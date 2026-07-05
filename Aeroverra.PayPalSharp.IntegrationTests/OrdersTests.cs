@@ -43,7 +43,7 @@ public class OrdersTests
     {
         Skip.IfNot(_fx.IsConfigured, _fx.SkipReason);
 
-        var seller = _fx.Data("MerchantId"); // the sandbox sub-merchant
+        var seller = _fx.Data("SellerMerchantId") ?? _fx.Data("MerchantId"); // a linked sandbox sub-merchant
         Order created;
         try
         {
@@ -73,7 +73,7 @@ public class OrdersTests
     public async Task Create_order_within_ActingAsMerchant_scope()
     {
         Skip.IfNot(_fx.IsConfigured, _fx.SkipReason);
-        var seller = _fx.Data("MerchantId")!;
+        var seller = (_fx.Data("SellerMerchantId") ?? _fx.Data("MerchantId"))!;
 
         // This is the shape you asked about: one client, act on behalf of a seller per call.
         Order created;

@@ -1,0 +1,42 @@
+# Regenerating the clients
+
+The clients are produced by `Aeroverra.PayPalSharp.WrapperGenerator`, a build-time console app that is
+not shipped (nothing references it, so its NSwag dependencies never reach the package). The raw PayPal
+specs live in `WrapperGenerator/Definitions/`; a transformer pipeline runs over each spec in memory
+before NSwag sees it.
+
+```bash
+# generate from the committed specs
+dotnet run --project Aeroverra.PayPalSharp.WrapperGenerator
+
+# refresh the raw specs from PayPal's GitHub first, then generate
+dotnet run --project Aeroverra.PayPalSharp.WrapperGenerator -- --download
+```
+
+Output goes to `Aeroverra.PayPalSharp/Generated/*.cs`.
+
+## The transformer pipeline
+
+Runs in this order (see `WrapperGenerator/SpecFixer/Transformer/`):
+
+1. **StripCallbacks** removes OpenAPI `callbacks` (async callback path-items). NSwag mishandles PayPal's
+   use of them and ends up deserializing a real path-item as an operation ("Required property
+   'responses' not found").
+2. **EnsureOperationResponses** backfills a default `responses` object on any operation missing one
+   (some PayPal operations ship without it, which is invalid OpenAPI).
+3. **FlattenEnumsToString** replaces string enums with `string` (see
+   [Models and nullability](Models-and-Nullability.md)).
+4. **InlineStringAllOf** collapses PayPal's `allOf: [ <string-ref>, <description> ]` wrapper to an inline
+   string. Without this, after flattening, NSwag emits `class X : string`, which does not compile.
+5. **MarkKnownRequired** marks a curated set of always-present response fields required.
+
+## Adding a new PayPal API
+
+1. Add a `ClientSpec` to the `Clients` array in `WrapperGenerator/Program.cs`
+   (name, spec file, class name, namespace, output file, resource key, download URL).
+2. Run the generator; a new `Generated/<Name>Client.cs` appears.
+3. Add the `UpdateJsonSerializerSettings` hook for the new namespace in
+   `Serialization/GeneratedClientHooks.cs`.
+4. Expose it on `IPayPalApiClient` / `PayPalApiClient` and register it in
+   `ServiceCollectionExtensions.AddApiClient<...>`, and in `PayPalClientFactory.Build`.
+5. Add any resource-specific `MarkKnownRequired` entries and tests.
