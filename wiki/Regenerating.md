@@ -15,6 +15,13 @@ dotnet run --project Aeroverra.PayPalSharp.WrapperGenerator -- --download
 
 Output goes to `Aeroverra.PayPalSharp/Generated/*.cs`.
 
+## Hand-maintained specs
+
+Most specs in `Definitions/` are downloaded from PayPal and auto-update. `paypal_custom_v1.json` is
+different: it has no download URL and never auto-updates. It is the home for endpoints and models PayPal
+does not publish in its official specs (today, the webhook signing-certificate endpoint, exposed as
+`client.Custom.CertsGetAsync`). Add anything the official specs miss here and it generates like the rest.
+
 ## The transformer pipeline
 
 Runs in this order (see `WrapperGenerator/SpecFixer/Transformer/`):

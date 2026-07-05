@@ -1,4 +1,5 @@
 using Aeroverra.PayPalSharp.CatalogProductsV1;
+using Aeroverra.PayPalSharp.CustomV1;
 using Aeroverra.PayPalSharp.DisputesV1;
 using Aeroverra.PayPalSharp.InvoicesV2;
 using Aeroverra.PayPalSharp.OrdersV2;
@@ -33,6 +34,10 @@ public static class ServiceCollectionExtensions
         services.Configure(configure);
         services.TryAddSingleton<PayPalMerchantContext>();
 
+        // Offline webhook signature verification (cert fetch + RSA verify, no API round-trip).
+        services.TryAddSingleton<IPayPalCertificateSource, HttpPayPalCertificateSource>();
+        services.TryAddSingleton<IPayPalWebhookVerifier, PayPalWebhookVerifier>();
+
         // Token provider gets its own HttpClient (no auth handler - it *is* the auth).
         services.AddHttpClient<IPayPalTokenProvider, PayPalTokenProvider>(ConfigureHttpClient);
 
@@ -53,6 +58,7 @@ public static class ServiceCollectionExtensions
         AddApiClient<IPartnerReferralsV2Client, PartnerReferralsV2Client>(services);
         AddApiClient<IPartnerReferralsV1Client, PartnerReferralsV1Client>(services);
         AddApiClient<IWebhooksV1Client, WebhooksV1Client>(services);
+        AddApiClient<IPayPalCustomClient, PayPalCustomClient>(services);
 
         services.AddScoped<IPayPalApiClient, PayPalApiClient>();
         services.AddPayPalSharpFactory();

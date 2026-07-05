@@ -6,11 +6,12 @@ A strict-typed PayPal REST client for modern .NET, with first-class partner / pl
 
 ## Purpose
 
-The existing .NET options for PayPal are dated and loosely typed, and none cleanly support the partner
-APIs (acting on behalf of sellers). AeroPayPalSharp is generated from PayPal's official OpenAPI specs
-and then tightened so responses are actually typed instead of everything-nullable. It wraps all of
-PayPal's REST APIs behind one injectable client, handles OAuth for you, and makes partner flows (auth
-assertion, attribution) first-class.
+The existing .NET options for PayPal are dated and loosely typed, none cleanly support the partner
+APIs (acting on behalf of sellers), and none have good webhook handling. AeroPayPalSharp is generated
+from PayPal's official OpenAPI specs and then tightened so responses are actually typed instead of
+everything-nullable. It wraps all of PayPal's REST APIs behind one injectable client, handles OAuth for
+you, makes partner flows (auth assertion, attribution) first-class, and includes offline webhook
+signature verification that PayPal does not publish a spec for.
 
 - All of PayPal's REST APIs, one injectable `IPayPalApiClient`
 - Strongly-typed models, plus typed value constants (`PayPalIntent.Capture`, `PayPalCurrency.Usd`, ...)
@@ -18,6 +19,7 @@ assertion, attribution) first-class.
 - PayPal's enum fields stay strings under the hood, so a value PayPal adds later never crashes deserialization
 - OAuth2 fetched, cached, and refreshed automatically
 - Partner attribution and auth assertion built in, including a clean `ActingAsMerchant` scope
+- Offline webhook signature verification (no extra API call) plus typed event-name constants
 - .NET 10, Newtonsoft.Json
 
 ## Install

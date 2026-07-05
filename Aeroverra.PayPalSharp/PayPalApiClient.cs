@@ -1,4 +1,5 @@
 using Aeroverra.PayPalSharp.CatalogProductsV1;
+using Aeroverra.PayPalSharp.CustomV1;
 using Aeroverra.PayPalSharp.DisputesV1;
 using Aeroverra.PayPalSharp.InvoicesV2;
 using Aeroverra.PayPalSharp.OrdersV2;
@@ -64,6 +65,9 @@ public interface IPayPalApiClient
     /// <summary>Webhooks management - subscriptions, event types, lookups, simulation.</summary>
     IWebhooksV1Client Webhooks { get; }
 
+    /// <summary>Hand-maintained endpoints PayPal does not publish in its specs (e.g. the webhook cert endpoint).</summary>
+    IPayPalCustomClient Custom { get; }
+
     /// <summary>
     /// Runs the calls inside the returned scope on behalf of <paramref name="merchantId"/> by
     /// attaching a <c>PayPal-Auth-Assertion</c> for that sub-merchant. Usage:
@@ -92,6 +96,7 @@ public sealed class PayPalApiClient : IPayPalApiClient
         IPartnerReferralsV2Client partnerReferralsV2,
         IPartnerReferralsV1Client partnerReferralsV1,
         IWebhooksV1Client webhooks,
+        IPayPalCustomClient custom,
         PayPalMerchantContext merchantContext)
     {
         Orders = orders;
@@ -108,6 +113,7 @@ public sealed class PayPalApiClient : IPayPalApiClient
         PartnerReferralsV2 = partnerReferralsV2;
         PartnerReferralsV1 = partnerReferralsV1;
         Webhooks = webhooks;
+        Custom = custom;
         _merchantContext = merchantContext;
     }
 
@@ -125,6 +131,7 @@ public sealed class PayPalApiClient : IPayPalApiClient
     public IPartnerReferralsV2Client PartnerReferralsV2 { get; }
     public IPartnerReferralsV1Client PartnerReferralsV1 { get; }
     public IWebhooksV1Client Webhooks { get; }
+    public IPayPalCustomClient Custom { get; }
 
     public IDisposable ActingAsMerchant(string merchantId) => _merchantContext.ActingAs(merchantId);
 }

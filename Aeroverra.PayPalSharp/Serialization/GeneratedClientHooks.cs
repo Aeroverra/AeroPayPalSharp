@@ -127,3 +127,12 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
             => global::Aeroverra.PayPalSharp.PayPalJsonSettings.Apply(settings);
     }
 }
+
+namespace Aeroverra.PayPalSharp.CustomV1
+{
+    public partial class PayPalCustomClient
+    {
+        static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings)
+            => global::Aeroverra.PayPalSharp.PayPalJsonSettings.Apply(settings);
+    }
+}

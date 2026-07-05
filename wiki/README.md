@@ -18,6 +18,8 @@ modern .NET with first-class partner / platform support.
   Subscriptions, Catalog Products, Disputes, Payouts, Transaction Search, Shipment Tracking, Payment
   Tokens, Web Profiles, Partner Referrals, Webhooks), with example calls including webhook creation and
   signature verification.
+- **[Webhooks](Webhooks.md)** - managing subscriptions, plus receiving and verifying incoming webhooks
+  offline (no extra API call), with typed event-name constants.
 - **[Constants and enums](Constants-and-Enums.md)** - typed value constants (`PayPalIntent.Capture`,
   `PayPalCurrency.Usd`, statuses, ...) with an `IsKnown` validator, and why the model fields are strings.
 - **[Error handling](Error-Handling.md)** - the typed `PayPalApiException`, status codes, and the parsed
@@ -39,11 +41,15 @@ modern .NET with first-class partner / platform support.
   to add a new PayPal API.
 - **[Testing](Testing.md)** - running the live sandbox tests, what is covered, and how credentials are
   supplied without committing them.
+- **[Releasing (NuGet)](Releasing.md)** - the publish workflow, how the version auto-increments, and
+  trusted publishing.
 
 ## Quick answers
 
 - **Which PayPal APIs are supported?** All of them. See [The clients](Clients.md).
+- **How do I verify an incoming webhook?** [Webhooks](Webhooks.md) (offline, no extra API call).
 - **How do I act on behalf of a seller when I am a partner?** [Partner and platform](Partner-and-Platform.md).
 - **How do I handle many merchants with their own keys?** [Multi-tenant factory](Multi-Tenant-Factory.md).
 - **Why is `status` a string and not an enum?** [Constants and enums](Constants-and-Enums.md).
 - **How do I regenerate after PayPal updates a spec?** [Regenerating the clients](Regenerating.md).
+- **How do I publish a new version to NuGet?** [Releasing](Releasing.md).

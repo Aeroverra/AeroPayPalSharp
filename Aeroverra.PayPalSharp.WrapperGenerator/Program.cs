@@ -78,6 +78,12 @@ internal static class Program
         new("Web Profiles V1", "payment-experience_web_experience_profiles_v1.json", "WebProfilesV1Client",
             "Aeroverra.PayPalSharp.WebProfilesV1", "WebProfilesV1Client.cs", "web-profile",
             PayPalSpecBase + "payment-experience_web_experience_profiles_v1.json"),
+
+        // Hand-maintained supplement (no DownloadUrl -> never auto-updates). Home for endpoints and
+        // models PayPal does not publish in its official specs, e.g. the webhook cert endpoint.
+        new("Custom", "paypal_custom_v1.json", "PayPalCustomClient",
+            "Aeroverra.PayPalSharp.CustomV1", "PayPalCustomClient.cs", "",
+            null),
     };
 
     // The transformer pipeline applied to every spec, in order.

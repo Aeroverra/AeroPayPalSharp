@@ -1,0 +1,39 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "PayPal (hand-maintained supplement)",
+    "version": "1.0.0",
+    "description": "Endpoints and models PayPal does NOT publish in its official OpenAPI specifications, maintained by hand in this repo. Unlike the other Definitions, this file has no download URL and never auto-updates. Add here anything the official specs miss (for example the webhook signing-certificate endpoint)."
+  },
+  "servers": [
+    { "url": "https://api-m.sandbox.paypal.com" },
+    { "url": "https://api-m.paypal.com" }
+  ],
+  "paths": {
+    "/v1/notifications/certs/{cert_id}": {
+      "get": {
+        "operationId": "certs.get",
+        "summary": "Downloads the PayPal public certificate that signed a webhook, by its id.",
+        "description": "PayPal advertises the full certificate URL in the PAYPAL-CERT-URL header of a webhook. This returns the PEM-encoded X.509 certificate. Used for offline webhook signature verification. Not part of PayPal's published specs.",
+        "parameters": [
+          {
+            "name": "cert_id",
+            "in": "path",
+            "required": true,
+            "description": "The certificate id, e.g. CERT-360caa42-fca2a594-bf9ab596.",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The PEM-encoded certificate.",
+            "content": {
+              "text/plain": { "schema": { "type": "string" } }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": { "schemas": {} }
+}

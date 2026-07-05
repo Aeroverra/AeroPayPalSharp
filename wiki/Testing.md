@@ -14,6 +14,15 @@ dotnet user-secrets --project Aeroverra.PayPalSharp.IntegrationTests set "PayPal
 dotnet test
 ```
 
+The real-webhook verification test reads captured fixtures (body + headers + signing cert) from a local
+folder, and the webhook id they were sent to, from user-secrets so nothing account-specific lives in the
+repo. It skips unless both are set:
+
+```bash
+dotnet user-secrets --project Aeroverra.PayPalSharp.IntegrationTests set "PayPal:WebhookFixturesDir" "C:\\path\\to\\fixtures"
+dotnet user-secrets --project Aeroverra.PayPalSharp.IntegrationTests set "PayPal:WebhookId" "your-webhook-id"
+```
+
 ## What is covered
 
 - Auth token issue and caching.

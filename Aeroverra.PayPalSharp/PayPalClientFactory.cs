@@ -2,6 +2,7 @@ using System.Collections.Concurrent;
 using System.Security.Cryptography;
 using System.Text;
 using Aeroverra.PayPalSharp.CatalogProductsV1;
+using Aeroverra.PayPalSharp.CustomV1;
 using Aeroverra.PayPalSharp.DisputesV1;
 using Aeroverra.PayPalSharp.InvoicesV2;
 using Aeroverra.PayPalSharp.OrdersV2;
@@ -185,6 +186,7 @@ public sealed class PayPalClientFactory : IPayPalClientFactory, IDisposable
             new PartnerReferralsV2Client(apiHttp),
             new PartnerReferralsV1Client(apiHttp),
             new WebhooksV1Client(apiHttp),
+            new PayPalCustomClient(apiHttp),
             merchantContext);
     }
 
