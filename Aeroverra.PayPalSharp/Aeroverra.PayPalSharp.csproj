@@ -1,6 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+	  <VersionPrefix>0.0.0.0</VersionPrefix>
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
@@ -8,7 +9,28 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <!-- Generated PayPal clients carry thousands of members without XML docs. -->
     <NoWarn>$(NoWarn);1591;1573;8618</NoWarn>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Authors>Aeroverra Nicholas Halka</Authors>
+    <Description>A strict typed PayPal client for modern .NET with partner api support</Description>
+    <Copyright>Copyright (c) 2026 Aeroverra</Copyright>
+    <PackageProjectUrl>https://github.com/Aeroverra/AeroPayPalSharp</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/Aeroverra/AeroPayPalSharp</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>PayPal;Partner;API;Payments;ecommerce;platform</PackageTags>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />

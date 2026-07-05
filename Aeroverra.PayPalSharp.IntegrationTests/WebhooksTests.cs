@@ -5,8 +5,8 @@ using Xunit.Abstractions;
 namespace Aeroverra.PayPalSharp.IntegrationTests;
 
 /// <summary>
-/// Live Webhooks Management tests: the read catalog, listing, a full create → get →
-/// list-subscribed → delete → confirm-gone round-trip, and signature verification.
+/// Live Webhooks Management tests: the read catalog, listing, a full create -> get ->
+/// list-subscribed -> delete -> confirm-gone round-trip, and signature verification.
 /// </summary>
 [Collection(PayPalCollection.Name)]
 public class WebhooksTests

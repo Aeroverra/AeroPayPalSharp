@@ -1,9 +1,20 @@
 using System.Collections.Concurrent;
 using System.Security.Cryptography;
 using System.Text;
+using Aeroverra.PayPalSharp.CatalogProductsV1;
+using Aeroverra.PayPalSharp.DisputesV1;
+using Aeroverra.PayPalSharp.InvoicesV2;
+using Aeroverra.PayPalSharp.OrdersV2;
 using Aeroverra.PayPalSharp.PartnerReferralsV1;
 using Aeroverra.PayPalSharp.PartnerReferralsV2;
+using Aeroverra.PayPalSharp.PaymentsV2;
+using Aeroverra.PayPalSharp.PaymentTokensV3;
+using Aeroverra.PayPalSharp.PayoutsV1;
+using Aeroverra.PayPalSharp.ShipmentTrackingV1;
+using Aeroverra.PayPalSharp.SubscriptionsV1;
+using Aeroverra.PayPalSharp.TransactionSearchV1;
 using Aeroverra.PayPalSharp.WebhooksV1;
+using Aeroverra.PayPalSharp.WebProfilesV1;
 using Microsoft.Extensions.Options;
 
 namespace Aeroverra.PayPalSharp;
@@ -129,7 +140,7 @@ public sealed class PayPalClientFactory : IPayPalClientFactory, IDisposable
 
     private IPayPalApiClient Build(PayPalCredentials credentials)
     {
-        var options = Options.Create(credentials.ToOptions());
+        var options = Microsoft.Extensions.Options.Options.Create(credentials.ToOptions());
         var baseUri = ResolveBaseUri(options.Value);
 
         // Token provider gets its own HttpClient over the shared transport (no auth handler).
@@ -141,7 +152,8 @@ public sealed class PayPalClientFactory : IPayPalClientFactory, IDisposable
         var tokenProvider = new PayPalTokenProvider(tokenHttp, options);
 
         // API HttpClient: partner headers -> auth (bearer) -> shared transport.
-        var partner = new PayPalPartnerHeaderHandler(options) { InnerHandler = new NonDisposingHandler(_rootHandler) };
+        var merchantContext = new PayPalMerchantContext();
+        var partner = new PayPalPartnerHeaderHandler(options, merchantContext) { InnerHandler = new NonDisposingHandler(_rootHandler) };
         var auth = new PayPalAuthenticationHandler(tokenProvider) { InnerHandler = partner };
         var apiHttp = new HttpClient(auth, disposeHandler: true)
         {
@@ -157,11 +169,23 @@ public sealed class PayPalClientFactory : IPayPalClientFactory, IDisposable
             _built.Add(apiHttp);
         }
 
-        // The three generated clients can share one configured HttpClient.
+        // All generated clients share one configured HttpClient.
         return new PayPalApiClient(
+            new OrdersV2Client(apiHttp),
+            new PaymentsV2Client(apiHttp),
+            new InvoicesV2Client(apiHttp),
+            new SubscriptionsV1Client(apiHttp),
+            new CatalogProductsV1Client(apiHttp),
+            new DisputesV1Client(apiHttp),
+            new PayoutsV1Client(apiHttp),
+            new TransactionSearchV1Client(apiHttp),
+            new ShipmentTrackingV1Client(apiHttp),
+            new PaymentTokensV3Client(apiHttp),
+            new WebProfilesV1Client(apiHttp),
             new PartnerReferralsV2Client(apiHttp),
             new PartnerReferralsV1Client(apiHttp),
-            new WebhooksV1Client(apiHttp));
+            new WebhooksV1Client(apiHttp),
+            merchantContext);
     }
 
     private static Uri ResolveBaseUri(PayPalOptions options)

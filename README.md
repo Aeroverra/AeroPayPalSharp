@@ -154,23 +154,54 @@ public sealed class Raw(IPayPalTokenProvider tokens)
 
 ## Partner &amp; platform (multiparty)
 
-Two partner headers are handled by `PayPalPartnerHeaderHandler`:
+Two partner headers are added automatically by `PayPalPartnerHeaderHandler`:
 
-- **`PayPal-Partner-Attribution-Id`** - added to every request when `PartnerAttributionId` is set.
-- **`PayPal-Auth-Assertion`** - an unsigned (`alg=none`) JWT that says "I, the partner, am calling on
-  behalf of this sub-merchant". Enabled globally with `SendAuthAssertion = true` + `MerchantId`, or
-  built per-call:
+- **`PayPal-Partner-Attribution-Id`** (your BN code) is sent on every request when `PartnerAttributionId` is set.
+- **`PayPal-Auth-Assertion`** makes a call run on behalf of a sub-merchant.
+
+### Acting on behalf of a seller
+
+When you process for a seller there are two separate things, and it is easy to conflate them:
+
+- **Who receives the money** is the order's `payee.merchant_id`, in the request **body** (not a header).
+- **Acting as the seller** (using the permissions they granted your platform) is the
+  `PayPal-Auth-Assertion` **header**.
+
+The cleanest way to send that header is a scope on the client. Everything inside the `using` runs on
+behalf of that merchant, and the value flows across awaits and is restored on dispose, so a single
+injected client serves many sellers safely (including concurrently):
 
 ```csharp
-var assertion = PayPalAuthAssertion.Build(clientId, merchantId);
-// → base64url({"alg":"none"}).base64url({"iss":clientId,"payer_id":merchantId}).
-// attach it to a specific HttpRequestMessage as the "PayPal-Auth-Assertion" header
+using (paypal.ActingAsMerchant(sellerMerchantId))
+{
+    var order = new Order_request
+    {
+        Intent = "CAPTURE",
+        Purchase_units = new List<Purchase_units>
+        {
+            new Purchase_units
+            {
+                Amount = new Amount3 { Currency_code = "USD", Value = "10.00" },
+                Payee  = new Payee3 { Merchant_id = sellerMerchantId },   // who gets the money
+            },
+        },
+    };
+
+    Order created = await paypal.Orders.CreateAsync(order, payPal_Request_Id: Guid.NewGuid().ToString("N"));
+}
 ```
 
-Per-call headers you set yourself always win - the handler only fills in what you didn't.
+Other ways to set the assertion:
 
-> Other per-call niceties like `PayPal-Request-Id` (idempotency) and `Prefer: return=representation`
-> become relevant with Orders/Payments and will be surfaced as those clients land.
+- **Globally**, for a client dedicated to one seller: set `SendAuthAssertion = true` + `MerchantId` in
+  options (or on `PayPalCredentials` when building via the factory). Every call then acts as that merchant.
+- **Explicitly per call**, where PayPal exposes it: many methods take a `payPal_Auth_Assertion` argument.
+  Build the value with `PayPalAuthAssertion.Build(clientId, merchantId)` if you want to pass it yourself.
+
+Per-call headers you set yourself always win; the handler only fills in what you did not.
+
+> Many create/capture methods also accept a `payPal_Request_Id` (idempotency) argument and a `prefer`
+> argument (pass `"return=representation"` for the full object in the response).
 
 ## Multi-tenant: clients from raw credentials
 
@@ -228,7 +259,28 @@ OAuth token instead of fetching a new one each time.
 ## Using the clients
 
 Inject `IPayPalApiClient` and reach the sub-clients, **or** inject any sub-client interface directly
-(`IWebhooksV1Client`, `IPartnerReferralsV2Client`, `IPartnerReferralsV1Client`).
+(`IOrdersV2Client`, `IWebhooksV1Client`, and so on).
+
+All of PayPal's REST APIs are wrapped, each as a sub-client:
+
+| `IPayPalApiClient` member | PayPal API | Example calls |
+|---|---|---|
+| `.Orders` | Orders v2 | `CreateAsync`, `GetAsync`, `CaptureAsync`, `AuthorizeAsync`, `ConfirmAsync` |
+| `.Payments` | Payments v2 | `AuthorizationsGetAsync`, `CapturesRefundAsync`, `RefundsGetAsync` |
+| `.Invoices` | Invoicing v2 | `CreateAsync`, `SendAsync`, `ListAsync`, `RemindAsync`, `CancelAsync` |
+| `.Subscriptions` | Subscriptions v1 | `CreateAsync`, `GetAsync`, `CancelAsync`, `PlansListAsync`, `PlansCreateAsync` |
+| `.CatalogProducts` | Catalog Products v1 | `CreateAsync`, `ListAsync`, `GetAsync`, `PatchAsync` |
+| `.Disputes` | Disputes v1 | `ListAsync`, `GetAsync`, `ProvideEvidenceAsync`, `AppealAsync`, `AcceptClaimAsync` |
+| `.Payouts` | Payouts v1 | `PostAsync`, `GetAsync`, `PayoutsItemGetAsync`, `PayoutsItemCancelAsync` |
+| `.TransactionSearch` | Transaction Search v1 | `SearchGetAsync`, `BalancesGetAsync` |
+| `.ShipmentTracking` | Add Tracking v1 | `PostAsync`, `PutAsync`, `GetAsync`, `TrackersBatchPostAsync` |
+| `.PaymentTokens` | Payment Method Tokens v3 | `CreateAsync`, `GetAsync`, `DeleteAsync`, `SetupTokensCreateAsync` |
+| `.WebProfiles` | Payment Experience v1 | `CreateAsync`, `GetListAsync`, `UpdateAsync`, `DeleteAsync` |
+| `.PartnerReferralsV2` | Partner Referrals v2 | `CreateAsync`, `ReadAsync` |
+| `.PartnerReferralsV1` | Partner Referrals v1 (deprecated) | `CreateAsync`, `MerchantIntegrationStatusAsync` |
+| `.Webhooks` | Webhooks Management v1 | `ListAsync`, `PostAsync`, `WebhooksEventTypesListAsync`, `VerifyWebhookSignaturePostAsync` |
+
+A few of these are shown in detail below; the rest follow the same shape.
 
 ### Webhooks
 
@@ -408,8 +460,8 @@ dotnet run --project Aeroverra.PayPalSharp.WrapperGenerator -- --download
 ```
 
 Output goes to `Aeroverra.PayPalSharp/Generated/*.cs`. Method names are derived from PayPal's dotted
-operationIds with the resource prefix dropped: `orders.create` → `client.Orders.CreateAsync`,
-`event-types.list` → `client.Webhooks.EventTypesListAsync`.
+operationIds with the resource prefix dropped: `orders.create` -> `client.Orders.CreateAsync`,
+`event-types.list` -> `client.Webhooks.EventTypesListAsync`.
 
 ## Adding a new PayPal API
 
@@ -439,7 +491,7 @@ dotnet test
 ```
 
 Current coverage (all green against sandbox): OAuth token issue + cache; webhook event-type catalog;
-webhook list; full create → get → list-subscribed → delete → 404 round-trip; signature verification;
+webhook list; full create -> get -> list-subscribed -> delete -> 404 round-trip; signature verification;
 partner-referral create (asserts `action_url`) + read-back.
 
 ## Project layout
@@ -452,7 +504,9 @@ partner-referral create (asserts `action_url`) + read-back.
 
 ## Roadmap
 
-- **Orders v2**, **Invoicing v2**, **Payments v2** (captures/refunds) - same pattern, exposed as
-  `client.Orders`, `client.Invoices`, `client.Payments`.
-- Per-call `PayPal-Request-Id` (idempotency) and `Prefer` helpers.
-- More per-endpoint edge-case tests, and a growing `MarkKnownRequired` set as fields are confirmed.
+All 13 of PayPal's published REST APIs are wrapped. Remaining polish:
+
+- More per-endpoint live tests across the newer clients (Invoices, Subscriptions, Payments, Disputes,
+  Payouts, Payment Tokens, and so on).
+- A growing `MarkKnownRequired` set as always-present response fields are confirmed per resource.
+- Optional cleanup of a few NSwag-numbered type names (for example the renamed `Operation1` field).

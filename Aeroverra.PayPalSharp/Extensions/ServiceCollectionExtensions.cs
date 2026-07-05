@@ -1,6 +1,17 @@
+using Aeroverra.PayPalSharp.CatalogProductsV1;
+using Aeroverra.PayPalSharp.DisputesV1;
+using Aeroverra.PayPalSharp.InvoicesV2;
+using Aeroverra.PayPalSharp.OrdersV2;
 using Aeroverra.PayPalSharp.PartnerReferralsV1;
 using Aeroverra.PayPalSharp.PartnerReferralsV2;
+using Aeroverra.PayPalSharp.PaymentsV2;
+using Aeroverra.PayPalSharp.PaymentTokensV3;
+using Aeroverra.PayPalSharp.PayoutsV1;
+using Aeroverra.PayPalSharp.ShipmentTrackingV1;
+using Aeroverra.PayPalSharp.SubscriptionsV1;
+using Aeroverra.PayPalSharp.TransactionSearchV1;
 using Aeroverra.PayPalSharp.WebhooksV1;
+using Aeroverra.PayPalSharp.WebProfilesV1;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -20,6 +31,7 @@ public static class ServiceCollectionExtensions
     {
         ArgumentNullException.ThrowIfNull(configure);
         services.Configure(configure);
+        services.TryAddSingleton<PayPalMerchantContext>();
 
         // Token provider gets its own HttpClient (no auth handler - it *is* the auth).
         services.AddHttpClient<IPayPalTokenProvider, PayPalTokenProvider>(ConfigureHttpClient);
@@ -27,6 +39,17 @@ public static class ServiceCollectionExtensions
         services.AddTransient<PayPalAuthenticationHandler>();
         services.AddTransient<PayPalPartnerHeaderHandler>();
 
+        AddApiClient<IOrdersV2Client, OrdersV2Client>(services);
+        AddApiClient<IPaymentsV2Client, PaymentsV2Client>(services);
+        AddApiClient<IInvoicesV2Client, InvoicesV2Client>(services);
+        AddApiClient<ISubscriptionsV1Client, SubscriptionsV1Client>(services);
+        AddApiClient<ICatalogProductsV1Client, CatalogProductsV1Client>(services);
+        AddApiClient<IDisputesV1Client, DisputesV1Client>(services);
+        AddApiClient<IPayoutsV1Client, PayoutsV1Client>(services);
+        AddApiClient<ITransactionSearchV1Client, TransactionSearchV1Client>(services);
+        AddApiClient<IShipmentTrackingV1Client, ShipmentTrackingV1Client>(services);
+        AddApiClient<IPaymentTokensV3Client, PaymentTokensV3Client>(services);
+        AddApiClient<IWebProfilesV1Client, WebProfilesV1Client>(services);
         AddApiClient<IPartnerReferralsV2Client, PartnerReferralsV2Client>(services);
         AddApiClient<IPartnerReferralsV1Client, PartnerReferralsV1Client>(services);
         AddApiClient<IWebhooksV1Client, WebhooksV1Client>(services);
@@ -35,6 +58,10 @@ public static class ServiceCollectionExtensions
         services.AddPayPalSharpFactory();
         return services;
     }
+
+    /// <summary>Adds the PayPal SDK, binding options from the "PayPal" configuration section.</summary>
+    public static IServiceCollection AddPayPalSharp(this IServiceCollection services, IConfiguration configuration)
+        => services.AddPayPalSharp(options => configuration.GetSection(PayPalOptions.SectionName).Bind(options));
 
     /// <summary>
     /// Registers just the runtime factory (<see cref="IPayPalClientFactory"/>) for building a
@@ -47,10 +74,6 @@ public static class ServiceCollectionExtensions
         services.TryAddSingleton<IPayPalClientFactory, PayPalClientFactory>();
         return services;
     }
-
-    /// <summary>Adds the PayPal SDK, binding options from the "PayPal" configuration section.</summary>
-    public static IServiceCollection AddPayPalSharp(this IServiceCollection services, IConfiguration configuration)
-        => services.AddPayPalSharp(options => configuration.GetSection(PayPalOptions.SectionName).Bind(options));
 
     private static void AddApiClient<TInterface, TImplementation>(IServiceCollection services)
         where TInterface : class

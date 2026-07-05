@@ -8,9 +8,9 @@ namespace Aeroverra.PayPalSharp.WrapperGenerator;
 /// Produces a single client class per spec (the spec's own ClassName) with tidy
 /// method names derived from PayPal's dotted operationIds. The leading resource
 /// segment is dropped when it matches the client's resource so methods read
-/// naturally: <c>orders.create</c> → <c>client.Orders.Create()</c>,
-/// <c>orders.track.create</c> → <c>client.Orders.TrackCreate()</c>,
-/// <c>event-types.list</c> (under Webhooks) → <c>client.Webhooks.EventTypesList()</c>.
+/// naturally: <c>orders.create</c> -> <c>client.Orders.Create()</c>,
+/// <c>orders.track.create</c> -> <c>client.Orders.TrackCreate()</c>,
+/// <c>event-types.list</c> (under Webhooks) -> <c>client.Webhooks.EventTypesList()</c>.
 /// </summary>
 internal sealed class PayPalOperationNameGenerator : IOperationNameGenerator
 {
