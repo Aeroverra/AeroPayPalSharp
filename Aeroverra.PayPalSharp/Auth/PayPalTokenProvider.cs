@@ -1,0 +1,113 @@
+using System.Net.Http.Headers;
+using System.Text;
+using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
+
+namespace Aeroverra.PayPalSharp;
+
+/// <summary>Supplies (and caches) PayPal OAuth2 access tokens.</summary>
+public interface IPayPalTokenProvider
+{
+    /// <summary>Returns a valid bearer access token, fetching/refreshing as needed.</summary>
+    Task<string> GetAccessTokenAsync(CancellationToken cancellationToken = default);
+}
+
+/// <summary>
+/// Client-credentials token provider. POSTs to <c>/v1/oauth2/token</c> with HTTP Basic
+/// (client id:secret), caches the token, and refreshes ~1 minute before expiry. A
+/// semaphore collapses concurrent refreshes into one request.
+/// </summary>
+public sealed class PayPalTokenProvider : IPayPalTokenProvider
+{
+    private readonly HttpClient _httpClient;
+    private readonly PayPalOptions _options;
+    private readonly SemaphoreSlim _gate = new(1, 1);
+
+    private string? _cachedToken;
+    private DateTimeOffset _expiresAt = DateTimeOffset.MinValue;
+
+    public PayPalTokenProvider(HttpClient httpClient, IOptions<PayPalOptions> options)
+    {
+        _httpClient = httpClient;
+        _options = options.Value;
+    }
+
+    public async Task<string> GetAccessTokenAsync(CancellationToken cancellationToken = default)
+    {
+        // Fast path: a still-valid cached token.
+        if (_cachedToken is not null && DateTimeOffset.UtcNow < _expiresAt)
+        {
+            return _cachedToken;
+        }
+
+        await _gate.WaitAsync(cancellationToken).ConfigureAwait(false);
+        try
+        {
+            // Re-check inside the lock - another caller may have just refreshed.
+            if (_cachedToken is not null && DateTimeOffset.UtcNow < _expiresAt)
+            {
+                return _cachedToken;
+            }
+
+            if (string.IsNullOrWhiteSpace(_options.ClientId) || string.IsNullOrWhiteSpace(_options.ClientSecret))
+            {
+                throw new InvalidOperationException(
+                    "PayPal ClientId/ClientSecret are not configured. Set them via AddPayPalSharp or configuration (user-secrets).");
+            }
+
+            var basic = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{_options.ClientId}:{_options.ClientSecret}"));
+            using var request = new HttpRequestMessage(HttpMethod.Post, $"{_options.BaseUrl}/v1/oauth2/token")
+            {
+                Headers = { Authorization = new AuthenticationHeaderValue("Basic", basic) },
+                Content = new FormUrlEncodedContent(new[]
+                {
+                    new KeyValuePair<string, string>("grant_type", "client_credentials"),
+                }),
+            };
+
+            using var response = await _httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
+            var body = await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new PayPalAuthenticationException(
+                    $"PayPal token request failed with {(int)response.StatusCode} {response.ReasonPhrase}: {Truncate(body, 500)}");
+            }
+
+            var token = JsonConvert.DeserializeObject<TokenResponse>(body);
+            if (token is null || string.IsNullOrEmpty(token.AccessToken))
+            {
+                throw new PayPalAuthenticationException("PayPal token response did not contain an access_token.");
+            }
+
+            _cachedToken = token.AccessToken;
+            // Refresh a minute early; guard against absurdly small expiry values.
+            var lifetime = Math.Max(token.ExpiresIn - 60, 30);
+            _expiresAt = DateTimeOffset.UtcNow.AddSeconds(lifetime);
+            return _cachedToken;
+        }
+        finally
+        {
+            _gate.Release();
+        }
+    }
+
+    private static string Truncate(string value, int max) => value.Length <= max ? value : value[..max] + "...";
+
+    private sealed class TokenResponse
+    {
+        [JsonProperty("access_token")]
+        public string? AccessToken { get; set; }
+
+        [JsonProperty("token_type")]
+        public string? TokenType { get; set; }
+
+        [JsonProperty("expires_in")]
+        public int ExpiresIn { get; set; }
+    }
+}
+
+/// <summary>Thrown when PayPal authentication (token acquisition) fails.</summary>
+public sealed class PayPalAuthenticationException : Exception
+{
+    public PayPalAuthenticationException(string message) : base(message) { }
+}

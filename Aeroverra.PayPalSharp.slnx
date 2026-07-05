@@ -1,3 +1,5 @@
 <Solution>
   <Project Path="Aeroverra.PayPalSharp/Aeroverra.PayPalSharp.csproj" />
+  <Project Path="Aeroverra.PayPalSharp.WrapperGenerator/Aeroverra.PayPalSharp.WrapperGenerator.csproj" />
+  <Project Path="Aeroverra.PayPalSharp.IntegrationTests/Aeroverra.PayPalSharp.IntegrationTests.csproj" />
 </Solution>
