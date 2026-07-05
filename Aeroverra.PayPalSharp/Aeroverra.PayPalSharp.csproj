@@ -15,6 +15,7 @@
     <Copyright>Copyright (c) 2026 Aeroverra</Copyright>
     <PackageProjectUrl>https://github.com/Aeroverra/AeroPayPalSharp</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
     <RepositoryUrl>https://github.com/Aeroverra/AeroPayPalSharp</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>PayPal;Partner;API;Payments;ecommerce;platform</PackageTags>
@@ -27,6 +28,10 @@
       <PackagePath>\</PackagePath>
     </None>
     <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="icon.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
