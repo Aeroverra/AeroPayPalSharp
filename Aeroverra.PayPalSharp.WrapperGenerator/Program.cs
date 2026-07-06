@@ -94,6 +94,7 @@ internal static class Program
         new FlattenEnumsToString(),
         new InlineStringAllOf(),
         new MarkKnownRequired(),
+        new MoneyValueToDecimal(),
     };
 
     private static async Task<int> Main(string[] args)

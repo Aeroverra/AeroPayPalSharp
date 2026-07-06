@@ -18,5 +18,7 @@ public static class PayPalJsonSettings
         // Keep PayPal's date strings sane; ISO round-trip.
         settings.DateParseHandling = DateParseHandling.DateTimeOffset;
         settings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
+        // Money is a decimal in C# but a string on the wire (currency-safe, trims trailing zeros).
+        settings.Converters.Add(new PayPalMoneyConverter());
     }
 }

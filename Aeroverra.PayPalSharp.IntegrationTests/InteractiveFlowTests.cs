@@ -124,7 +124,7 @@ public class InteractiveFlowTests
                         Frequency = new Subs.Frequency { Interval_unit = "MONTH", Interval_count = 1 },
                         Pricing_scheme = new Subs.Pricing_scheme
                         {
-                            Fixed_price = new Subs.Money { Currency_code = PayPalCurrency.Usd, Value = "9.99" },
+                            Fixed_price = new Subs.Money { Currency_code = PayPalCurrency.Usd, Value = 9.99m },
                         },
                     },
                 },
@@ -321,8 +321,8 @@ public class InteractiveFlowTests
                             Sku = "AERO-WIDGET",
                             Quantity = "2",
                             Category = "DIGITAL_GOODS",
-                            Unit_amount = new Unit_amount { Currency_code = PayPalCurrency.Usd, Value = "5.00" },
-                            Tax = new Tax { Currency_code = PayPalCurrency.Usd, Value = "0.50" },
+                            Unit_amount = new Unit_amount { Currency_code = PayPalCurrency.Usd, Value = 5.00m },
+                            Tax = new Tax { Currency_code = PayPalCurrency.Usd, Value = 0.50m },
                         },
                         new Items
                         {
@@ -331,21 +331,21 @@ public class InteractiveFlowTests
                             Sku = "AERO-GADGET",
                             Quantity = "1",
                             Category = "DIGITAL_GOODS",
-                            Unit_amount = new Unit_amount { Currency_code = PayPalCurrency.Usd, Value = "3.00" },
-                            Tax = new Tax { Currency_code = PayPalCurrency.Usd, Value = "0.30" },
+                            Unit_amount = new Unit_amount { Currency_code = PayPalCurrency.Usd, Value = 3.00m },
+                            Tax = new Tax { Currency_code = PayPalCurrency.Usd, Value = 0.30m },
                         },
                     },
                     Amount = new Amount3
                     {
                         Currency_code = PayPalCurrency.Usd,
-                        Value = "15.80",
+                        Value = 15.80m,
                         Breakdown = new Amount_breakdown
                         {
-                            Item_total = new Item_total { Currency_code = PayPalCurrency.Usd, Value = "13.00" },
-                            Tax_total = new Tax_total { Currency_code = PayPalCurrency.Usd, Value = "1.30" },
-                            Shipping = new Shipping { Currency_code = PayPalCurrency.Usd, Value = "2.00" },
-                            Handling = new Handling { Currency_code = PayPalCurrency.Usd, Value = "0.50" },
-                            Discount = new Discount { Currency_code = PayPalCurrency.Usd, Value = "1.00" },
+                            Item_total = new Item_total { Currency_code = PayPalCurrency.Usd, Value = 13.00m },
+                            Tax_total = new Tax_total { Currency_code = PayPalCurrency.Usd, Value = 1.30m },
+                            Shipping = new Shipping { Currency_code = PayPalCurrency.Usd, Value = 2.00m },
+                            Handling = new Handling { Currency_code = PayPalCurrency.Usd, Value = 0.50m },
+                            Discount = new Discount { Currency_code = PayPalCurrency.Usd, Value = 1.00m },
                         },
                     },
                     Shipping = new Shipping2

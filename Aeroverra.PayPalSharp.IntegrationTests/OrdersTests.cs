@@ -24,7 +24,7 @@ public class OrdersTests
     {
         var unit = new Purchase_units
         {
-            Amount = new Amount3 { Currency_code = PayPalCurrency.Usd, Value = "10.00" },
+            Amount = new Amount3 { Currency_code = PayPalCurrency.Usd, Value = 10.00m },
         };
         if (!string.IsNullOrWhiteSpace(sellerMerchantId))
         {
