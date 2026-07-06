@@ -19,16 +19,29 @@ public interface IPayPalTokenProvider
 /// </summary>
 public sealed class PayPalTokenProvider : IPayPalTokenProvider
 {
-    private readonly HttpClient _httpClient;
+    private readonly Func<HttpClient> _httpClientAccessor;
     private readonly PayPalOptions _options;
     private readonly SemaphoreSlim _gate = new(1, 1);
 
     private string? _cachedToken;
     private DateTimeOffset _expiresAt = DateTimeOffset.MinValue;
 
+    /// <summary>Uses a fixed <see cref="HttpClient"/> (the factory path builds one over its shared transport).</summary>
     public PayPalTokenProvider(HttpClient httpClient, IOptions<PayPalOptions> options)
     {
-        _httpClient = httpClient;
+        ArgumentNullException.ThrowIfNull(httpClient);
+        _httpClientAccessor = () => httpClient;
+        _options = options.Value;
+    }
+
+    /// <summary>
+    /// Resolves an <see cref="HttpClient"/> from the factory per fetch (the DI path). Registered as a
+    /// singleton so one token is cached and shared across every client, instead of one cache per client.
+    /// </summary>
+    public PayPalTokenProvider(IHttpClientFactory httpClientFactory, string httpClientName, IOptions<PayPalOptions> options)
+    {
+        ArgumentNullException.ThrowIfNull(httpClientFactory);
+        _httpClientAccessor = () => httpClientFactory.CreateClient(httpClientName);
         _options = options.Value;
     }
 
@@ -65,7 +78,7 @@ public sealed class PayPalTokenProvider : IPayPalTokenProvider
                 }),
             };
 
-            using var response = await _httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
+            using var response = await _httpClientAccessor().SendAsync(request, cancellationToken).ConfigureAwait(false);
             var body = await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
             if (!response.IsSuccessStatusCode)
             {

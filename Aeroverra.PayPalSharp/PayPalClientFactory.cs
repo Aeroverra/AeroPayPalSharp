@@ -77,6 +77,36 @@ public interface IPayPalClientFactory
         PayPalEnvironment environment = PayPalEnvironment.Sandbox,
         string? partnerAttributionId = null,
         string? merchantId = null);
+
+    /// <summary>
+    /// Builds a client that authenticates with an access token you already hold, instead of a client
+    /// id/secret. The SDK does not fetch or refresh the token; when it expires, build a new client (or
+    /// use <see cref="CreateWithTokenProvider"/> with a refreshing provider). Reuse the returned client
+    /// rather than calling this per request. Pass <paramref name="partnerClientId"/> only if you need
+    /// <c>ActingAsMerchant</c> to build an auth assertion (its issuer).
+    /// </summary>
+    IPayPalApiClient CreateWithAccessToken(
+        string accessToken,
+        PayPalEnvironment environment = PayPalEnvironment.Sandbox,
+        string? partnerAttributionId = null,
+        string? merchantId = null,
+        string? partnerClientId = null,
+        string? baseUrlOverride = null,
+        int timeoutSeconds = 100);
+
+    /// <summary>
+    /// Builds a client whose bearer token comes from your own <see cref="IPayPalTokenProvider"/> (for
+    /// example <see cref="DelegatePayPalTokenProvider"/> wrapping a central token service). Reuse the
+    /// returned client. Pass <paramref name="partnerClientId"/> only if <c>ActingAsMerchant</c> needs it.
+    /// </summary>
+    IPayPalApiClient CreateWithTokenProvider(
+        IPayPalTokenProvider tokenProvider,
+        PayPalEnvironment environment = PayPalEnvironment.Sandbox,
+        string? partnerAttributionId = null,
+        string? merchantId = null,
+        string? partnerClientId = null,
+        string? baseUrlOverride = null,
+        int timeoutSeconds = 100);
 }
 
 /// <summary>
@@ -139,6 +169,43 @@ public sealed class PayPalClientFactory : IPayPalClientFactory, IDisposable
             MerchantId = merchantId,
         });
 
+    public IPayPalApiClient CreateWithAccessToken(
+        string accessToken,
+        PayPalEnvironment environment = PayPalEnvironment.Sandbox,
+        string? partnerAttributionId = null,
+        string? merchantId = null,
+        string? partnerClientId = null,
+        string? baseUrlOverride = null,
+        int timeoutSeconds = 100)
+        => CreateWithTokenProvider(
+            new StaticPayPalTokenProvider(accessToken),
+            environment, partnerAttributionId, merchantId, partnerClientId, baseUrlOverride, timeoutSeconds);
+
+    public IPayPalApiClient CreateWithTokenProvider(
+        IPayPalTokenProvider tokenProvider,
+        PayPalEnvironment environment = PayPalEnvironment.Sandbox,
+        string? partnerAttributionId = null,
+        string? merchantId = null,
+        string? partnerClientId = null,
+        string? baseUrlOverride = null,
+        int timeoutSeconds = 100)
+    {
+        ArgumentNullException.ThrowIfNull(tokenProvider);
+        ObjectDisposedException.ThrowIf(_disposed, this);
+
+        var options = Microsoft.Extensions.Options.Options.Create(new PayPalOptions
+        {
+            Environment = environment,
+            ClientId = partnerClientId ?? string.Empty,   // only used as the auth-assertion issuer
+            PartnerAttributionId = partnerAttributionId,
+            MerchantId = merchantId,
+            SendAuthAssertion = false,
+            BaseUrlOverride = baseUrlOverride,
+            TimeoutSeconds = timeoutSeconds,
+        });
+        return BuildClient(options, tokenProvider);
+    }
+
     private IPayPalApiClient Build(PayPalCredentials credentials)
     {
         var options = Microsoft.Extensions.Options.Options.Create(credentials.ToOptions());
@@ -150,7 +217,17 @@ public sealed class PayPalClientFactory : IPayPalClientFactory, IDisposable
             BaseAddress = baseUri,
             Timeout = TimeSpan.FromSeconds(options.Value.TimeoutSeconds),
         };
-        var tokenProvider = new PayPalTokenProvider(tokenHttp, options);
+        lock (_sync)
+        {
+            _built.Add(tokenHttp);
+        }
+
+        return BuildClient(options, new PayPalTokenProvider(tokenHttp, options));
+    }
+
+    private IPayPalApiClient BuildClient(IOptions<PayPalOptions> options, IPayPalTokenProvider tokenProvider)
+    {
+        var baseUri = ResolveBaseUri(options.Value);
 
         // API HttpClient: partner headers -> auth (bearer) -> shared transport.
         var merchantContext = new PayPalMerchantContext();
@@ -166,7 +243,6 @@ public sealed class PayPalClientFactory : IPayPalClientFactory, IDisposable
 
         lock (_sync)
         {
-            _built.Add(tokenHttp);
             _built.Add(apiHttp);
         }
 
@@ -187,6 +263,7 @@ public sealed class PayPalClientFactory : IPayPalClientFactory, IDisposable
             new PartnerReferralsV1Client(apiHttp),
             new WebhooksV1Client(apiHttp),
             new PayPalCustomClient(apiHttp),
+            tokenProvider,
             merchantContext);
     }
 

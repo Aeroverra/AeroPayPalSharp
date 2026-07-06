@@ -37,6 +37,24 @@ using (paypal.ActingAsMerchant(sellerMerchantId))
 }
 ```
 
+## Thread safety of the scope
+
+`ActingAsMerchant` does not create a new client; it sets an ambient value on an `AsyncLocal<string?>`
+(the same primitive Serilog's `LogContext` uses). `AsyncLocal` stores its value in the current async
+execution context, not on the shared client or handler, so:
+
+- Concurrent requests each read their own flow's value. Two threads in different scopes at the same
+  time never see each other's merchant, and a thread making direct (unscoped) calls sends no assertion
+  even while other threads are scoped.
+- The partner header handler reads the value at send time (it does not capture a copy), so a single
+  pooled handler shared across all requests stays correct.
+- Nested scopes restore the outer value on dispose.
+
+This is covered by a test that drives 900 interleaved concurrent flows through one shared client and
+asserts none leak. One rule makes it hold: **`await` your calls inside the `using`** (the natural
+pattern above). If you start a task and let the `using` dispose before it runs, the scope is already
+gone. Do not fire-and-forget across the scope boundary.
+
 ## Other ways to set the assertion
 
 - **Globally**, for a client dedicated to one seller: set `SendAuthAssertion = true` + `MerchantId` in

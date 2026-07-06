@@ -69,6 +69,13 @@ public interface IPayPalApiClient
     IPayPalCustomClient Custom { get; }
 
     /// <summary>
+    /// The OAuth token source backing this client. Use <c>client.Tokens.GetAccessTokenAsync()</c> to
+    /// read the current bearer token (for example to call something not yet wrapped, or to hand off to
+    /// another system).
+    /// </summary>
+    IPayPalTokenProvider Tokens { get; }
+
+    /// <summary>
     /// Runs the calls inside the returned scope on behalf of <paramref name="merchantId"/> by
     /// attaching a <c>PayPal-Auth-Assertion</c> for that sub-merchant. Usage:
     /// <code>using (client.ActingAsMerchant(sellerMerchantId)) { await client.Orders.CreateAsync(order); }</code>
@@ -97,6 +104,7 @@ public sealed class PayPalApiClient : IPayPalApiClient
         IPartnerReferralsV1Client partnerReferralsV1,
         IWebhooksV1Client webhooks,
         IPayPalCustomClient custom,
+        IPayPalTokenProvider tokens,
         PayPalMerchantContext merchantContext)
     {
         Orders = orders;
@@ -114,6 +122,7 @@ public sealed class PayPalApiClient : IPayPalApiClient
         PartnerReferralsV1 = partnerReferralsV1;
         Webhooks = webhooks;
         Custom = custom;
+        Tokens = tokens;
         _merchantContext = merchantContext;
     }
 
@@ -132,6 +141,7 @@ public sealed class PayPalApiClient : IPayPalApiClient
     public IPartnerReferralsV1Client PartnerReferralsV1 { get; }
     public IWebhooksV1Client Webhooks { get; }
     public IPayPalCustomClient Custom { get; }
+    public IPayPalTokenProvider Tokens { get; }
 
     public IDisposable ActingAsMerchant(string merchantId) => _merchantContext.ActingAs(merchantId);
 }

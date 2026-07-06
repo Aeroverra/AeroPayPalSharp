@@ -23,6 +23,8 @@ namespace Aeroverra.PayPalSharp;
 /// <summary>Registers the PayPal clients in the DI container.</summary>
 public static class ServiceCollectionExtensions
 {
+    internal const string TokenHttpClientName = "Aeroverra.PayPalSharp.Token";
+
     /// <summary>
     /// Adds the PayPal SDK. Inject <see cref="IPayPalApiClient"/> (or any individual
     /// sub-client interface) afterwards. Auth (OAuth2 client-credentials) and partner
@@ -38,8 +40,14 @@ public static class ServiceCollectionExtensions
         services.TryAddSingleton<IPayPalCertificateSource, HttpPayPalCertificateSource>();
         services.TryAddSingleton<IPayPalWebhookVerifier, PayPalWebhookVerifier>();
 
-        // Token provider gets its own HttpClient (no auth handler - it *is* the auth).
-        services.AddHttpClient<IPayPalTokenProvider, PayPalTokenProvider>(ConfigureHttpClient);
+        // Token provider gets its own named HttpClient (no auth handler - it *is* the auth). It is a
+        // SINGLETON so one OAuth token is cached and shared across every client and request, rather than
+        // one cache per injected client (the typed-client pattern would make it transient).
+        services.AddHttpClient(TokenHttpClientName, ConfigureHttpClient);
+        services.TryAddSingleton<IPayPalTokenProvider>(sp => new PayPalTokenProvider(
+            sp.GetRequiredService<IHttpClientFactory>(),
+            TokenHttpClientName,
+            sp.GetRequiredService<IOptions<PayPalOptions>>()));
 
         services.AddTransient<PayPalAuthenticationHandler>();
         services.AddTransient<PayPalPartnerHeaderHandler>();
