@@ -64,7 +64,7 @@ namespace Aeroverra.PayPalSharp.PartnerReferralsV1
         /// <param name="tracking_id">Filters the sellers in the response by this partner-provided seller ID (`merchant_id`).</param>
         /// <returns>A successful request returns the HTTP `201 Created` status code and a JSON response body that lists sellers. For each seller, the response shows the seller ID (`merchant_id`), the tracking ID, and [HATEOAS links](/docs/api/reference/api-responses/#hateoas-links) to show the seller-partner information.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task MerchantIntegrationFindAsync(string partner_id, string tracking_id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<MerchantIntegration> MerchantIntegrationFindAsync(string partner_id, string tracking_id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -355,7 +355,7 @@ namespace Aeroverra.PayPalSharp.PartnerReferralsV1
         /// <param name="tracking_id">Filters the sellers in the response by this partner-provided seller ID (`merchant_id`).</param>
         /// <returns>A successful request returns the HTTP `201 Created` status code and a JSON response body that lists sellers. For each seller, the response shows the seller ID (`merchant_id`), the tracking ID, and [HATEOAS links](/docs/api/reference/api-responses/#hateoas-links) to show the seller-partner information.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task MerchantIntegrationFindAsync(string partner_id, string tracking_id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<MerchantIntegration> MerchantIntegrationFindAsync(string partner_id, string tracking_id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (partner_id == null)
                 throw new System.ArgumentNullException("partner_id");
@@ -370,6 +370,7 @@ namespace Aeroverra.PayPalSharp.PartnerReferralsV1
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                 
@@ -406,7 +407,12 @@ namespace Aeroverra.PayPalSharp.PartnerReferralsV1
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<MerchantIntegration>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new PayPalApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {

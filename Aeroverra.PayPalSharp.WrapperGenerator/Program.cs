@@ -95,6 +95,7 @@ internal static class Program
         new InlineStringAllOf(),
         new MarkKnownRequired(),
         new MoneyValueToDecimal(),
+        new FixMerchantIntegrationFindResponse(),
     };
 
     private static async Task<int> Main(string[] args)
