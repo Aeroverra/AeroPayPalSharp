@@ -168,7 +168,9 @@ internal static class Program
             GenerateClientInterfaces = true,
             InjectHttpClient = true,
             DisposeHttpClient = false,
-            GenerateExceptionClasses = true,
+            // One shared PayPalApiException lives in the root namespace (Exceptions/PayPalApiException.cs)
+            // so a single catch handles errors from every sub-client. Do not generate it per client.
+            GenerateExceptionClasses = false,
             ExceptionClass = "PayPalApiException",
             UseBaseUrl = false,
             GenerateBaseUrlProperty = false,

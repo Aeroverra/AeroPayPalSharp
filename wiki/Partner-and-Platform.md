@@ -66,3 +66,23 @@ Per-call headers you set yourself always win; the handler only fills in what you
 
 Many create/capture methods also accept a `payPal_Request_Id` (idempotency) argument and a `prefer`
 argument (pass `"return=representation"` for the full object in the response).
+
+## Onboarding sellers (partner referrals)
+
+To onboard a seller, create a partner referral with `PartnerReferralsV2.CreateAsync` (a `tracking_id`
+you choose, `operations`, `products`, `legal_consents`, and a `partner_config_override.return_url`),
+then send the seller to the `action_url` link from the response.
+
+Do **not** rely on the browser redirecting back to your `return_url` to know that onboarding finished.
+PayPal treats that redirect as best-effort and it is increasingly unreliable (it may not fire at all).
+The authoritative completion signals are:
+
+- The **`MERCHANT.ONBOARDING.COMPLETED`** webhook (and `CUSTOMER.MERCHANT-INTEGRATION.*` events) - the
+  best choice for a server, since it needs no polling. Verify it with the
+  [webhook verifier](Webhooks.md).
+- **Polling the merchant-integration status by tracking id**:
+  `PartnerReferralsV1.MerchantIntegrationFindAsync(partnerMerchantId, trackingId)`. A 404 means not yet;
+  a 200 means an integration exists for that seller. Read `payments_receivable` and
+  `primary_email_confirmed` on the response to confirm the seller can actually transact.
+
+The interactive onboarding test (`InteractiveFlowTests`) demonstrates the polling approach.

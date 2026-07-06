@@ -19,7 +19,7 @@ public class WiringTests
     public async Task Payments_get_unknown_authorization_is_client_error()
     {
         Skip.IfNot(_fx.IsConfigured, _fx.SkipReason);
-        var ex = await Assert.ThrowsAnyAsync<Aeroverra.PayPalSharp.PaymentsV2.PayPalApiException>(
+        var ex = await Assert.ThrowsAnyAsync<PayPalApiException>(
             () => _fx.Client.Payments.AuthorizationsGetAsync("AUTH-DOES-NOT-EXIST"));
         Assert.InRange(ex.StatusCode, 400, 499);
     }
@@ -28,7 +28,7 @@ public class WiringTests
     public async Task Payouts_get_unknown_batch_is_client_error()
     {
         Skip.IfNot(_fx.IsConfigured, _fx.SkipReason);
-        var ex = await Assert.ThrowsAnyAsync<Aeroverra.PayPalSharp.PayoutsV1.PayPalApiException>(
+        var ex = await Assert.ThrowsAnyAsync<PayPalApiException>(
             () => _fx.Client.Payouts.GetAsync("BATCH-DOES-NOT-EXIST"));
         Assert.InRange(ex.StatusCode, 400, 499);
     }
@@ -37,7 +37,7 @@ public class WiringTests
     public async Task PaymentTokens_get_unknown_is_client_error()
     {
         Skip.IfNot(_fx.IsConfigured, _fx.SkipReason);
-        var ex = await Assert.ThrowsAnyAsync<Aeroverra.PayPalSharp.PaymentTokensV3.PayPalApiException>(
+        var ex = await Assert.ThrowsAnyAsync<PayPalApiException>(
             () => _fx.Client.PaymentTokens.GetAsync("TOKEN-DOES-NOT-EXIST"));
         Assert.InRange(ex.StatusCode, 400, 499);
     }

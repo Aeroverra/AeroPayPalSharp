@@ -59,7 +59,7 @@ public class ReadTests
             var balances = await _fx.Client.TransactionSearch.BalancesGetAsync();
             Assert.NotNull(balances);
         }
-        catch (Aeroverra.PayPalSharp.TransactionSearchV1.PayPalApiException ex)
+        catch (PayPalApiException ex)
         {
             // Transaction Search must be enabled on the REST app; otherwise PayPal 403s.
             Skip.If(true, $"Transaction Search not enabled for this app (PayPal {ex.StatusCode})");

@@ -23,6 +23,21 @@ dotnet user-secrets --project Aeroverra.PayPalSharp.IntegrationTests set "PayPal
 dotnet user-secrets --project Aeroverra.PayPalSharp.IntegrationTests set "PayPal:WebhookId" "your-webhook-id"
 ```
 
+## Interactive (human-in-the-loop) tests
+
+Some endpoints need a real buyer approval that cannot be automated (capturing and refunding a paid
+order). `InteractiveFlowTests` covers these: it creates an order, opens your browser to the PayPal
+approval page, waits on a throwaway `localhost` listener for you to pay with a sandbox buyer, then
+captures and refunds. Every request and response body is logged so you can inspect real payloads.
+
+It never runs in a normal `dotnet test` / CI run; it skips unless you opt in:
+
+```bash
+dotnet user-secrets --project Aeroverra.PayPalSharp.IntegrationTests set "PayPal:RunInteractive" "true"
+dotnet test --filter "InteractiveFlowTests" --logger "console;verbosity=detailed"
+# set it back to false afterwards so ordinary runs do not open a browser
+```
+
 ## What is covered
 
 - Auth token issue and caching.
@@ -39,4 +54,5 @@ dotnet user-secrets --project Aeroverra.PayPalSharp.IntegrationTests set "PayPal
 - The runtime factory: builds a working client from raw credentials and caches per credential set.
 
 Some endpoints need a completed buyer flow (a real capture, dispute, or vaulted token) and cannot be
-driven from an automated test alone; those are covered by the wiring tests rather than a full flow.
+driven from an automated test alone. Capture and refund are covered by the interactive test above
+(a real approved-and-paid order); the rest are covered by the wiring tests rather than a full flow.
