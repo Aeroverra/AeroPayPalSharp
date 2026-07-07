@@ -1,5 +1,6 @@
 using System.Globalization;
-using Newtonsoft.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Aeroverra.PayPalSharp;
 
@@ -11,54 +12,38 @@ namespace Aeroverra.PayPalSharp;
 /// (JPY 0, USD 2, TND 3); FEWER is always accepted (<c>"10"</c> == 10.00). So on write we trim trailing
 /// zeros, which keeps every well-scaled amount valid for its currency - crucially, a zero-decimal
 /// currency like JPY stored as <c>5000.00m</c> serializes as <c>"5000"</c>, not the rejected
-/// <c>"5000.00"</c>. Genuinely over-precise input (for example 3 decimals on a USD amount) is left as-is
-/// so PayPal reports the real error rather than us silently rounding money.
+/// <c>"5000.00"</c>. Genuinely over-precise input is left as-is so PayPal reports the real error rather
+/// than us silently rounding money.
 ///
-/// Registered for decimal/decimal? by PayPalJsonSettings; only money values are decimal in the generated
-/// models, so nothing else is affected.
+/// Registered for decimal by PayPalJsonSettings; System.Text.Json also uses it for decimal?.
 /// </summary>
-public sealed class PayPalMoneyConverter : JsonConverter
+public sealed class PayPalMoneyConverter : JsonConverter<decimal>
 {
-    public override bool CanConvert(System.Type objectType)
-        => objectType == typeof(decimal) || objectType == typeof(decimal?);
-
-    public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+    public override decimal Read(ref Utf8JsonReader reader, System.Type typeToConvert, JsonSerializerOptions options)
     {
-        if (value is decimal amount)
-        {
-            // "0.############" trims trailing zeros (5000.00 -> "5000", 10.50 -> "10.5") and never adds a
-            // trailing decimal point, so the result never exceeds the currency's max decimal places.
-            writer.WriteValue(amount.ToString("0.############", CultureInfo.InvariantCulture));
-        }
-        else
-        {
-            writer.WriteNull();
-        }
-    }
-
-    public override object? ReadJson(JsonReader reader, System.Type objectType, object? existingValue, JsonSerializer serializer)
-    {
-        var nullable = objectType == typeof(decimal?);
         switch (reader.TokenType)
         {
-            case JsonToken.Null:
-                return nullable ? (decimal?)null : 0m;
-
-            case JsonToken.String:
-                var text = (string?)reader.Value;
+            case JsonTokenType.String:
+                var text = reader.GetString();
                 if (string.IsNullOrWhiteSpace(text))
                 {
-                    return nullable ? (decimal?)null : 0m;
+                    return 0m;
                 }
                 return decimal.Parse(text, NumberStyles.Number, CultureInfo.InvariantCulture);
 
-            case JsonToken.Integer:
-            case JsonToken.Float:
+            case JsonTokenType.Number:
                 // Tolerate a numeric value if PayPal ever returns money as a number.
-                return System.Convert.ToDecimal(reader.Value, CultureInfo.InvariantCulture);
+                return reader.GetDecimal();
 
             default:
-                throw new JsonSerializationException($"Unexpected token {reader.TokenType} when parsing a money value.");
+                throw new JsonException($"Unexpected token {reader.TokenType} when parsing a money value.");
         }
+    }
+
+    public override void Write(Utf8JsonWriter writer, decimal value, JsonSerializerOptions options)
+    {
+        // "0.############" trims trailing zeros (5000.00 -> "5000", 10.50 -> "10.5") and never adds a
+        // trailing decimal point, so the result never exceeds the currency's max decimal places.
+        writer.WriteStringValue(value.ToString("0.############", CultureInfo.InvariantCulture));
     }
 }

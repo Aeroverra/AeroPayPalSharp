@@ -243,8 +243,8 @@ namespace Aeroverra.PayPalSharp.DisputesV1
     public partial class DisputesV1Client : IDisputesV1Client
     {
         private System.Net.Http.HttpClient _httpClient;
-        private static System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings, true);
-        private Newtonsoft.Json.JsonSerializerSettings _instanceSettings;
+        private static System.Lazy<System.Text.Json.JsonSerializerOptions> _settings = new System.Lazy<System.Text.Json.JsonSerializerOptions>(CreateSerializerSettings, true);
+        private System.Text.Json.JsonSerializerOptions _instanceSettings;
 
     #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public DisputesV1Client(System.Net.Http.HttpClient httpClient)
@@ -254,16 +254,16 @@ namespace Aeroverra.PayPalSharp.DisputesV1
             Initialize();
         }
 
-        private static Newtonsoft.Json.JsonSerializerSettings CreateSerializerSettings()
+        private static System.Text.Json.JsonSerializerOptions CreateSerializerSettings()
         {
-            var settings = new Newtonsoft.Json.JsonSerializerSettings();
+            var settings = new System.Text.Json.JsonSerializerOptions();
             UpdateJsonSerializerSettings(settings);
             return settings;
         }
 
-        protected Newtonsoft.Json.JsonSerializerSettings JsonSerializerSettings { get { return _instanceSettings ?? _settings.Value; } }
+        protected System.Text.Json.JsonSerializerOptions JsonSerializerSettings { get { return _instanceSettings ?? _settings.Value; } }
 
-        static partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
+        static partial void UpdateJsonSerializerSettings(System.Text.Json.JsonSerializerOptions settings);
 
         partial void Initialize();
 
@@ -518,8 +518,8 @@ namespace Aeroverra.PayPalSharp.DisputesV1
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
-                    var content_ = new System.Net.Http.StringContent(json_);
+                    var json_ = System.Text.Json.JsonSerializer.SerializeToUtf8Bytes(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.ByteArrayContent(json_);
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("PATCH");
@@ -986,8 +986,8 @@ namespace Aeroverra.PayPalSharp.DisputesV1
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
-                    var content_ = new System.Net.Http.StringContent(json_);
+                    var json_ = System.Text.Json.JsonSerializer.SerializeToUtf8Bytes(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.ByteArrayContent(json_);
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -1113,8 +1113,8 @@ namespace Aeroverra.PayPalSharp.DisputesV1
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
-                    var content_ = new System.Net.Http.StringContent(json_);
+                    var json_ = System.Text.Json.JsonSerializer.SerializeToUtf8Bytes(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.ByteArrayContent(json_);
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -1235,8 +1235,8 @@ namespace Aeroverra.PayPalSharp.DisputesV1
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
-                    var content_ = new System.Net.Http.StringContent(json_);
+                    var json_ = System.Text.Json.JsonSerializer.SerializeToUtf8Bytes(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.ByteArrayContent(json_);
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -1493,8 +1493,8 @@ namespace Aeroverra.PayPalSharp.DisputesV1
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
-                    var content_ = new System.Net.Http.StringContent(json_);
+                    var json_ = System.Text.Json.JsonSerializer.SerializeToUtf8Bytes(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.ByteArrayContent(json_);
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -1615,8 +1615,8 @@ namespace Aeroverra.PayPalSharp.DisputesV1
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
-                    var content_ = new System.Net.Http.StringContent(json_);
+                    var json_ = System.Text.Json.JsonSerializer.SerializeToUtf8Bytes(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.ByteArrayContent(json_);
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -1747,8 +1747,8 @@ namespace Aeroverra.PayPalSharp.DisputesV1
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
-                    var content_ = new System.Net.Http.StringContent(json_);
+                    var json_ = System.Text.Json.JsonSerializer.SerializeToUtf8Bytes(body, JsonSerializerSettings);
+                    var content_ = new System.Net.Http.ByteArrayContent(json_);
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -2170,10 +2170,10 @@ namespace Aeroverra.PayPalSharp.DisputesV1
                 var responseText = await ReadAsStringAsync(response.Content, cancellationToken).ConfigureAwait(false);
                 try
                 {
-                    var typedBody = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(responseText, JsonSerializerSettings);
+                    var typedBody = System.Text.Json.JsonSerializer.Deserialize<T>(responseText, JsonSerializerSettings);
                     return new ObjectResponseResult<T>(typedBody!, responseText);
                 }
-                catch (Newtonsoft.Json.JsonException exception)
+                catch (System.Text.Json.JsonException exception)
                 {
                     var message = "Could not deserialize the response body string as " + typeof(T).FullName + ".";
                     throw new PayPalApiException(message, (int)response.StatusCode, responseText, headers, exception);
@@ -2184,15 +2184,12 @@ namespace Aeroverra.PayPalSharp.DisputesV1
                 try
                 {
                     using (var responseStream = await ReadAsStreamAsync(response.Content, cancellationToken).ConfigureAwait(false))
-                    using (var streamReader = new System.IO.StreamReader(responseStream))
-                    using (var jsonTextReader = new Newtonsoft.Json.JsonTextReader(streamReader))
                     {
-                        var serializer = Newtonsoft.Json.JsonSerializer.Create(JsonSerializerSettings);
-                        var typedBody = serializer.Deserialize<T>(jsonTextReader);
+                        var typedBody = await System.Text.Json.JsonSerializer.DeserializeAsync<T>(responseStream, JsonSerializerSettings, cancellationToken).ConfigureAwait(false);
                         return new ObjectResponseResult<T>(typedBody!, string.Empty);
                     }
                 }
-                catch (Newtonsoft.Json.JsonException exception)
+                catch (System.Text.Json.JsonException exception)
                 {
                     var message = "Could not deserialize the response body stream as " + typeof(T).FullName + ".";
                     throw new PayPalApiException(message, (int)response.StatusCode, string.Empty, headers, exception);
@@ -2262,14 +2259,14 @@ namespace Aeroverra.PayPalSharp.DisputesV1
     public partial class AcceptClaimResponseOptions
     {
 
-        [Newtonsoft.Json.JsonProperty("accept_claim_types", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("accept_claim_types")]
         [System.ComponentModel.DataAnnotations.MinLength(1)]
         [System.ComponentModel.DataAnnotations.MaxLength(10)]
         public AcceptClaimTypeList AcceptClaimTypes { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -2297,14 +2294,14 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The customer notes about accepting of offer. PayPal can but the merchant cannot view these notes.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("note", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("note")]
         [System.ComponentModel.DataAnnotations.StringLength(2000, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^(.|\r?\n)*$")]
         public string Note { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -2320,14 +2317,14 @@ namespace Aeroverra.PayPalSharp.DisputesV1
     public partial class AcknowledgeReturnItemResponseOptions
     {
 
-        [Newtonsoft.Json.JsonProperty("acknowledgement_types", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("acknowledgement_types")]
         [System.ComponentModel.DataAnnotations.MinLength(1)]
         [System.ComponentModel.DataAnnotations.MaxLength(10)]
         public AcknowledgementTypeList AcknowledgementTypes { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -2357,7 +2354,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <br/>
         /// <br/>Allowed values: ACKNOWLEDGE_RETURN_ITEM, ACCEPT_CLAIM, PROVIDE_EVIDENCE, APPEAL, CANCEL, CHANGE_REASON, ESCALATE.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("action", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("action")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[A-Z_]+$")]
         public string Action { get; set; } = default!;
@@ -2365,7 +2362,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The response option for the corresponding action. Possible values:&lt;ul&gt;&lt;li&gt;&lt;a href="https://developer.paypal.com/docs/api/customer-disputes/v1/#definition-acknowledgement_type"&gt;Acknowledgement Types&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://developer.paypal.com/docs/api/customer-disputes/v1/#definition-response-accept_claim_type"&gt;Accept Claim types&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("response_option", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("response_option")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[A-Z_]+$")]
         public string ResponseOption { get; set; } = default!;
@@ -2373,12 +2370,12 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// Indicates whether the evidence is mandatory for the corresponding action and response option.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("mandatory", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("mandatory")]
         public bool Mandatory { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -2397,48 +2394,48 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The street number.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("street_number", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("street_number")]
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string StreetNumber { get; set; } = default!;
 
         /// <summary>
         /// The street name. Just `Drury` in `Drury Lane`.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("street_name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("street_name")]
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string StreetName { get; set; } = default!;
 
         /// <summary>
         /// The street type. For example, avenue, boulevard, road, or expressway.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("street_type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("street_type")]
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string StreetType { get; set; } = default!;
 
         /// <summary>
         /// The delivery service. Post office box, bag number, or post office name.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("delivery_service", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("delivery_service")]
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string DeliveryService { get; set; } = default!;
 
         /// <summary>
         /// A named locations that represents the premise. Usually a building name or number or collection of buildings with a common name or number. For example, &lt;code&gt;Craven House&lt;/code&gt;.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("building_name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("building_name")]
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string BuildingName { get; set; } = default!;
 
         /// <summary>
         /// The first-order entity below a named building or location that represents the sub-premises. Usually a single building within a collection of buildings with a common name. Can be a flat, story, floor, room, or apartment.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("sub_building", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("sub_building")]
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string SubBuilding { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -2457,71 +2454,71 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The first line of the address. For example, number or street. For example, `173 Drury Lane`. Required for data entry and compliance and risk checks. Must contain the full address.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("address_line_1", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("address_line_1")]
         [System.ComponentModel.DataAnnotations.StringLength(300)]
         public string AddressLine1 { get; set; } = default!;
 
         /// <summary>
         /// The second line of the address. For example, suite or apartment number.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("address_line_2", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("address_line_2")]
         [System.ComponentModel.DataAnnotations.StringLength(300)]
         public string AddressLine2 { get; set; } = default!;
 
         /// <summary>
         /// The third line of the address, if needed. For example, a street complement for Brazil, direction text, such as `next to Walmart`, or a landmark in an Indian address.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("address_line_3", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("address_line_3")]
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string AddressLine3 { get; set; } = default!;
 
         /// <summary>
         /// The neighborhood, ward, or district. Smaller than `admin_area_level_3` or `sub_locality`. Value is:&lt;ul&gt;&lt;li&gt;The postal sorting code for Guernsey and many French territories, such as French Guiana.&lt;/li&gt;&lt;li&gt;The fine-grained administrative levels in China.&lt;/li&gt;&lt;/ul&gt;
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("admin_area_4", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("admin_area_4")]
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string AdminArea4 { get; set; } = default!;
 
         /// <summary>
         /// A sub-locality, suburb, neighborhood, or district. Smaller than `admin_area_level_2`. Value is:&lt;ul&gt;&lt;li&gt;Brazil. Suburb, bairro, or neighborhood.&lt;/li&gt;&lt;li&gt;India. Sub-locality or district. Street name information is not always available but a sub-locality or district can be a very small area.&lt;/li&gt;&lt;/ul&gt;
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("admin_area_3", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("admin_area_3")]
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         public string AdminArea3 { get; set; } = default!;
 
         /// <summary>
         /// A city, town, or village. Smaller than `admin_area_level_1`.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("admin_area_2", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("admin_area_2")]
         [System.ComponentModel.DataAnnotations.StringLength(120)]
         public string AdminArea2 { get; set; } = default!;
 
         /// <summary>
         /// The highest level sub-division in a country, which is usually a province, state, or ISO-3166-2 subdivision. Format for postal delivery. For example, `CA` and not `California`. Value, by country, is:&lt;ul&gt;&lt;li&gt;UK. A county.&lt;/li&gt;&lt;li&gt;US. A state.&lt;/li&gt;&lt;li&gt;Canada. A province.&lt;/li&gt;&lt;li&gt;Japan. A prefecture.&lt;/li&gt;&lt;li&gt;Switzerland. A kanton.&lt;/li&gt;&lt;/ul&gt;
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("admin_area_1", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("admin_area_1")]
         [System.ComponentModel.DataAnnotations.StringLength(300)]
         public string AdminArea1 { get; set; } = default!;
 
         /// <summary>
         /// The postal code, which is the zip code or equivalent. Typically required for countries with a postal code or an equivalent. See [postal code](https://en.wikipedia.org/wiki/Postal_code).
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("postal_code", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("postal_code")]
         [System.ComponentModel.DataAnnotations.StringLength(60)]
         public string PostalCode { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("country_code", Required = Newtonsoft.Json.Required.Always)]
+        [System.Text.Json.Serialization.JsonPropertyName("country_code")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [System.ComponentModel.DataAnnotations.StringLength(2, MinimumLength = 2)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^([A-Z]{2}|C2)$")]
         public string CountryCode { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("address_details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("address_details")]
         public AddressDetails AddressDetails { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -2542,7 +2539,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <br/>
         /// <br/>Allowed values: BUYER_FAVOR, SELLER_FAVOR.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("adjudication_outcome", Required = Newtonsoft.Json.Required.Always)]
+        [System.Text.Json.Serialization.JsonPropertyName("adjudication_outcome")]
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
@@ -2550,7 +2547,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -2569,7 +2566,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The type of adjudication.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Always)]
+        [System.Text.Json.Serialization.JsonPropertyName("type")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
@@ -2578,7 +2575,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The date and time when the adjudication was done, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6).
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("adjudication_time", Required = Newtonsoft.Json.Required.Always)]
+        [System.Text.Json.Serialization.JsonPropertyName("adjudication_time")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 20)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])[T,t]([0-1][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)([.][0-9]+)?([Zz]|[+-][0-9]{2}:[0-9]{2})$")]
@@ -2587,7 +2584,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The reason for the adjudication type.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("reason", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("reason")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string Reason { get; set; } = default!;
@@ -2595,14 +2592,14 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The dispute life cycle stage during the adjudication.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("dispute_life_cycle_stage", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("dispute_life_cycle_stage")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string DisputeLifeCycleStage { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -2630,20 +2627,20 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// Indicates whether merchant has agreed to refund the buyer or not.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("merchant_agreed_refund", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("merchant_agreed_refund")]
         public bool MerchantAgreedRefund { get; set; } = default!;
 
         /// <summary>
         /// The date and time proposed by merchant to provide the refund, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6).
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("merchant_agreed_refund_time", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("merchant_agreed_refund_time")]
         [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 20)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])[T,t]([0-1][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)([.][0-9]+)?([Zz]|[+-][0-9]{2}:[0-9]{2})$")]
         public string MerchantAgreedRefundTime { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -2659,18 +2656,18 @@ namespace Aeroverra.PayPalSharp.DisputesV1
     public partial class AllowedResponseOptions
     {
 
-        [Newtonsoft.Json.JsonProperty("acknowledge_return_item", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("acknowledge_return_item")]
         public AcknowledgeReturnItemResponseOptions AcknowledgeReturnItem { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("accept_claim", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("accept_claim")]
         public AcceptClaimResponseOptions AcceptClaim { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("make_offer", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("make_offer")]
         public MakeOfferResponseOptions MakeOffer { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -2686,24 +2683,24 @@ namespace Aeroverra.PayPalSharp.DisputesV1
     public partial class BillingDisputesProperties
     {
 
-        [Newtonsoft.Json.JsonProperty("duplicate_transaction", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("duplicate_transaction")]
         public DuplicateTransaction DuplicateTransaction { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("incorrect_transaction_amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("incorrect_transaction_amount")]
         public IncorrectTransactionAmount IncorrectTransactionAmount { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("payment_by_other_means", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("payment_by_other_means")]
         public PaymentByOtherMeans PaymentByOtherMeans { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("credit_not_processed", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("credit_not_processed")]
         public CreditNotProcessed CreditNotProcessed { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("canceled_recurring_billing", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("canceled_recurring_billing")]
         public CanceledRecurringBilling CanceledRecurringBilling { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -2722,14 +2719,14 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The customer's name.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
         [System.ComponentModel.DataAnnotations.StringLength(2000, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[^~!@#$%^*()_{}:|\t\n/]+$")]
         public string Name { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -2744,7 +2741,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -2760,15 +2757,15 @@ namespace Aeroverra.PayPalSharp.DisputesV1
     public partial class CanceledRecurringBilling
     {
 
-        [Newtonsoft.Json.JsonProperty("expected_refund", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("expected_refund")]
         public Money ExpectedRefund { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("cancellation_details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("cancellation_details")]
         public CancellationDetails CancellationDetails { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -2787,7 +2784,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The date and time of the cancellation, in [Internet date and time format](http://tools.ietf.org/html/rfc3339#section-5.6).
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("cancellation_date", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("cancellation_date")]
         [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 20)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])[T,t]([0-1][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)([.][0-9]+)?([Zz]|[+-][0-9]{2}:[0-9]{2})$")]
         public string CancellationDate { get; set; } = default!;
@@ -2795,7 +2792,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The cancellation number.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("cancellation_number", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("cancellation_number")]
         [System.ComponentModel.DataAnnotations.StringLength(127, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^.*$")]
         public string CancellationNumber { get; set; } = default!;
@@ -2803,7 +2800,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// Indicates whether the dispute was canceled.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("cancelled", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("cancelled")]
         public bool Cancelled { get; set; } = default!;
 
         /// <summary>
@@ -2811,14 +2808,14 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <br/>
         /// <br/>Allowed values: CANCELLED_PAYPAL_BILLING_AGREEMENT, WEBSITE, PHONE, EMAIL, WRITTEN, IN_PERSON.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("cancellation_mode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("cancellation_mode")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string CancellationMode { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -2837,7 +2834,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The email address that is provided by the merchant where the customer can share the evidences.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("email")]
         [System.ComponentModel.DataAnnotations.StringLength(254, MinimumLength = 3)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^(?:[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+)*|""(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*"")@(?:(?:[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?\.)+[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[A-Za-z0-9-]*[A-Za-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$")]
         public string Email { get; set; } = default!;
@@ -2845,7 +2842,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The merchant provided notes that are visible to both the customer and PayPal.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("note", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("note")]
         [System.ComponentModel.DataAnnotations.StringLength(2000, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^(.|\r?\n)*$")]
         public string Note { get; set; } = default!;
@@ -2853,14 +2850,14 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The date and time when the contact details were posted, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6).
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("time_posted", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("time_posted")]
         [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 20)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])[T,t]([0-1][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)([.][0-9]+)?([Zz]|[+-][0-9]{2}:[0-9]{2})$")]
         public string TimePosted { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -2881,29 +2878,29 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <br/>
         /// <br/>Allowed values: PRODUCT, SERVICE.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("issue_type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("issue_type")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string IssueType { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("expected_refund", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("expected_refund")]
         public Money ExpectedRefund { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("cancellation_details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("cancellation_details")]
         public CancellationDetails CancellationDetails { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("product_details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("product_details")]
         public ProductDetails ProductDetails { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("service_details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("service_details")]
         public ServiceDetails ServiceDetails { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("agreed_refund_details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("agreed_refund_details")]
         public AgreedRefundDetails AgreedRefundDetails { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -2919,30 +2916,30 @@ namespace Aeroverra.PayPalSharp.DisputesV1
     public partial class Cryptocurrency
     {
 
-        [Newtonsoft.Json.JsonProperty("asset_symbol", Required = Newtonsoft.Json.Required.Always)]
+        [System.Text.Json.Serialization.JsonPropertyName("asset_symbol")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [System.ComponentModel.DataAnnotations.StringLength(10, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Za-z]{1,10}$")]
         public string AssetSymbol { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("quantity", Required = Newtonsoft.Json.Required.Always)]
+        [System.Text.Json.Serialization.JsonPropertyName("quantity")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [System.ComponentModel.DataAnnotations.StringLength(40, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^((-?[0-9]+)|(-?([0-9]+)?[.][0-9]+))$")]
         public string Quantity { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("quantity_in_subunits", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("quantity_in_subunits")]
         [System.ComponentModel.DataAnnotations.StringLength(81, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^-?[0-9]+$")]
         public string QuantityInSubunits { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("decimals", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("decimals")]
         [System.ComponentModel.DataAnnotations.Range(0, 40)]
         public int Decimals { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -2988,7 +2985,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The customer notes about the denial of offer. PayPal can but the merchant cannot view these notes.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("note", Required = Newtonsoft.Json.Required.Always)]
+        [System.Text.Json.Serialization.JsonPropertyName("note")]
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.StringLength(2000, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^(.|\r?\n)*$")]
@@ -2996,7 +2993,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -3015,7 +3012,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The ID of the dispute.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("dispute_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("dispute_id")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[A-Za-z0-9-]+$")]
         public string DisputeId { get; set; } = default!;
@@ -3023,7 +3020,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The date and time when the dispute was created, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6). For example, *`yyyy`*-*`MM`*-*`dd`*`T`*`HH`*:*`mm`*:*`ss`*.*`SSS`*`Z`.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("create_time", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("create_time")]
         [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 20)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])[T,t]([0-1][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)([.][0-9]+)?([Zz]|[+-][0-9]{2}:[0-9]{2})$")]
         public string CreateTime { get; set; } = default!;
@@ -3031,22 +3028,22 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The date and time when the dispute was last updated, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6). For example, *`yyyy`*-*`MM`*-*`dd`*`T`*`HH`*:*`mm`*:*`ss`*.*`SSS`*`Z`.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("update_time", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("update_time")]
         [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 20)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])[T,t]([0-1][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)([.][0-9]+)?([Zz]|[+-][0-9]{2}:[0-9]{2})$")]
         public string UpdateTime { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("disputed_transactions", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("disputed_transactions")]
         [System.ComponentModel.DataAnnotations.MinLength(1)]
         [System.ComponentModel.DataAnnotations.MaxLength(1000)]
         public TransactionInfoList DisputedTransactions { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("reason", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("reason")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string Reason { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("status")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string Status { get; set; } = default!;
@@ -3054,66 +3051,66 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The amount in the transaction that the customer originally disputed. Because customers can sometimes dispute only part of the payment, the disputed amount might be different from the total gross or net amount of the original transaction.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("dispute_amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("dispute_amount")]
         public Money DisputeAmount { get; set; } = default!;
 
         /// <summary>
         /// The asset in the transaction that the customer disputed.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("dispute_asset", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("dispute_asset")]
         public Cryptocurrency DisputeAsset { get; set; } = default!;
 
         /// <summary>
         /// Policy that determines whether the fee needs to be charged, retained or returned while moving the money as part of dispute process.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("fee_policy", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("fee_policy")]
         public FeePolicy FeePolicy { get; set; } = default!;
 
         /// <summary>
         /// The code that identifies the reason for the credit card chargeback. Each card issuer follows their own standards for defining reason type, code, and its format. For more details about the external reason code, see the card issue site. Available for only unbranded transactions.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("external_reason_code", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("external_reason_code")]
         [System.ComponentModel.DataAnnotations.StringLength(2000, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[A-Za-z0-9._-]+$")]
         public string ExternalReasonCode { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("dispute_outcome", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("dispute_outcome")]
         public DisputeOutcome DisputeOutcome { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("adjudications", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("adjudications")]
         [System.ComponentModel.DataAnnotations.MinLength(1)]
         [System.ComponentModel.DataAnnotations.MaxLength(10)]
         public AdjudicationList Adjudications { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("money_movements", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("money_movements")]
         [System.ComponentModel.DataAnnotations.MinLength(1)]
         [System.ComponentModel.DataAnnotations.MaxLength(50)]
         public MoneyMovementList MoneyMovements { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("fund_movements", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("fund_movements")]
         [System.ComponentModel.DataAnnotations.MinLength(1)]
         [System.ComponentModel.DataAnnotations.MaxLength(50)]
         public FundMovementList FundMovements { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("dispute_life_cycle_stage", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("dispute_life_cycle_stage")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string DisputeLifeCycleStage { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("dispute_channel", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("dispute_channel")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[A-Z0-9_]+$")]
         public string DisputeChannel { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("messages", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("messages")]
         [System.ComponentModel.DataAnnotations.MinLength(1)]
         [System.ComponentModel.DataAnnotations.MaxLength(1000)]
         public MessageList Messages { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("extensions", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("extensions")]
         public Extensions Extensions { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("evidences", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("evidences")]
         [System.ComponentModel.DataAnnotations.MinLength(1)]
         [System.ComponentModel.DataAnnotations.MaxLength(100)]
         public EvidenceList Evidences { get; set; } = default!;
@@ -3121,7 +3118,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The date and time by when the customer must respond to the dispute, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6). If the customer does not respond by this date and time, the dispute is closed in the merchant's favor. For example, *`yyyy`*-*`MM`*-*`dd`*`T`*`HH`*:*`mm`*:*`ss`*.*`SSS`*`Z`.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("buyer_response_due_date", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("buyer_response_due_date")]
         [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 20)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])[T,t]([0-1][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)([.][0-9]+)?([Zz]|[+-][0-9]{2}:[0-9]{2})$")]
         public string BuyerResponseDueDate { get; set; } = default!;
@@ -3129,36 +3126,36 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The date and time by when the merchant must respond to the dispute, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6). If the merchant does not respond by this date and time, the dispute is closed in the customer's favor. For example, *`yyyy`*-*`MM`*-*`dd`*`T`*`HH`*:*`mm`*:*`ss`*.*`SSS`*`Z`.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("seller_response_due_date", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("seller_response_due_date")]
         [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 20)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])[T,t]([0-1][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)([.][0-9]+)?([Zz]|[+-][0-9]{2}:[0-9]{2})$")]
         public string SellerResponseDueDate { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("offer", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("offer")]
         public Offer Offer { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("refund_details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("refund_details")]
         public RefundDetails RefundDetails { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("communication_details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("communication_details")]
         public CommunicationDetails CommunicationDetails { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("supporting_info", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("supporting_info")]
         [System.ComponentModel.DataAnnotations.MinLength(1)]
         [System.ComponentModel.DataAnnotations.MaxLength(100)]
         public SupportingInfoList SupportingInfo { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("allowed_response_options", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("allowed_response_options")]
         public AllowedResponseOptions AllowedResponseOptions { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("links")]
         [System.ComponentModel.DataAnnotations.MinLength(1)]
         [System.ComponentModel.DataAnnotations.MaxLength(10)]
         public DefinitionsLinkDescriptionList Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -3177,7 +3174,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The ID of the dispute.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("dispute_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("dispute_id")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[A-Za-z0-9-]+$")]
         public string DisputeId { get; set; } = default!;
@@ -3185,7 +3182,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The date and time when the dispute was created, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6). For example, *`yyyy`*-*`MM`*-*`dd`*`T`*`HH`*:*`mm`*:*`ss`*.*`SSS`*`Z`.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("create_time", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("create_time")]
         [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 20)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])[T,t]([0-1][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)([.][0-9]+)?([Zz]|[+-][0-9]{2}:[0-9]{2})$")]
         public string CreateTime { get; set; } = default!;
@@ -3193,22 +3190,22 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The date and time when the dispute was last updated, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6). For example, *`yyyy`*-*`MM`*-*`dd`*`T`*`HH`*:*`mm`*:*`ss`*.*`SSS`*`Z`.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("update_time", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("update_time")]
         [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 20)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])[T,t]([0-1][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)([.][0-9]+)?([Zz]|[+-][0-9]{2}:[0-9]{2})$")]
         public string UpdateTime { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("reason", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("reason")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string Reason { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("status")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string Status { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("dispute_state", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("dispute_state")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string DisputeState { get; set; } = default!;
@@ -3216,21 +3213,21 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The amount in the transaction that the customer originally disputed. Because customers can sometimes dispute only part of the payment, the disputed amount might be different from the total gross or net amount of the original transaction.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("dispute_amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("dispute_amount")]
         public Money DisputeAmount { get; set; } = default!;
 
         /// <summary>
         /// The asset in the transaction that the customer disputed.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("dispute_asset", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("dispute_asset")]
         public Cryptocurrency DisputeAsset { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("dispute_life_cycle_stage", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("dispute_life_cycle_stage")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string DisputeLifeCycleStage { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("dispute_channel", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("dispute_channel")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[A-Z0-9_]+$")]
         public string DisputeChannel { get; set; } = default!;
@@ -3238,7 +3235,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The date and time by when the customer must respond to the dispute, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6). If the customer does not respond by this date and time, the dispute is closed in the merchant's favor. For example, *`yyyy`*-*`MM`*-*`dd`*`T`*`HH`*:*`mm`*:*`ss`*.*`SSS`*`Z`.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("buyer_response_due_date", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("buyer_response_due_date")]
         [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 20)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])[T,t]([0-1][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)([.][0-9]+)?([Zz]|[+-][0-9]{2}:[0-9]{2})$")]
         public string BuyerResponseDueDate { get; set; } = default!;
@@ -3246,19 +3243,19 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The date and time by when the merchant must respond to the dispute, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6). If the merchant does not respond by this date and time, the dispute is closed in the customer's favor. For example, *`yyyy`*-*`MM`*-*`dd`*`T`*`HH`*:*`mm`*:*`ss`*.*`SSS`*`Z`.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("seller_response_due_date", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("seller_response_due_date")]
         [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 20)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])[T,t]([0-1][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)([.][0-9]+)?([Zz]|[+-][0-9]{2}:[0-9]{2})$")]
         public string SellerResponseDueDate { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("links")]
         [System.ComponentModel.DataAnnotations.MinLength(1)]
         [System.ComponentModel.DataAnnotations.MaxLength(10)]
         public DefinitionsLinkDescriptionList Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -3288,7 +3285,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <br/>
         /// <br/>Allowed values: RESOLVED_BUYER_FAVOUR, RESOLVED_SELLER_FAVOUR, RESOLVED_WITH_PAYOUT, CANCELED_BY_BUYER, ACCEPTED, DENIED, NONE.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("outcome_code", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("outcome_code")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string OutcomeCode { get; set; } = default!;
@@ -3296,7 +3293,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The justification for the adjudication outcome.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("outcome_reason", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("outcome_reason")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string OutcomeReason { get; set; } = default!;
@@ -3304,18 +3301,18 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The amount that either the merchant or PayPal refunds the customer.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("amount_refunded", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("amount_refunded")]
         public Money AmountRefunded { get; set; } = default!;
 
         /// <summary>
         /// The asset that either the merchant or PayPal refunds the customer.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("asset_refunded", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("asset_refunded")]
         public Cryptocurrency AssetRefunded { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -3331,19 +3328,19 @@ namespace Aeroverra.PayPalSharp.DisputesV1
     public partial class DisputeSearch
     {
 
-        [Newtonsoft.Json.JsonProperty("items", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("items")]
         [System.ComponentModel.DataAnnotations.MinLength(1)]
         [System.ComponentModel.DataAnnotations.MaxLength(100)]
         public DisputeInfoList Items { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("links")]
         [System.ComponentModel.DataAnnotations.MinLength(1)]
         [System.ComponentModel.DataAnnotations.MaxLength(10)]
         public DefinitionsLinkDescriptionList Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -3362,7 +3359,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The document name.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
         [System.ComponentModel.DataAnnotations.StringLength(2000, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[A-Za-z0-9-_,\s]+[.]{1}[A-Za-z]+$")]
         public string Name { get; set; } = default!;
@@ -3370,12 +3367,12 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The downloadable URL for the document for which the client has access.&lt;br/&gt;&lt;br/&gt;&lt;blockquote&gt;&lt;strong&gt;Note:&lt;/strong&gt; Document download may require some configuration setup and available as a limited release at this time. For more information, reach out to your PayPal account manager.&lt;/blockquote&gt;.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("url", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("url")]
         public System.Uri Url { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -3403,18 +3400,18 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// If `true`, indicates that a duplicate transaction was received.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("received_duplicate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("received_duplicate")]
         public bool ReceivedDuplicate { get; set; } = default!;
 
         /// <summary>
         /// The transaction details for the original transaction, when the dispute reason is `DUPLICATE_TRANSACTION`. Currently, contains only the date and amount.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("original_transaction", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("original_transaction")]
         public TransactionInfo OriginalTransaction { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -3433,39 +3430,39 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The human-readable, unique name of the error.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Always)]
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string Name { get; set; } = default!;
 
         /// <summary>
         /// The message that describes the error.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("message", Required = Newtonsoft.Json.Required.Always)]
+        [System.Text.Json.Serialization.JsonPropertyName("message")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string Message { get; set; } = default!;
 
         /// <summary>
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.Always)]
+        [System.Text.Json.Serialization.JsonPropertyName("debug_id")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// The information link, or URI, that shows detailed information about this error for the developer.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("information_link", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("information_link")]
         public string InformationLink { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("details")]
         public ErrorDetailsList Details { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("links")]
         public LinkDescriptionList Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -3484,34 +3481,34 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// Allowed values: INVALID_REQUEST.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
         public string Name { get; set; } = default!;
 
         /// <summary>
         /// Allowed values: Request is not well-formed, syntactically incorrect, or violates schema..
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("message", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("message")]
         public string Message { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("details")]
         public System.Collections.Generic.ICollection<ErrorDetails> Details { get; set; } = default!;
 
         /// <summary>
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("debug_id")]
         public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("links")]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
         public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -3530,34 +3527,34 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// Allowed values: AUTHENTICATION_FAILURE.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
         public string Name { get; set; } = default!;
 
         /// <summary>
         /// Allowed values: Authentication failed due to missing authorization header, or invalid authentication credentials..
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("message", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("message")]
         public string Message { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("details")]
         public System.Collections.Generic.ICollection<ErrorDetails> Details { get; set; } = default!;
 
         /// <summary>
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("debug_id")]
         public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("links")]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
         public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -3576,34 +3573,34 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// Allowed values: NOT_AUTHORIZED.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
         public string Name { get; set; } = default!;
 
         /// <summary>
         /// Allowed values: Authorization failed due to insufficient permissions..
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("message", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("message")]
         public string Message { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("details")]
         public System.Collections.Generic.ICollection<ErrorDetails> Details { get; set; } = default!;
 
         /// <summary>
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("debug_id")]
         public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("links")]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
         public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -3622,34 +3619,34 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// Allowed values: RESOURCE_NOT_FOUND.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
         public string Name { get; set; } = default!;
 
         /// <summary>
         /// Allowed values: The specified resource does not exist..
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("message", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("message")]
         public string Message { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("details")]
         public System.Collections.Generic.ICollection<ErrorDetails> Details { get; set; } = default!;
 
         /// <summary>
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("debug_id")]
         public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("links")]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
         public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -3668,34 +3665,34 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// Allowed values: RESOURCE_CONFLICT.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
         public string Name { get; set; } = default!;
 
         /// <summary>
         /// Allowed values: The server has detected a conflict while processing this request..
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("message", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("message")]
         public string Message { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("details")]
         public System.Collections.Generic.ICollection<ErrorDetails> Details { get; set; } = default!;
 
         /// <summary>
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("debug_id")]
         public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("links")]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
         public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -3714,34 +3711,34 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// Allowed values: UNSUPPORTED_MEDIA_TYPE.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
         public string Name { get; set; } = default!;
 
         /// <summary>
         /// Allowed values: The server does not support the request payload's media type..
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("message", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("message")]
         public string Message { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("details")]
         public System.Collections.Generic.ICollection<ErrorDetails> Details { get; set; } = default!;
 
         /// <summary>
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("debug_id")]
         public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("links")]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
         public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -3760,34 +3757,34 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// Allowed values: UNPROCESSABLE_ENTITY.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
         public string Name { get; set; } = default!;
 
         /// <summary>
         /// Allowed values: The requested action could not be performed, semantically incorrect, or failed business validation..
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("message", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("message")]
         public string Message { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("details")]
         public System.Collections.Generic.ICollection<ErrorDetails> Details { get; set; } = default!;
 
         /// <summary>
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("debug_id")]
         public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("links")]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
         public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -3806,31 +3803,31 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// Allowed values: INTERNAL_SERVER_ERROR.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
         public string Name { get; set; } = default!;
 
         /// <summary>
         /// Allowed values: An internal server error occurred..
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("message", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("message")]
         public string Message { get; set; } = default!;
 
         /// <summary>
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("debug_id")]
         public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("links")]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
         public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -3849,31 +3846,31 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// Allowed values: SERVICE_UNAVAILABLE.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
         public string Name { get; set; } = default!;
 
         /// <summary>
         /// Allowed values: Service Unavailable..
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("message", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("message")]
         public string Message { get; set; } = default!;
 
         /// <summary>
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("debug_id")]
         public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("links")]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
         public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -3892,34 +3889,34 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The field that caused the error. If this field is in the body, set this value to the field's JSON pointer value. Required for client-side errors.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("field", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("field")]
         public string Field { get; set; } = default!;
 
         /// <summary>
         /// The value of the field that caused the error.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("value")]
         public string Value { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("location", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("location")]
         public string Location { get; set; } = default!;
 
         /// <summary>
         /// The unique, fine-grained application-level error code.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("issue", Required = Newtonsoft.Json.Required.Always)]
+        [System.Text.Json.Serialization.JsonPropertyName("issue")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string Issue { get; set; } = default!;
 
         /// <summary>
         /// The human-readable description for an issue. The description can change over the lifetime of an API, so clients must not depend on this value.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("description")]
         public string Description { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -3938,37 +3935,37 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The field that caused the error. If this field is in the body, set this value to the field's JSON pointer value. Required for client-side errors.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("field", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("field")]
         public string Field { get; set; } = default!;
 
         /// <summary>
         /// The value of the field that caused the error.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("value")]
         public string Value { get; set; } = default!;
 
         /// <summary>
         /// The location of the field that caused the error. Value is `body`, `path`, or `query`.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("location", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("location")]
         public string Location { get; set; } = "body";
 
         /// <summary>
         /// The unique, fine-grained application-level error code.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("issue", Required = Newtonsoft.Json.Required.Always)]
+        [System.Text.Json.Serialization.JsonPropertyName("issue")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string Issue { get; set; } = default!;
 
         /// <summary>
         /// The human-readable description for an issue. The description can change over the lifetime of an API, so clients must not depend on this value.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("description")]
         public string Description { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -3996,7 +3993,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The complete target URL. To make the related call, combine the method with this [URI Template-formatted](https://tools.ietf.org/html/rfc6570) link. For pre-processing, include the `$`, `(`, and `)` characters. The `href` is the key HATEOAS component that links a completed call with a subsequent call.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("href", Required = Newtonsoft.Json.Required.Always)]
+        [System.Text.Json.Serialization.JsonPropertyName("href")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [System.ComponentModel.DataAnnotations.StringLength(20000)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^.*$")]
@@ -4005,7 +4002,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The [link relation type](https://tools.ietf.org/html/rfc5988#section-4), which serves as an ID for a link that unambiguously describes the semantics of the link. See [Link Relations](https://www.iana.org/assignments/link-relations/link-relations.xhtml).
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("rel", Required = Newtonsoft.Json.Required.Always)]
+        [System.Text.Json.Serialization.JsonPropertyName("rel")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^.*$")]
@@ -4016,14 +4013,14 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <br/>
         /// <br/>Allowed values: GET, POST, PUT, DELETE, PATCH.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("method", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("method")]
         [System.ComponentModel.DataAnnotations.StringLength(6, MinimumLength = 3)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[A-Z]*$")]
         public string Method { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -4042,17 +4039,17 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The notes about the escalation of the dispute to a claim.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("note", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("note")]
         [System.ComponentModel.DataAnnotations.StringLength(2000, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^(.|\r?\n)*$")]
         public string Note { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("buyer_escalation_reason", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("buyer_escalation_reason")]
         public BuyerEscalationReason BuyerEscalationReason { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -4068,14 +4065,14 @@ namespace Aeroverra.PayPalSharp.DisputesV1
     public partial class EscalateResponse
     {
 
-        [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("links")]
         [System.ComponentModel.DataAnnotations.MinLength(1)]
         [System.ComponentModel.DataAnnotations.MaxLength(10)]
         public DefinitionsLinkDescriptionList Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -4096,15 +4093,15 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <br/>
         /// <br/>Allowed values: PROOF_OF_FULFILLMENT, PROOF_OF_REFUND, PROOF_OF_DELIVERY_SIGNATURE, PROOF_OF_RECEIPT_COPY, RETURN_POLICY, BILLING_AGREEMENT, PROOF_OF_RESHIPMENT, ITEM_DESCRIPTION, POLICE_REPORT, AFFIDAVIT, PAID_WITH_OTHER_METHOD, COPY_OF_CONTRACT, TERMINAL_ATM_RECEIPT, PRICE_DIFFERENCE_REASON, SOURCE_CONVERSION_RATE, BANK_STATEMENT, CREDIT_DUE_REASON, REQUEST_CREDIT_RECEIPT, PROOF_OF_RETURN, CREATE, CHANGE_REASON, PROOF_OF_REFUND_OUTSIDE_PAYPAL, RECEIPT_OF_MERCHANDISE, CUSTOMS_DOCUMENT, CUSTOMS_FEE_RECEIPT, INFORMATION_ON_RESOLUTION, ADDITIONAL_INFORMATION_OF_ITEM, DETAILS_OF_PURCHASE, PROOF_OF_SIGNIFICANT_DIFFERENCE, PROOF_OF_SOFTWARE_OR_SERVICE_NOT_AS_DESCRIBED, PROOF_OF_CONFISCATION, PROOF_OF_DAMAGE, COPY_OF_LAW_ENFORCEMENT_AGENCY_REPORT, ADDITIONAL_PROOF_OF_SHIPMENT, PROOF_OF_DENIAL_BY_CARRIER, THIRDPARTY_PROOF_FOR_DAMAGE_OR_SIGNIFICANT_DIFFERENCE, VALID_SUPPORTING_DOCUMENT, LEGIBLE_SUPPORTING_DOCUMENT, RETURN_TRACKING_INFORMATION, DELIVERY_RECEIPT, PROOF_OF_INSTORE_RECEIPT, ADDITIONAL_TRACKING_INFORMATION, PROOF_OF_SHIPMENT_POSTAGE, ONLINE_TRACKING_INFORMATION, PROOF_OF_INSTORE_REFUND, PROOF_FOR_SOFTWARE_OR_SERVICE_DELIVERED, RETURN_ADDRESS_FOR_SHIPPING, COPY_OF_THE_EPARCEL_MANIFEST, COPY_OF_SHIPPING_MANIFEST, APPEAL_AFFIDAVIT, RECEIPT_OF_REPLACEMENT, COPY_OF_DRIVERS_LICENSE, ACCOUNT_CHANGE_INFORMATION, DELIVERY_ADDRESS, CONFIRMATION_OF_RESOLUTION, MERCHANT_RESPONSE, PERMISSION_DESCRIPTION, STATUS_OF_MERCHANDISE, LOST_CARD_DETAILS, LAST_VALID_TRANSACTION_DETAILS, ADDITIONAL_PROOF_OF_RETURN, DECLARATION, PROOF_OF_MISSING_ITEMS, PROOF_OF_EMPTY_PACKAGE_OR_DIFFERENT_ITEM, PROOF_OF_ITEM_NOT_RECEIVED, ORDER_DETAILS, LISTING_URL, SHIPPING_INSURANCE, BUYER_RESPONSE, PHOTOS_OF_SHIPPED_ITEM, OTHER, CANCELLATION_DETAILS, MERCHANT_CONTACT_DETAILS, ITEM_DETAILS, CORRECT_RECIPIENT_INFORMATION, EXPLANATION_OF_FUNDS_NOT_DELIVERED.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("evidence_type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("evidence_type")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string EvidenceType { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("evidence_info", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("evidence_info")]
         public EvidenceInfo EvidenceInfo { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("documents", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("documents")]
         [System.ComponentModel.DataAnnotations.MinLength(1)]
         [System.ComponentModel.DataAnnotations.MaxLength(100)]
         public DefinitionsDocumentList Documents { get; set; } = default!;
@@ -4112,7 +4109,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// Any evidence-related notes.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("notes", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("notes")]
         [System.ComponentModel.DataAnnotations.StringLength(2000, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^(.|\r?\n)*$")]
         public string Notes { get; set; } = default!;
@@ -4122,7 +4119,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <br/>
         /// <br/>Allowed values: REQUESTED_FROM_BUYER, REQUESTED_FROM_SELLER, SUBMITTED_BY_BUYER, SUBMITTED_BY_SELLER, SUBMITTED_BY_PARTNER.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("source", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("source")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[A-Z_]+$")]
         public string Source { get; set; } = default!;
@@ -4130,7 +4127,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The date and time when the evidence was received, in [Internet date and time format](http://tools.ietf.org/html/rfc3339#section-5.6).
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("date", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("date")]
         [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 20)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])[T,t]([0-1][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)([.][0-9]+)?([Zz]|[+-][0-9]{2}:[0-9]{2})$")]
         public string Date { get; set; } = default!;
@@ -4138,7 +4135,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The item ID. If the merchant provides multiple pieces of evidence and the transaction has multiple item IDs, the merchant can use this value to associate a piece of evidence with an item ID.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("item_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("item_id")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[A-Za-z0-9]+$")]
         public string ItemId { get; set; } = default!;
@@ -4146,7 +4143,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The item type for which the evidence is requested or submitted.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("item_type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("item_type")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string ItemType { get; set; } = default!;
@@ -4154,20 +4151,20 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The action details for the information. Includes additional information such as the action for which the evidence was requested/submitted, and whether the evidence is mandatory for the corresponding action.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("action_info", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("action_info")]
         public ActionInfo ActionInfo { get; set; } = default!;
 
         /// <summary>
         /// The dispute life cycle stage for the evidence.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("dispute_life_cycle_stage", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("dispute_life_cycle_stage")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string DisputeLifeCycleStage { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -4183,19 +4180,19 @@ namespace Aeroverra.PayPalSharp.DisputesV1
     public partial class EvidenceInfo
     {
 
-        [Newtonsoft.Json.JsonProperty("tracking_info", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("tracking_info")]
         [System.ComponentModel.DataAnnotations.MinLength(1)]
         [System.ComponentModel.DataAnnotations.MaxLength(10)]
         public TrackingInfoList TrackingInfo { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("refund_ids", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("refund_ids")]
         [System.ComponentModel.DataAnnotations.MinLength(1)]
         [System.ComponentModel.DataAnnotations.MaxLength(100)]
         public RefundIdsList RefundIds { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -4223,10 +4220,10 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// Indicates that the merchant was contacted.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("merchant_contacted", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("merchant_contacted")]
         public bool MerchantContacted { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("merchant_contacted_outcome", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("merchant_contacted_outcome")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string MerchantContactedOutcome { get; set; } = default!;
@@ -4234,7 +4231,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The date and time when merchant was contacted.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("merchant_contacted_time", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("merchant_contacted_time")]
         [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 20)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])[T,t]([0-1][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)([.][0-9]+)?([Zz]|[+-][0-9]{2}:[0-9]{2})$")]
         public string MerchantContactedTime { get; set; } = default!;
@@ -4242,7 +4239,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The method used to contact the merchant.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("merchant_contacted_mode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("merchant_contacted_mode")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string MerchantContactedMode { get; set; } = default!;
@@ -4250,7 +4247,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The date and time when the buyer contacted the partner to file a dispute, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6). For example, *`yyyy`*-*`MM`*-*`dd`*`T`*`HH`*:*`mm`*:*`ss`*.*`SSS`*`Z`.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("buyer_contacted_time", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("buyer_contacted_time")]
         [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 20)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])[T,t]([0-1][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)([.][0-9]+)?([Zz]|[+-][0-9]{2}:[0-9]{2})$")]
         public string BuyerContactedTime { get; set; } = default!;
@@ -4258,25 +4255,25 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The channel through which the buyer contacted the partner to file a dispute. Partners that allow buyers to create dispute from multiple channels can use this field to help identify which channel was used for each individual dispute.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("buyer_contacted_channel", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("buyer_contacted_channel")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^.*$")]
         public string BuyerContactedChannel { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("billing_dispute_properties", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("billing_dispute_properties")]
         public BillingDisputesProperties BillingDisputeProperties { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("merchandize_dispute_properties", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("merchandize_dispute_properties")]
         public MerchandizeDisputeProperties MerchandizeDisputeProperties { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("reported_source", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("reported_source")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[A-Z0-9_]+$")]
         public string ReportedSource { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -4294,7 +4291,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -4315,7 +4312,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <br/>
         /// <br/>Allowed values: SELLER, BUYER, PAYMENT_PROCESSOR.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("party", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("party")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string Party { get; set; } = default!;
@@ -4323,19 +4320,19 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The amount transferred as part of the money movement.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("amount")]
         public Money Amount { get; set; } = default!;
 
         /// <summary>
         /// The asset transferred as part of the money movement.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("asset", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("asset")]
         public Cryptocurrency Asset { get; set; } = default!;
 
         /// <summary>
         /// The date and time when the money movement was initiated, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6).
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("initiated_time", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("initiated_time")]
         [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 20)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])[T,t]([0-1][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)([.][0-9]+)?([Zz]|[+-][0-9]{2}:[0-9]{2})$")]
         public string InitiatedTime { get; set; } = default!;
@@ -4345,7 +4342,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <br/>
         /// <br/>Allowed values: DEBIT, CREDIT.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("type")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string Type { get; set; } = default!;
@@ -4353,14 +4350,14 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The reason for the fund movement.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("reason", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("reason")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string Reason { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -4385,26 +4382,26 @@ namespace Aeroverra.PayPalSharp.DisputesV1
     public partial class IncorrectTransactionAmount
     {
 
-        [Newtonsoft.Json.JsonProperty("correct_transaction_amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("correct_transaction_amount")]
         public Money CorrectTransactionAmount { get; set; } = default!;
 
         /// <summary>
         /// The correct asset quantity of the transaction.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("correct_transaction_asset", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("correct_transaction_asset")]
         public Cryptocurrency CorrectTransactionAsset { get; set; } = default!;
 
         /// <summary>
         /// The date and time when the customer created the transaction, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6).
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("correct_transaction_time", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("correct_transaction_time")]
         [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 20)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])[T,t]([0-1][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)([.][0-9]+)?([Zz]|[+-][0-9]{2}:[0-9]{2})$")]
         public string CorrectTransactionTime { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -4419,7 +4416,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -4434,7 +4431,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -4449,7 +4446,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -4464,7 +4461,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -4483,7 +4480,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The item ID. If the merchant provides multiple pieces of evidence and the transaction has multiple item IDs, the merchant can use this value to associate a piece of evidence with an item ID.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("item_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("item_id")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^.*$")]
         public string ItemId { get; set; } = default!;
@@ -4491,7 +4488,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The item name.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("item_name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("item_name")]
         [System.ComponentModel.DataAnnotations.StringLength(2000, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^.*$")]
         public string ItemName { get; set; } = default!;
@@ -4499,7 +4496,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The item description.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("item_description", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("item_description")]
         [System.ComponentModel.DataAnnotations.StringLength(2000, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^(.|\r?\n)*$")]
         public string ItemDescription { get; set; } = default!;
@@ -4507,7 +4504,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The count of the item in the dispute. Must be a whole number.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("item_quantity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("item_quantity")]
         [System.ComponentModel.DataAnnotations.StringLength(10, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[1-9][0-9]{0,9}$")]
         public string ItemQuantity { get; set; } = default!;
@@ -4515,12 +4512,12 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The ID of the transaction in the partner system. The partner transaction ID is returned at an item level because the partner might show different transactions for different items in the cart.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("partner_transaction_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("partner_transaction_id")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[A-Za-z0-9]+$")]
         public string PartnerTransactionId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("reason", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("reason")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string Reason { get; set; } = default!;
@@ -4528,43 +4525,43 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The amount of the item in the dispute.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("dispute_amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("dispute_amount")]
         public Money DisputeAmount { get; set; } = default!;
 
         /// <summary>
         /// Any notes provided with the item.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("notes", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("notes")]
         [System.ComponentModel.DataAnnotations.StringLength(2000, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^(.|\r?\n)*$")]
         public string Notes { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("item_type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("item_type")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string ItemType { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("product_details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("product_details")]
         public ItemProductDetails ProductDetails { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("service_details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("service_details")]
         public ItemServiceDetails ServiceDetails { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("booking_details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("booking_details")]
         public ItemBookingDetails BookingDetails { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("digital_download_details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("digital_download_details")]
         public ItemDigitalDownloadDetails DigitalDownloadDetails { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("cancellation_details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("cancellation_details")]
         public ItemCancellationDetails CancellationDetails { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("agreed_refund_details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("agreed_refund_details")]
         public ItemAgreedRefundDetails AgreedRefundDetails { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -4588,7 +4585,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -4603,7 +4600,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -4622,14 +4619,14 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The complete target URL. To make the related call, combine the method with this [URI Template-formatted](https://tools.ietf.org/html/rfc6570) link. For pre-processing, include the `$`, `(`, and `)` characters. The `href` is the key HATEOAS component that links a completed call with a subsequent call.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("href", Required = Newtonsoft.Json.Required.Always)]
+        [System.Text.Json.Serialization.JsonPropertyName("href")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string Href { get; set; } = default!;
 
         /// <summary>
         /// The [link relation type](https://tools.ietf.org/html/rfc5988#section-4), which serves as an ID for a link that unambiguously describes the semantics of the link. See [Link Relations](https://www.iana.org/assignments/link-relations/link-relations.xhtml).
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("rel", Required = Newtonsoft.Json.Required.Always)]
+        [System.Text.Json.Serialization.JsonPropertyName("rel")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string Rel { get; set; } = default!;
 
@@ -4638,12 +4635,12 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <br/>
         /// <br/>Allowed values: GET, POST, PUT, DELETE, HEAD, CONNECT, OPTIONS, PATCH.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("method", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("method")]
         public string Method { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -4671,7 +4668,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The merchant's notes about the offer.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("note", Required = Newtonsoft.Json.Required.Always)]
+        [System.Text.Json.Serialization.JsonPropertyName("note")]
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.StringLength(2000, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^(.|\r?\n)*$")]
@@ -4680,24 +4677,24 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The amount proposed to resolve the dispute.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("offer_amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("offer_amount")]
         public Money OfferAmount { get; set; } = default!;
 
         /// <summary>
         /// The return address for the item. Required when the customer must return an item to the merchant for the &lt;code&gt;MERCHANDISE_OR_SERVICE_NOT_AS_DESCRIBED&lt;/code&gt; dispute reason, especially if the refund amount is less than the dispute amount.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("return_shipping_address", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("return_shipping_address")]
         public AddressPortable ReturnShippingAddress { get; set; } = default!;
 
         /// <summary>
         /// The merchant-provided ID of the invoice for the refund. This optional value maps the refund to an invoice ID in the merchant's system.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("invoice_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("invoice_id")]
         [System.ComponentModel.DataAnnotations.StringLength(127, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^.*$")]
         public string InvoiceId { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("offer_type", Required = Newtonsoft.Json.Required.Always)]
+        [System.Text.Json.Serialization.JsonPropertyName("offer_type")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
@@ -4705,7 +4702,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -4721,14 +4718,14 @@ namespace Aeroverra.PayPalSharp.DisputesV1
     public partial class MakeOfferResponseOptions
     {
 
-        [Newtonsoft.Json.JsonProperty("offer_types", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("offer_types")]
         [System.ComponentModel.DataAnnotations.MinLength(1)]
         [System.ComponentModel.DataAnnotations.MaxLength(10)]
         public OfferTypeList OfferTypes { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -4749,29 +4746,29 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <br/>
         /// <br/>Allowed values: PRODUCT, SERVICE.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("issue_type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("issue_type")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string IssueType { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("product_details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("product_details")]
         public ProductDetails ProductDetails { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("service_details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("service_details")]
         public ServiceDetails ServiceDetails { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("cancellation_details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("cancellation_details")]
         public CancellationDetails CancellationDetails { get; set; } = default!;
 
         /// <summary>
         /// The return address for the item. Required when the customer must return an item to the merchant for the &lt;a href="https://developer.paypal.com/docs/integration/direct/customer-disputes/integration-guide/#merchandise_or_service_not_as_described"&gt;&lt;code&gt;MERCHANDISE_OR_SERVICE_NOT_AS_DESCRIBED&lt;/code&gt;&lt;/a&gt; dispute reason.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("return_shipping_address", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("return_shipping_address")]
         public AddressPortable ReturnShippingAddress { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -4792,7 +4789,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <br/>
         /// <br/>Allowed values: BUYER, SELLER, ARBITER.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("posted_by", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("posted_by")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string PostedBy { get; set; } = default!;
@@ -4800,7 +4797,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The date and time when the message was posted, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6).
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("time_posted", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("time_posted")]
         [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 20)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])[T,t]([0-1][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)([.][0-9]+)?([Zz]|[+-][0-9]{2}:[0-9]{2})$")]
         public string TimePosted { get; set; } = default!;
@@ -4808,19 +4805,19 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The message text.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("content", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("content")]
         [System.ComponentModel.DataAnnotations.StringLength(2000)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^(.|\r?\n)*$")]
         public string Content { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("documents", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("documents")]
         [System.ComponentModel.DataAnnotations.MinLength(1)]
         [System.ComponentModel.DataAnnotations.MaxLength(10)]
         public DocumentList Documents { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -4845,7 +4842,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
     public partial class Money
     {
 
-        [Newtonsoft.Json.JsonProperty("currency_code", Required = Newtonsoft.Json.Required.Always)]
+        [System.Text.Json.Serialization.JsonPropertyName("currency_code")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [System.ComponentModel.DataAnnotations.StringLength(3, MinimumLength = 3)]
         public string CurrencyCode { get; set; } = default!;
@@ -4853,12 +4850,12 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The value, which might be:&lt;ul&gt;&lt;li&gt;An integer for currencies like `JPY` that are not typically fractional.&lt;/li&gt;&lt;li&gt;A decimal fraction for currencies like `TND` that are subdivided into thousandths.&lt;/li&gt;&lt;/ul&gt;For the required number of decimal places for a currency code, see [Currency Codes](https://developer.paypal.com/api/rest/reference/currency-codes/).
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("value", Required = Newtonsoft.Json.Required.Always)]
+        [System.Text.Json.Serialization.JsonPropertyName("value")]
         public decimal Value { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -4880,7 +4877,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <br/>
         /// <br/>Allowed values: SELLER, BUYER, PAYMENT_PROCESSOR.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("affected_party", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("affected_party")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string AffectedParty { get; set; } = default!;
@@ -4888,19 +4885,19 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The amount transferred as part of the money movement.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("amount")]
         public Money Amount { get; set; } = default!;
 
         /// <summary>
         /// The asset transferred as part of the money movement.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("asset", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("asset")]
         public Cryptocurrency Asset { get; set; } = default!;
 
         /// <summary>
         /// The date and time when the money movement was initiated, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6).
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("initiated_time", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("initiated_time")]
         [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 20)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])[T,t]([0-1][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)([.][0-9]+)?([Zz]|[+-][0-9]{2}:[0-9]{2})$")]
         public string InitiatedTime { get; set; } = default!;
@@ -4910,7 +4907,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <br/>
         /// <br/>Allowed values: DEBIT, CREDIT.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("type")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string Type { get; set; } = default!;
@@ -4918,14 +4915,14 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The reason for the money movement.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("reason", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("reason")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string Reason { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -4954,28 +4951,28 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The customer-requested refund for this dispute.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("buyer_requested_amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("buyer_requested_amount")]
         public Money BuyerRequestedAmount { get; set; } = default!;
 
         /// <summary>
         /// The merchant-offered refund for this dispute.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("seller_offered_amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("seller_offered_amount")]
         public Money SellerOfferedAmount { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("offer_type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("offer_type")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string OfferType { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("history", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("history")]
         [System.ComponentModel.DataAnnotations.MinLength(1)]
         [System.ComponentModel.DataAnnotations.MaxLength(1000)]
         public OfferHistoryList History { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -4994,7 +4991,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The date and time when the event occurred, in [Internet date and time format](http://tools.ietf.org/html/rfc3339#section-5.6).
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("offer_time", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("offer_time")]
         [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 20)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])[T,t]([0-1][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)([.][0-9]+)?([Zz]|[+-][0-9]{2}:[0-9]{2})$")]
         public string OfferTime { get; set; } = default!;
@@ -5004,7 +5001,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <br/>
         /// <br/>Allowed values: BUYER, SELLER.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("actor", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("actor")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string Actor { get; set; } = default!;
@@ -5014,12 +5011,12 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <br/>
         /// <br/>Allowed values: PROPOSED, ACCEPTED, DENIED.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("event_type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("event_type")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string EventType { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("offer_type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("offer_type")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string OfferType { get; set; } = default!;
@@ -5027,13 +5024,13 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The offer amount.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("offer_amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("offer_amount")]
         public Money OfferAmount { get; set; } = default!;
 
         /// <summary>
         /// The user submitted notes.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("notes", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("notes")]
         [System.ComponentModel.DataAnnotations.StringLength(2000, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^(.|\r?\n)*$")]
         public string Notes { get; set; } = default!;
@@ -5041,14 +5038,14 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The dispute life cycle stage during the offer event.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("dispute_life_cycle_stage", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("dispute_life_cycle_stage")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string DisputeLifeCycleStage { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -5087,31 +5084,31 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <br/>
         /// <br/>Allowed values: add, remove, replace, move, copy, test.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("op", Required = Newtonsoft.Json.Required.Always)]
+        [System.Text.Json.Serialization.JsonPropertyName("op")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string Op { get; set; } = default!;
 
         /// <summary>
         /// The &lt;a href="https://tools.ietf.org/html/rfc6901"&gt;JSON Pointer&lt;/a&gt; to the target document location at which to complete the operation.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("path", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("path")]
         public string Path { get; set; } = default!;
 
         /// <summary>
         /// The value to apply. The &lt;code&gt;remove&lt;/code&gt;, &lt;code&gt;copy&lt;/code&gt;, and &lt;code&gt;move&lt;/code&gt; operations do not require a value. Since &lt;a href="https://www.rfc-editor.org/rfc/rfc69021"&gt;JSON Patch&lt;/a&gt; allows any type for &lt;code&gt;value&lt;/code&gt;, the &lt;code&gt;type&lt;/code&gt; property is not specified.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("value")]
         public object Value { get; set; } = default!;
 
         /// <summary>
         /// The &lt;a href="https://tools.ietf.org/html/rfc6901"&gt;JSON Pointer&lt;/a&gt; to the target document location from which to move the value. Required for the &lt;code&gt;move&lt;/code&gt; operation.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("from", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("from")]
         public string From { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -5139,13 +5136,13 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// If `true`, indicates that a charge was made that is different from the original charge.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("charge_different_from_original", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("charge_different_from_original")]
         public bool ChargeDifferentFromOriginal { get; set; } = default!;
 
         /// <summary>
         /// If `true`, indicates that a duplicate transaction was received.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("received_duplicate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("received_duplicate")]
         public bool ReceivedDuplicate { get; set; } = default!;
 
         /// <summary>
@@ -5153,7 +5150,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <br/>
         /// <br/>Allowed values: CASH, CREDIT_CARD, CHECK, PAYPAL, DEBIT_CARD, GIFT_CARD, BANK_TRANSFER.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("payment_method", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("payment_method")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string PaymentMethod { get; set; } = default!;
@@ -5161,14 +5158,14 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// Last 2-4 characters of the payment instrument. For payment_method CHECK, payment_instrument_suffix entered must be of minimum length 2-4 characters. For payment_method CREDIT_CARD, DEBIT_CARD, GIFT_CARD, BANK_TRANSFER, payment_instrument_suffix entered must be of length 4.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("payment_instrument_suffix", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("payment_instrument_suffix")]
         [System.ComponentModel.DataAnnotations.StringLength(4, MinimumLength = 2)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^.*$")]
         public string PaymentInstrumentSuffix { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -5183,7 +5180,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -5202,7 +5199,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The product description.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("description")]
         [System.ComponentModel.DataAnnotations.StringLength(2000, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^(.|\r?\n)*$")]
         public string Description { get; set; } = default!;
@@ -5212,7 +5209,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <br/>
         /// <br/>Allowed values: YES, NO, RETURNED.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("product_received", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("product_received")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string ProductReceived { get; set; } = default!;
@@ -5220,7 +5217,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The date and time when product was delivered.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("product_received_time", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("product_received_time")]
         [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 20)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])[T,t]([0-1][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)([.][0-9]+)?([Zz]|[+-][0-9]{2}:[0-9]{2})$")]
         public string ProductReceivedTime { get; set; } = default!;
@@ -5228,12 +5225,12 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The expected delivery date and time of the product.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("expected_delivery_date", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("expected_delivery_date")]
         [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 20)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])[T,t]([0-1][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)([.][0-9]+)?([Zz]|[+-][0-9]{2}:[0-9]{2})$")]
         public string ExpectedDeliveryDate { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("sub_reasons", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("sub_reasons")]
         [System.ComponentModel.DataAnnotations.MinLength(1)]
         [System.ComponentModel.DataAnnotations.MaxLength(10)]
         public SubReasonsList SubReasons { get; set; } = default!;
@@ -5241,15 +5238,15 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The URL where the customer purchased the product.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("purchase_url", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("purchase_url")]
         public System.Uri PurchaseUrl { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("return_details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("return_details")]
         public ReturnDetails ReturnDetails { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -5268,12 +5265,12 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The maximum refundable amount.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("allowed_refund_amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("allowed_refund_amount")]
         public Money AllowedRefundAmount { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -5303,7 +5300,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <br/>
         /// <br/>Allowed values: BUYER_EVIDENCE, SELLER_EVIDENCE.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("action", Required = Newtonsoft.Json.Required.Always)]
+        [System.Text.Json.Serialization.JsonPropertyName("action")]
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
@@ -5311,7 +5308,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -5330,7 +5327,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The date and time when the product was returned, [Internet date and time format](http://tools.ietf.org/html/rfc3339#section-5.6).
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("return_time", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("return_time")]
         [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 20)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])[T,t]([0-1][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)([.][0-9]+)?([Zz]|[+-][0-9]{2}:[0-9]{2})$")]
         public string ReturnTime { get; set; } = default!;
@@ -5340,7 +5337,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <br/>
         /// <br/>Allowed values: SHIPPED, IN_PERSON.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("mode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("mode")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[A-Z_]+$")]
         public string Mode { get; set; } = default!;
@@ -5348,13 +5345,13 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// Indicates whether customer has the return receipt.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("receipt", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("receipt")]
         public bool Receipt { get; set; } = default!;
 
         /// <summary>
         /// The confirmation number for the item return.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("return_confirmation_number", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("return_confirmation_number")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[A-Za-z0-9:\-]+$")]
         public string ReturnConfirmationNumber { get; set; } = default!;
@@ -5362,12 +5359,12 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// If `true`, indicates that the item was returned but the seller refused to accept the return and if `false`, indicates the item was not attempted to return.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("returned", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("returned")]
         public bool Returned { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -5386,7 +5383,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The email address for the merchant's PayPal account.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("email")]
         [System.ComponentModel.DataAnnotations.StringLength(254, MinimumLength = 3)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^(?:[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+)*|""(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*"")@(?:(?:[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?\.)+[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[A-Za-z0-9-]*[A-Za-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$")]
         public string Email { get; set; } = default!;
@@ -5394,7 +5391,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The PayPal account ID for the merchant.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("merchant_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("merchant_id")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Za-z]+$")]
         public string MerchantId { get; set; } = default!;
@@ -5402,14 +5399,14 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The name of the merchant.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
         [System.ComponentModel.DataAnnotations.StringLength(2000, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[^~!@#$%^*()_{}:|\t\n/]+$")]
         public string Name { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -5428,7 +5425,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The service description.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("description")]
         [System.ComponentModel.DataAnnotations.StringLength(2000, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^(.|\r?\n)*$")]
         public string Description { get; set; } = default!;
@@ -5438,7 +5435,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <br/>
         /// <br/>Allowed values: YES, NO, CANCELLED.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("service_started", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("service_started")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string ServiceStarted { get; set; } = default!;
@@ -5446,12 +5443,12 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The customer specified note about the service usage.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("note", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("note")]
         [System.ComponentModel.DataAnnotations.StringLength(2000, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^(.|\r?\n)*$")]
         public string Note { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("sub_reasons", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("sub_reasons")]
         [System.ComponentModel.DataAnnotations.MinLength(1)]
         [System.ComponentModel.DataAnnotations.MaxLength(10)]
         public DefinitionsSubReasonsList SubReasons { get; set; } = default!;
@@ -5459,12 +5456,12 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The URL of the merchant or marketplace site where the customer purchased the service.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("purchase_url", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("purchase_url")]
         public System.Uri PurchaseUrl { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -5489,14 +5486,14 @@ namespace Aeroverra.PayPalSharp.DisputesV1
     public partial class SubsequentAction
     {
 
-        [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("links")]
         [System.ComponentModel.DataAnnotations.MinLength(1)]
         [System.ComponentModel.DataAnnotations.MaxLength(10)]
         public DefinitionsLinkDescriptionList Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -5515,12 +5512,12 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// Any supporting notes.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("notes", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("notes")]
         [System.ComponentModel.DataAnnotations.StringLength(2000, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^(.|\r?\n)*$")]
         public string Notes { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("documents", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("documents")]
         [System.ComponentModel.DataAnnotations.MinLength(1)]
         [System.ComponentModel.DataAnnotations.MaxLength(100)]
         public SupportingInfoDefinitionsDocumentList Documents { get; set; } = default!;
@@ -5530,7 +5527,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <br/>
         /// <br/>Allowed values: SUBMITTED_BY_BUYER, SUBMITTED_BY_SELLER, SUBMITTED_BY_PARTNER.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("source", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("source")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string Source { get; set; } = default!;
@@ -5538,7 +5535,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The date and time when the information was received, in [Internet date and time format](http://tools.ietf.org/html/rfc3339#section-5.6).
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("provided_time", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("provided_time")]
         [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 20)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])[T,t]([0-1][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)([.][0-9]+)?([Zz]|[+-][0-9]{2}:[0-9]{2})$")]
         public string ProvidedTime { get; set; } = default!;
@@ -5546,14 +5543,14 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The dispute life cycle stage for the supporting info.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("dispute_life_cycle_stage", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("dispute_life_cycle_stage")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string DisputeLifeCycleStage { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -5592,7 +5589,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <br/>
         /// <br/>Allowed values: UPS, USPS, FEDEX, AIRBORNE_EXPRESS, DHL, AIRSURE, ROYAL_MAIL, PARCELFORCE, SWIFTAIR, OTHER, UK_PARCELFORCE, UK_ROYALMAIL_SPECIAL, UK_ROYALMAIL_RECORDED, UK_ROYALMAIL_INT_SIGNED, UK_ROYALMAIL_AIRSURE, UK_UPS, UK_FEDEX, UK_AIRBORNE_EXPRESS, UK_DHL, UK_OTHER, UK_CANNOT_PROV_TRACK, UK_CANNOT_PROVIDE_TRACKING, CA_CANADA_POST, CA_PUROLATOR, CA_CANPAR, CA_LOOMIS, CA_TNT, TNT, CA_OTHER, CA_CANNOT_PROV_TRACK, DE_DP_DHL_WITHIN_EUROPE, DE_DP_DHL_T_AND_T_EXPRESS, DE_DHL_DP_INTL_SHIPMENTS, CA_CANNOT_PROVIDE_TRACKING, DE_GLS, DE_DPD_DELISTACK, DE_HERMES, DE_UPS, DE_FEDEX, DE_TNT, DE_OTHER, FR_CHRONOPOST, FR_COLIPOSTE, FR_DHL, FR_UPS, FR_FEDEX, FR_TNT, FR_GLS, FR_OTHER, IT_POSTE_ITALIA, IT_DHL, IT_UPS, IT_FEDEX, IT_TNT, IT_GLS, IT_OTHER, AU_AUSTRALIA_POST_EP_PLAT, AU_AUSTRALIA_POST_EPARCEL, AU_AUSTRALIA_POST_EMS, AU_DHL, AU_STAR_TRACK_EXPRESS, AU_UPS, AU_FEDEX, AU_TNT, AU_TOLL_IPEC, AU_OTHER, FR_SUIVI, IT_EBOOST_SDA, ES_CORREOS_DE_ESPANA, ES_DHL, ES_UPS, ES_FEDEX, ES_TNT, ES_OTHER, AT_AUSTRIAN_POST_EMS, AT_AUSTRIAN_POST_PPRIME, BE_CHRONOPOST, BE_TAXIPOST, CH_SWISS_POST_EXPRES, CH_SWISS_POST_PRIORITY, CN_CHINA_POST, HK_HONGKONG_POST, IE_AN_POST_SDS_EMS, IE_AN_POST_SDS_PRIORITY, IE_AN_POST_REGISTERED, IE_AN_POST_SWIFTPOST, IN_INDIAPOST, JP_JAPANPOST, KR_KOREA_POST, NL_TPG, SG_SINGPOST, TW_CHUNGHWA_POST, CN_CHINA_POST_EMS, CN_FEDEX, CN_TNT, CN_UPS, CN_OTHER, NL_TNT, NL_DHL, NL_UPS, NL_FEDEX, NL_KIALA, BE_KIALA, PL_POCZTA_POLSKA, PL_POCZTEX, PL_GLS, PL_MASTERLINK, PL_TNT, PL_DHL, PL_UPS, PL_FEDEX, JP_SAGAWA_KYUU_BIN, JP_NITTSU_PELICAN_BIN, JP_KURO_NEKO_YAMATO_UNYUU, JP_TNT, JP_DHL, JP_UPS, JP_FEDEX, NL_PICKUP, NL_INTANGIBLE, NL_ABC_MAIL, HK_FOUR_PX_EXPRESS, HK_FLYT_EXPRESS, US_ASCENDIA, US_ENSENDA, US_GLOBEGISTICS, US_ONTRAC, RRDONNELLEY, ASENDIA_UK, UK_COLLECTPLUS, UK_DPD, UK_HERMESWORLD, UK_INTERLINK_EXPRESS, UK_TNT, UK_UK_MAIL, UK_YODEL, BUYLOGIC, CN_EMS, CHINA_POST, CNEXPS, CPACKET, CUCKOOEXPRESS, CN_EC, CN_EMPS, DE_ASENDIA, UK_DELTEC, DE_DEUTSCHE, DE_DPD, RABEN_GROUP, GLOBAL_TNT, ADSONE, AU_AU_POST, BONDSCOURIERS, COURIERS_PLEASE, DTDC_AU, AU_FASTWAY, HUNTER_EXPRESS, SENDLE, AUS_TOLL, TOLL, UBI_LOGISTICS, OMNIPARCEL, QUANTIUM, CN_SF_EXPRESS, SEKOLOGISTICS, HK_TAQBIN, GB_APC, CA_CANPAR_COURIER, GLOBAL_ESTES, CA_GREYHOUND, PUROLATOR, US_RL, IT_BRT, DMM_NETWORK, IT_FERCAM, HERMES_IT, IT_POSTE_ITALIANE, IT_SDA, IT_SGT, GLOBAL_SKYNET, FR_BERT, FR_COLIS, FR_GEODIS, FR_LAPOSTE, FR_TELIWAY, DPD_POLAND, INPOST_PACZKOMATY, POL_POCZTA, POL_SIODEMKA, ESP_CORREOS, ES_CORREOS, ESP_NACEX, ESP_ASM, ESP_REDUR, CBL_LOGISTICA, EKART, IND_DELHIVERY, IND_BLUEDART, IND_DTDC, IND_PROFESSIONAL_COURIERS, IND_REDEXPRESS, IND_XPRESSBEES, IND_DOTZOT, THA_KERRY, SENDIT, ACOMMERCE, NINJAVAN_THAI, NIM_EXPRESS, THA_THAILAND_POST, THA_DYNAMIC_LOGISTICS, ALPHAFAST, FASTRAK_TH, EPARCEL_KR, CJ_KOREA_THAI, RINCOS, KOR_KOREA_POST, KOR_CJ, KOR_ECARGO, SREKOREA, ROCKETPARCEL, BG_BULGARIAN_POST, JPN_JAPAN_POST, JPN_YAMATO, JPN_SAGAWA, TUR_PTT, AUT_AUSTRIAN_POST, AU_AUSTRIAN_POST, RUSSIAN_POST, BEL_DHL, FR_MONDIAL, EU_BPOST, LANDMARK_GLOBAL, IDN_POS, IDN_POS_INT, IDN_JNE, IDN_PANDU, RPX, IDN_TIKI, IDN_LION_PARCEL, NINJAVAN_ID, IDN_WAHANA, IDN_FIRST_LOGISTICS, UK_AN_POST, DPD, UK_FASTWAY, UK_NIGHTLINE, WISELOADS, GR_ELTA, GRC_ACS, GR_GENIKI, NINJAVAN_PHILIPPINES, PHL_XEND_EXPRESS, PHL_LBC, PHL_JAMEXPRESS, PHL_AIRSPEED, PHL_RAF, DIRECTLOG, BRA_CORREIOS, NLD_DHL, NLD_POSTNL, NLD_GLS, NLD_TRANSMISSION, CORREOS_DE_MEXICO, MEX_ESTAFETA, MEX_SENDA, MEX_REDPACK, MEX_AEROFLASH, NATIONWIDE_MY, MYS_MYS_POST, MYS_TAQBIN, MYS_SKYNET, MYS_CITYLINK, MYS_AIRPAK, NINJAVAN_MY, KANGAROO_MY, VNM_VIETNAM_POST, VNPOST_EMS, PRT_INT_SEUR, PRT_CTT, PRT_CHRONOPOST, PRT_SEUR, ADICIONAL, LTU_LIETUVOS, DPEX, LWE_HK, SG_SG_POST, SG_TAQBIN, SG_NINJAVAN, SG_ZALORA, JET_SHIP, SG_PARCELPOST, CHE_SWISS_POST, ASENDIA_HK, HUN_MAGYAR, POSTNORD_LOGISTICS, SWE_DIRECTLINK, SWE_POSTNORD, SWE_DB, CZE_CESKA, NZ_NZ_POST, NZ_COURIER_POST, FASTWAY_NZ, TW_TAIWAN_POST, SPREADEL, ARE_EMIRATES_POST, AXL, CYP_CYPRUS_POST, HRV_HRVATSKA, NOR_POSTEN, RAM, THECOURIERGUY, ZA_FASTWAY, DPE_EXPRESS, POSTI, MATKAHUOLTO, GLOBAL_DHL, ARG_CORREO, ARG_OCA, POST_SERBIA, BH_POSTA, CORREOS_CHILE, APR_72, CORREOS_DE_COSTA_RICA, POSTUR_IS, SPEEDEXCOURIER, ROU_POSTA, UKR_NOVA, UKR_POSHTA, NGA_NIPOST, NG_COURIERPLUS, ESHOPWORLD, WEBINTERPRET, HERMES, ABC_MAIL, ARAMEX, YANWEN, INTERNATIONAL_BRIDGE, SFC_LOGISTICS, BQC_EXPRESS, ONE_WORLD, IT_REGISTER_MAIL, WINIT, CONTINENTAL, EFS, PANTOS, RELAIS_COLIS, US_DHL_EXPRESS, US_DHL_PARCEL, US_DHL_ECOMMERCE, US_DHL_GLOBALFORWARDING, UK_DHL_EXPRESS, UK_DHL_PARCEL, UK_DHL_GLOBALFORWARDING, CN_DHL_EXPRESS, CN_DHL_ECOMMERCE, CN_DHL_GLOBALFORWARDING, DE_DHL_EXPRESS, DE_DHL_PARCEL, DE_DHL_PACKET, DE_DHL_ECOMMERCE, DE_DHL_GLOBALFORWARDING, DE_DHL_DEUTSCHEPOST, AU_DHL_EXPRESS, AU_DHL_ECOMMERCE, AU_DHL_GLOBALFORWARDING, HK_DHL_EXPRESS, HK_DHL_ECOMMERCE, HK_DHL_GLOBALFORWARDING, CA_DHL_EXPRESS, CA_DHL_ECOMMERCE, CA_DHL_GLOBALFORWARDING, IT_DHL_EXPRESS, IT_DHL_ECOMMERCE, IT_DHL_GLOBALFORWARDING, FR_DHL_EXPRESS, FR_DHL_PARCEL, FR_DHL_GLOBALFORWARDING, PL_DHL_EXPRESS, PL_DHL_PARCEL, PL_DHL_GLOBALFORWARDING, ABC_PACKAGE, AN_POST, APC_OVERNIGHT, ASM_ES, AUPOST_CN, ACOMMMERCE, ADICIONAL_PT, AIR_21, AIRBORNE_EXPRESS_UK, AIRPAK_MY, AIRSPEED, ASENDIA_DE, ASENDIA_US, AUSTRALIA_POST, TOLL_AU, AUSTRIAN_POST_EXPRESS, AUSTRIAN_POST, B_TWO_C_EUROPE, BERT, BPOST, BRT_IT, BLUEDART, BONDS_COURIERS, BPOST_INT, BULGARIAN_POST, CJ_LOGISTICS, CJ_INT_MY, CJ_MY, CJ_TH, CANADA_POST, CANPAR, CESKA_CZ, CHRONOPOST_FR, CHRONOPOST_PT, CHUNGHWA_POST, CITYLINK_MY, COLIPOSTE, COLIS, COLLECTPLUS, CORREOS_AG, CORREOS_BR, CORREOS_CL, CORREOS_CR, CORREOS_MX, CORREOS_ES, CORREOS_EXPRESS, COURIERPLUS, COURIER_POST, CYPRUS_POST_CYP, DBSCHENKER_SE, DHL_ES, DHL_ACTIVE_TRACING, DHL_AU, DHL_BENELUX, DHL_DEUTSCHE_POST, DHL_FR, DHL_GLOBAL_ECOMMERCE, DHL_HK, DHL_IT, DHL_JP, DHL_NL, DHL_PACKET, DHL_PARCEL_NL, DHL_PARCEL_ES, DHL_PL, DHL_SG, DHL_UK, DHL_GLOBAL_MAIL_ASIA, DHL_GLOBAL_MAIL, DHL_AT, DPD_DELISTRACK, DPD_FR, DPD_DE, DPD_HK, DPD_IR, DPD_LOCAL_REF, DPD_LOCAL, DPD_PL, DPD_RO, DPD_RU, DPD_UK, DTDC_EXPRESS, DTDC_IN, DAWN_WING, DELHIVERY_IN, DELTEC_DE, DELTEC_UK, DEUTSCHE_DE, DIRECTLINK_SE, DIRECTLOG_BR, DOTZOT, EC_CN, ELTA_GR, EMPS_CN, EMS_CN, ECARGO, EMIRATES_POST, ENSENDA, ESTAFETA, ESTES, FERCAM_IT, FLYT_EXPRESS, FASTRACK, FASTWAY_US, FASTWAY_ZA, FASTWAY_UK, FASTWAY_AU, FIRST_LOGISITCS, FOUR_PX_EXPRESS, GEODIS, GLS_CZ, GLS_FR, GLS_DE, GLS_IT, GLS_NL, GLS_ES, GLS, ACS_GR, GENIKI_GR, GLOBEGISTICS, GREYHOUND, HERMES_DE, HERMESWORLD_UK, HK_POST, HRVATSKA_HR, HUAHAN_EXPRESS, IMX, ITIS, INDIA_POST, INTERLINK, INT_SEUR, INT_SUER, ISRAEL_POST, JNE_IDN, JAMEXPRESS_PH, JAPAN_POST, JP_POST, JETSHIP_MY, JETSHIP_SG, KERRY_EXPRESS_VN, KERRY_EXPRESS_HK, KERRY_EXPRESS_TH, KIALA, KOREA_POST, CJ_KR, LAPOSTE, LBC_PH, LIETUVOS_LT, LION_PARCEL, LOGISTICSWORLDWIDE_HK, LOGISTICSWORLDWIDE_KR, LOGISTICSWORLDWIDE_MY, LOOMIS, MONDIAL, MAGYAR_HU, MALAYSIA_POST, MASTERLINK, AEROFLASH, REDPACK, SENDA_MX, MONDIAL_BE, MYHERMES, NACEX_ES, NATIONWIDE, NZ_POST, NIPOST_NG, NIGHTLINE_UK, NINJAVAN_PH, NINJAVAN_SG, NOVA_POSHTA_INT, NOVA_POSHTA, OCA_AR, ONTRAC, PTT_POST, PANDU, PARCELPOST_SG, POCZTA_POLSKA, POCZTEX, CTT_PT, SEUR_PT, POS_ID, POS_INT, POSTNL_INT_3_S, POSTNL, POSTNL_INT, POSTNORD_LOGISTICS_DK, POSTNORD_LOGISTICS_SE, POSTNORD_LOGISTICS_GLOBAL, POSTA_RO, POSTE_ITALIANE, POSTEN_NORGE, PROFESSIONAL_COURIERS, RAF_PH, RL_US, RPD_2_MAN, RPX_ID, REDEXPRESS, REDUR_ES, REGISTER_MAIL_IT, RELAIS_COLIS_FR, ROCKET_PARCEL, SDA_IT, SF_EXPRESS, SFC_EXPRESS, SGT_IT, SRE_KOREA, SAGAWA, SAGAWA_JP, POST_SERBIA_CS, SINGPOST, SIODEMKA, SKYNET_WORLDWIDE, SKYNET_MY, SKYNET_UAE, SKYNET_UK, SEUR_ES, STARTRACK_EXPRESS, STARTRACK, SWISS_POST, TNT_AU, TNT_CN, TNT_CLICK_IT, TNT_FR, TNT_DE, TNT_IT, TNT_JP, TNT_NL, TNT_PL, TNT_ES, TNT_UK, TPG, TAIWAN_POST_TW, TAQBIN_HK, TAQBIN_MY, TAQBIN_SG, TAXIPOST, TELIWAY, THAILAND_POST, THE_COURIER_GUY, TIKI_ID, TOLL_IPEC, TWO_GO, TRANSMISSION, UK_MAIL, UPS_MI, VIETNAM_POST, WAHANA_ID, XEND_EXPRESS_PH, XPRESSBEES, YAMATO, YANWEN_CN, YODEL, UPS_CANADA, UPS_MAIL_INNOVATIONS, DE_DELTEC, DE_INTERNATIONALSEUR, FR_DPD, FR_IMX, IT_IMX, AU_DTDC, AU_SENDLE, AU_SKYNET, ES_GLS, ES_INTERNATIONALSEUR, ES_IMX, CN_HUAHANEXPRESS, LOCAL_PICKUP, HK_DPEX, HK_KERRYEXPRESS, HK_LOGISTICSWORLDWIDEEXPRESS, HK_RPX, HK_SPREADEL, IN_SPREADEL, TH_CJ, KR_LOGISTICSWORLDWIDE, AT_DHL, BE_IMX, MY_LOGISTICSWORLDWIDE, MY_JETSHIP, SG_DHL, SG_SPREADEL, POSTAROMANA, US_PUROLATOR, US_FASTWAY, CHRONOPOST, CORREOS_DE_ESPANA, DEUTSCHE_POST_DHL, EBOOST_SDA, HONGKONG_POST, INTANGIBLE_DIGITAL_SERVICES, LA_POSTE, LA_POSTE_SUIVI, NEKO_YAMATO_UNYUU, NITTSU_PELICAN_BIN, POSTE_ITALIA, SAGAWA_KYUU_BIN, STAR_TRACK_EXPRESS, US_DTDC, US_STARTRACK, ISR_ISRAEL_POST, BE_MONDIAL, B_2_CEUROPE, PHL_2_GO, PHL_AIR_21, PT_SPANISH_SEUR, ES_SPANISH_SEUR, SG_DPEX, CH_IMX, DHLG, RUSTON, MIKROPAKKET, XPOST, PAN_ASIA, PARCELONE, SPEEDEE, VENIPAK, CROSHOT, SHREENANDANCOURIER, EPST_GLBL, NEWGISTICS, POST_SLOVENIA, JERSEY_POST, WMG, BOMBINOEXP, XQ_EXPRESS, FURDECO, LEGION_EXPRESS, YDH_EXPRESS, LHT_EXPRESS, SOUTH_AFRICAN_POST_OFFICE, GRUPO, SPOTON, DIMERCO, INTERPARCEL_UK, ABCUSTOM, IND_DELIVREE, GLOBAL_ABF, CN_BESTEXPRESS, DX_SFTP, PICKUPP_MYS, XPERT_DELIVERY, FMX, HELLMANN, DHL_REFR, DHL_HK, SHIP_IT_ASIA, KERRY_ECOMMERCE, GOJEK, FRETERAPIDO, YODEL_INTNL, CFL_LOGISTICS, PITNEY_BOWES, ZA_SPECIALISED_FREIGHT, JANCO, XPRESSEN_DK, YTO, RPD2MAN, SEUR_SP_API, DELIVERYONTIME, WISE_EXPRESS, JINSUNG, JTEXPRESS_VN, CHUKOU1, TRANS_KARGO, FEDEX_INTL_MLSERV, SWISHIP_DE, IVOY_WEBHOOK, AIRMEE_WEBHOOK, VAMOX, FIRSTMILE, AMS_GRP, FASTWAY_IR, HH_EXP, HRPARCEL, MYS_MYPOST_ONLINE, GESWL, BLUESTAR, TIPSA, CDEK_TR, KGMHUB, INTEXPRESS, DESCARTES, OVERSE_EXP, ONECLICK, ROADRUNNER_FREIGHT, GLS_CROTIA, TOURLINE, MRW_FTP, BH_WORLDWIDE, BLUEX, DYLT, OCS, YINGNUO_LOGISTICS, SIN_GLBL, TUFFNELLS_REFERENCE, CJPACKET, MILKMAN, FIEGE_NL, ASIGNA, ONEWORLDEXPRESS, LTIANEXP, KWE_GLOBAL, CTC_EXPRESS, LAO_POST, EU_IMX, GLS_SLOV, AMAZON, MORE_LINK, JX, MYS_EMS, EASY_MAIL, ADUIEPYLE, GB_PANTHER, SG_DETRACK, EXPRESSSALE, DICOM, MATDESPATCH, TRUNKRS_WEBHOOK, WESTBANK_COURIER, MBW, KHM_CAMBODIA_POST, FEDEX_CROSSBORDER, JANIO, SINOTRANS, BRT_IT_PARCELID, A1POST, DHL_SUPPLY_CHAIN, TAZMANIAN_FREIGHT, TOPYOU, PALEXPRESS, SAIA_FREIGHT, CN_WEDO, FULFILLME, SG_QXPRESS, UPS_REFERENCE, NHANS_SOLUTIONS, CARIBOU, LOCUS_WEBHOOK, DSV, CN_GOFLY, COORDINADORA, P2P_TRC, ANDREANI, DIRECTPARCELS, DOORA, FEDEX_POLAND, INTERPARCEL_NZ, XDP_UK_REFERENCE, ETOMARS, CN_JCEX, IND_ECOM, FAR_INTERNATIONAL, ESP_ENVIALIA, IDEXPRESS, GANGBAO, SMSA_EXPRESS, NEWAY, DEX_I, DESIGNERTRANSPORT_WEBHOOK, BUDBEE_WEBHOOK, GLS_SLOVEN, PARCELLED_IN, COPA_COURIER, GSI_EXPRESS, CON_WAY, BROUWER_TRANSPORT, TOLL_NZ, CPEX, ECHO, FEDEX_FR, XDE_WEBHOOK, TOLOS, BORDEREXPRESS, GIAO_HANG, MAILPLUS_JPN, GEODIS_ESPACE, TNT_UK_REFR, DOORDASH_WEBHOOK, KEC, CJ_HK_INTERNATIONAL, HELTHJEM, ZA_COURIERIT, SFB2C, FREIGHTQUOTE, FR_EXAPAQ, LANDMARK_GLOBAL_REFERENCE, PARCEL2GO, DELNEXT, TCK_EXPRESS, ENDEAVOUR_DELIVERY, NANJINGWOYUAN, HEPPNER_FR, PICKRR, FONSEN, APC_OVERNIGHT_CONNUM, STAR_TRACK_NEXT_FLIGHT, UPS_FREIGHT, DAJIN, POSTA_PLUS, CEVA, ORANGE_DS, ANSERX, JS_EXPRESS, PADTF, GAC, EZSHIP, GEIS, SYPOST, AMAZON_SHIP_MCF, SF_EX, YUSEN, ESP_MRW, BRING, PAGO, AO_COURIER, GBA, DIAMOND_EUROGISTICS, NEWEGGEXPRESS, LALAMOVE, SPEEDCOURIERS_GR, CORPORATECOURIERS_WEBHOOK, FORRUN, PICKUP, BOND, ECMS, INTELIPOST, SK_POSTA, FLASHEXPRESS, FETCHR_WEBHOOK, CN_STO, SEKO_SFTP, THEDELIVERYGROUP, CELLO_SQUARE, HOME_DELIVERY_SOLUTIONS, DPD_HGRY, KERRYTTC_VN, TARRIVE, JOYING_BOX, COLLIVERY, TOTAL_EXPRESS, ZJS_EXPRESS, STARKEN, MAINFREIGHT, IND_FIRSTFLIGHT, BE_BPOST, DEMANDSHIP, CN_DPEX, ACSWORLDWIDE, LOGISTERS, GOGLOBALPOST, AMSTAN, OKAYPARCEL, I_DIKA, ENVIALIA_REFERENCE, PAACK_WEBHOOK, GRAB_WEBHOOK, PARCELPOINT, ICUMULUS, FDSEXPRESS, DAIGLOBALTRACK, CNDEXPRESS, GLOBAL_IPARCEL, AMAZON_FBA_SWISHIP, WYNGS, YURTICI_KARGO, CN_PAYPAL_PACKAGE, PARCEL_2_POST, ZYLLEM, VIA_EXPRESS, WIZMO, TIGFREIGHT, PIL_LOGISTICS, ZTO_EXPRESS, HEPPNER, GENERAL_OVERNIGHT, HAPPY2POINT, ARCO_SPEDIZIONI, CHITCHATS, IML, SMOOTH, INTEL_VALLEY, CLE_LOGISTICS, FIEGE, MX_CARGO, ZIINGFINALMILE, TCS, DAYTON_FREIGHT, ROADBULL, YODEL_DIR, STONE3PL, PARCELPAL_WEBHOOK, DHL_ECOMERCE_ASA, SIMPLYPOST, KY_EXPRESS, SHENZHEN, UC_EXPRE, US_LASERSHIP, DIDADI, DYNALOGIC, DBSCHENKER_B2B, MXE, PFCEXPRESS, WHISTL, CAE_DELIVERS, WEPOST, ALLIEDEXPRESS, SHIPPIT, DDEXPRESS, ARAMEX_AU, TFM, BNEED, M_XPRESS, HK_TGX, LATVIJAS_PASTS, HDB_BOX, VIAEUROPE, CORREO_UY, CLEVY_LINKS, IBEONE, J_NET, RCL, 6LS, CGS_EXPRESS, BLR_BELPOST, BIRDSYSTEM, DOBROPOST, SAP_EXPRESS, WEASHIP, SONICTL, KWT, AFLLOG_FTP, IND_SAFEEXPRESS, TOPHATTEREXPRESS, SEINO, MGLOBAL, SZENDEX, AVERITT, DBSCHENKER_SV, LEADER, AO_DEUTSCHLAND, 2EBOX, EU_FLEET_SOLUTIONS, SG_SPEEDPOST, PCFCORP, AERONET, LINKBRIDGE, DE_DEUTSCHE_POST_DHL_WITHIN_EUROPE_TRACKNET, PRIMAMULTICIPTA, ISR_POST_DOMESTIC, COUREX, ZAJIL_EXPRESS, BESTWAYPARCEL, COLLECTCO, AEX, JTEXPRESS, FEDEX_UK, USHIP, ROUTIFIC_WEBHOOK, GLOBAL_EXPRESS, BRT_IT_SENDER_REF, GLOBAVEND, PIXSELL, SHIPTOR, CDEK, VNM_VIETTELPOST, PHL_AIR21, PALLET_NETWORK, CJ_CENTURY, UK_XDP, GSO, VIWO, SKYBOX, PAPER_EXPRESS, KERRYTJ, NTLOGISTICS_VN, SDH_SCM, PALLETWAYS, NOX_NACHTEXPRESS, ZINC, DPE_SOUTH_AFRC, LOGISTIKA, CELERITAS, PRESSIODE, SHREE_MARUTI, PARCELINKLOGISTICS, EFEX, LOTTE, LONESTAR, GB_NORSK, APRISAEXPRESS, BEL_RS, OSM_WORLDWIDE, SAILPOST, MAILAMERICAS, WESTGATE_GL, DTD_EXPR, ALFATREX, THABIT_LOGISTICS, PROMEDDELIVERY, PAQUETEXPRESS, NEWZEALAND_COURIERS, LIEFERY, JOOM_LOGIS, STRECK_TRANSPORT, HCT_LOGISTICS, ZA_FASTWAY, CARRY_FLAP, PONY_EXPRESS, US_OLD_DOMINION, ANICAM_BOX, ALWAYS_EXPRESS, WANBEXPRESS, AUS_STARTRACK, GBS_BROKER, STALLIONEXPRESS, RAIDEREX, ALLJOY, SHOPFANS, KYUNGDONG_PARCEL, CHAMPION_LOGISTICS, PICKUPP_SGP, DEALERSEND, MORNING_EXPRESS, NACEX, THENILE_WEBHOOK, JOCOM, HOLISOL, LBCEXPRESS_FTP, CSE, TFORCE_FINALMILE, KURASI, GEMWORLDWIDE, SHIP_GATE, USF_REDDAWAY, SHIPTER, NATIONAL_SAMEDAY, APG, CN_BOXC, YUNEXPRESS, INTEGRA2_FTP, CAINIAO, ECOSCOOTING, DMS_MATRIX, MAINWAY, ASENDIA_USA, PAPERFLY, HOUNDEXPRESS, 3JMSLOGISTICS, EP_BOX, BOX_BERRY, LICCARDI_EXPRESS, PLUS_LOG_UK, FULFILLA, SKY_POSTAL, ASE, CNWANGTONG, PITTOHIO, MAIL_PLUS, XPO_LOGISTICS, WNDIRECT, CLOUDWISH_ASIA, ZELERIS, MARA_XPRESS, GIO_EXPRESS, OCS_WORLDWIDE, DESTINY, ARK_LOGISTICS, DE_DPD_DELISTRACK, COMET_TECH, DHL_PARCEL_RU, AQUILINE, PILOT_FREIGHT, TNT_REFR, QWINTRY, DANSKE_FRAGT, SHREE_ANJANI_COURIER, CARRIERS, AIR_CANADA_GLOBAL, PRESIDENT_TRANS, STEPFORWARDFS, ESHIPPING, SHREETIRUPATI, HX_EXPRESS, INDOPAKET, CN_17POST, K1_EXPRESS, CJ_GLS, MYS_GDEX, NATIONEX, CN_EQUICK, ANJUN, VIRTRANSPORT, FARGOOD, SMG_EXPRESS, RZYEXPRESS, SEFL, HIPSHIPPER, HDB, RPXLOGISTICS, MIKROPAKKET_BE, KUEHNE, IT_NEXIVE, PTS, ETS_EXPRESS, SWISS_POST_FTP, COLIS_PRIVE, FASTRK_SERV, 4_72, US_YRC, CN_YUNDA, POSTNL_INTL_3S, AAA_COOPER, ELIAN_POST, CUBYN, SAU_SAUDI_POST, 360LION, ABXEXPRESS_MY, NINJAVAN_WB, ESP_PACKLINK, IND_JAYONEXPRESS, GB_ARROW, ZES_EXPRESS, IND_GOJAVAS, ZEPTO_EXPRESS, SKYNET_ZA, KPOST, ZEEK_2_DOOR, DHL_FREIGHT, BLUECARE, BLINKLASTMILE, POSTA_UKR, LOGISTYX_TRANSGROUP, JINDOUYUN, CHROBINSON, TRACKON, CN_POST56, GB_TUFFNELLS, COURANT_PLUS, SCUDEX_EXPRESS, SHIPENTEGRA, TRUMPCARD, CHOIR_EXP, ETOTAL, COPE, SFPLUS_WEBHOOK, IND_GATI, HERMES_2MANN_HANDLING, CN_WISHPOST, GLOBALTRANZ, HKD, UDS, BJSHOMEDELIVERY, YAKIT, LEXSHIP, OMNIVA, SUTTON, COSTMETICSNOW, PANTHER_REFERENCE, SFCSERVICE, PFLOGISTICS, LTL, LOOMIS_EXPRESS, PARKNPARCEL, SPRING_GDS, GLS_ITALY, ECEXPRESS, LINE, INTERPARCEL_AU, GEL_EXPRESS, AGILITY, XL_EXPRESS, ADERONLINE, DIRECTCOURIERS, PLANZER, NOX_NIGHT_TIME_EXPRESS, SENDING, HUODULL.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("carrier_name", Required = Newtonsoft.Json.Required.Always)]
+        [System.Text.Json.Serialization.JsonPropertyName("carrier_name")]
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
@@ -5601,7 +5598,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The name of carrier in free-form text for unavailable carriers. This field is mandatory when &lt;code&gt;carrier_name&lt;/code&gt; is &lt;code&gt;OTHER&lt;/code&gt;.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("carrier_name_other", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("carrier_name_other")]
         [System.ComponentModel.DataAnnotations.StringLength(2000, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^.*$")]
         public string CarrierNameOther { get; set; } = default!;
@@ -5609,13 +5606,13 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The URL to track the dispute-related transaction shipment.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("tracking_url", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("tracking_url")]
         public System.Uri TrackingUrl { get; set; } = default!;
 
         /// <summary>
         /// The number to track the dispute-related transaction shipment.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("tracking_number", Required = Newtonsoft.Json.Required.Always)]
+        [System.Text.Json.Serialization.JsonPropertyName("tracking_number")]
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^.*$")]
@@ -5623,7 +5620,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
@@ -5651,7 +5648,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The ID, as seen by the customer, for this transaction.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("buyer_transaction_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("buyer_transaction_id")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[A-Za-z0-9-]+$")]
         public string BuyerTransactionId { get; set; } = default!;
@@ -5659,7 +5656,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The ID, as seen by the merchant, for this transaction.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("seller_transaction_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("seller_transaction_id")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[A-Za-z0-9-]+$")]
         public string SellerTransactionId { get; set; } = default!;
@@ -5667,7 +5664,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The ID, as seen by the partner, for this transaction.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("reference_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("reference_id")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^.*$")]
         public string ReferenceId { get; set; } = default!;
@@ -5675,7 +5672,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The date and time when the transaction was created, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6). For example, *`yyyy`*-*`MM`*-*`dd`*`T`*`HH`*:*`mm`*:*`ss`*.*`SSS`*`Z`.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("create_time", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("create_time")]
         [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 20)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])[T,t]([0-1][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)([.][0-9]+)?([Zz]|[+-][0-9]{2}:[0-9]{2})$")]
         public string CreateTime { get; set; } = default!;
@@ -5685,7 +5682,7 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <br/>
         /// <br/>Allowed values: COMPLETED, UNCLAIMED, DENIED, FAILED, HELD, PENDING, PARTIALLY_REFUNDED, REFUNDED, REVERSED, CANCELLED.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("transaction_status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("transaction_status")]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
         public string TransactionStatus { get; set; } = default!;
@@ -5693,19 +5690,19 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// The gross amount of the transaction.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("gross_amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("gross_amount")]
         public Money GrossAmount { get; set; } = default!;
 
         /// <summary>
         /// The gross asset of the transaction.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("gross_asset", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("gross_asset")]
         public Cryptocurrency GrossAsset { get; set; } = default!;
 
         /// <summary>
         /// The ID of the invoice for the payment.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("invoice_number", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("invoice_number")]
         [System.ComponentModel.DataAnnotations.StringLength(127, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[A-Za-z0-9:\-|]+$")]
         public string InvoiceNumber { get; set; } = default!;
@@ -5713,28 +5710,28 @@ namespace Aeroverra.PayPalSharp.DisputesV1
         /// <summary>
         /// A free-text field that is entered by the merchant during checkout.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("custom", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("custom")]
         [System.ComponentModel.DataAnnotations.StringLength(2000, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^(.|\r?\n)*$")]
         public string Custom { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("buyer", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("buyer")]
         public Buyer Buyer { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("seller", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("seller")]
         public Seller Seller { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("items", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("items")]
         [System.ComponentModel.DataAnnotations.MinLength(1)]
         [System.ComponentModel.DataAnnotations.MaxLength(100)]
         public ItemInfoList Items { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("payment_processor", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.Text.Json.Serialization.JsonPropertyName("payment_processor")]
         public PaymentProcessor PaymentProcessor { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
-        [Newtonsoft.Json.JsonExtensionData]
+        [System.Text.Json.Serialization.JsonExtensionData]
         public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
         {
             get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }

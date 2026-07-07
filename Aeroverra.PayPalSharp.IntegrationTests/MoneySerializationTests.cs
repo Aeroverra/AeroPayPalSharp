@@ -1,7 +1,7 @@
+using System.Text.Json;
+using System.Text.Json.Nodes;
 using Aeroverra.PayPalSharp;
 using Aeroverra.PayPalSharp.OrdersV2;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Xunit;
 
 namespace Aeroverra.PayPalSharp.IntegrationTests;
@@ -12,16 +12,17 @@ namespace Aeroverra.PayPalSharp.IntegrationTests;
 /// </summary>
 public class MoneySerializationTests
 {
-    private static readonly JsonSerializerSettings Settings = BuildSettings();
+    private static readonly JsonSerializerOptions Options = BuildOptions();
 
-    private static JsonSerializerSettings BuildSettings()
+    private static JsonSerializerOptions BuildOptions()
     {
-        var settings = new JsonSerializerSettings();
-        PayPalJsonSettings.Apply(settings);
-        return settings;
+        var options = new JsonSerializerOptions();
+        PayPalJsonSettings.Apply(options);
+        return options;
     }
 
-    private static string ValueOf(AmountWithBreakdown amount) => (string)JObject.Parse(JsonConvert.SerializeObject(amount, Settings))["value"]!;
+    private static string ValueOf(AmountWithBreakdown amount)
+        => JsonNode.Parse(JsonSerializer.Serialize(amount, Options))!["value"]!.GetValue<string>();
 
     [Theory]
     [InlineData("10.00", "10")]      // whole USD amount -> no trailing zeros (still valid, <= 2 dp)
@@ -33,17 +34,17 @@ public class MoneySerializationTests
     public void Money_serializes_as_a_string_without_excess_decimals(string input, string expectedWire)
     {
         var amount = new AmountWithBreakdown { CurrencyCode = "USD", Value = decimal.Parse(input, System.Globalization.CultureInfo.InvariantCulture) };
-        var json = JObject.Parse(JsonConvert.SerializeObject(amount, Settings));
+        var value = JsonNode.Parse(JsonSerializer.Serialize(amount, Options))!["value"]!;
 
-        Assert.Equal(JTokenType.String, json["value"]!.Type); // string on the wire, never a JSON number
-        Assert.Equal(expectedWire, (string)json["value"]!);
+        Assert.Equal(JsonValueKind.String, value.GetValueKind()); // string on the wire, never a JSON number
+        Assert.Equal(expectedWire, value.GetValue<string>());
     }
 
     [Fact]
     public void Money_round_trips_from_a_paypal_string()
     {
         var json = "{\"currency_code\":\"USD\",\"value\":\"12.34\"}";
-        var amount = JsonConvert.DeserializeObject<AmountWithBreakdown>(json, Settings)!;
+        var amount = JsonSerializer.Deserialize<AmountWithBreakdown>(json, Options)!;
         Assert.Equal(12.34m, amount.Value);
         Assert.Equal("12.34", ValueOf(amount));
     }
@@ -74,10 +75,10 @@ public class MoneySerializationTests
     public void Currency_amounts_serialize_within_currency_decimals(string currency, string input, string expectedWire)
     {
         var amount = new AmountWithBreakdown { CurrencyCode = currency, Value = decimal.Parse(input, System.Globalization.CultureInfo.InvariantCulture) };
-        var json = JObject.Parse(JsonConvert.SerializeObject(amount, Settings));
+        var value = JsonNode.Parse(JsonSerializer.Serialize(amount, Options))!["value"]!;
 
-        Assert.Equal(JTokenType.String, json["value"]!.Type);
-        Assert.Equal(expectedWire, (string)json["value"]!);
+        Assert.Equal(JsonValueKind.String, value.GetValueKind());
+        Assert.Equal(expectedWire, value.GetValue<string>());
     }
 
     // A JPY value with fractional yen has no valid representation; make sure we never silently
@@ -110,12 +111,12 @@ public class MoneySerializationTests
             },
         };
 
-        var json = JObject.Parse(JsonConvert.SerializeObject(order, Settings));
-        var wire = json["purchase_units"]![0]!["amount"]!["value"]!;
-        Assert.Equal(JTokenType.String, wire.Type);
-        Assert.Equal(expectedWire, (string)wire!);
+        var json = JsonSerializer.Serialize(order, Options);
+        var wire = JsonNode.Parse(json)!["purchase_units"]![0]!["amount"]!["value"]!;
+        Assert.Equal(JsonValueKind.String, wire.GetValueKind());
+        Assert.Equal(expectedWire, wire.GetValue<string>());
 
-        var parsed = JsonConvert.DeserializeObject<OrderRequest>(json.ToString(), Settings)!;
+        var parsed = JsonSerializer.Deserialize<OrderRequest>(json, Options)!;
         Assert.Equal(value, parsed.PurchaseUnits.First().Amount.Value);
         Assert.Equal(currency, parsed.PurchaseUnits.First().Amount.CurrencyCode);
     }

@@ -72,7 +72,8 @@ public class InteractiveFlowTests
         _output.WriteLine($"Captured order {captured.Id} ({captured.Status}).");
         Assert.Equal("COMPLETED", captured.Status, ignoreCase: true);
 
-        var captureId = (string?)JObject.FromObject(captured).SelectToken("purchase_units[0].payments.captures[0].id");
+        var captureId = System.Text.Json.Nodes.JsonNode.Parse(System.Text.Json.JsonSerializer.Serialize(captured))
+            ?["purchase_units"]?[0]?["payments"]?["captures"]?[0]?["id"]?.GetValue<string>();
         Assert.False(string.IsNullOrEmpty(captureId), "Could not find a capture id in the capture response.");
         _output.WriteLine($"Capture id: {captureId}");
 

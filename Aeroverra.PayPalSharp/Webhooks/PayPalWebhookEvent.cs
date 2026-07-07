@@ -1,5 +1,5 @@
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Aeroverra.PayPalSharp;
 
@@ -12,27 +12,32 @@ namespace Aeroverra.PayPalSharp;
 /// </summary>
 public sealed class PayPalWebhookEvent
 {
-    [JsonProperty("id")] public string? Id { get; set; }
-    [JsonProperty("event_version")] public string? EventVersion { get; set; }
-    [JsonProperty("create_time")] public string? CreateTime { get; set; }
-    [JsonProperty("resource_type")] public string? ResourceType { get; set; }
-    [JsonProperty("resource_version")] public string? ResourceVersion { get; set; }
-    [JsonProperty("event_type")] public string? EventType { get; set; }
-    [JsonProperty("summary")] public string? Summary { get; set; }
-    [JsonProperty("resource")] public JObject? Resource { get; set; }
-    [JsonProperty("links")] public JArray? Links { get; set; }
+    [JsonPropertyName("id")] public string? Id { get; set; }
+    [JsonPropertyName("event_version")] public string? EventVersion { get; set; }
+    [JsonPropertyName("create_time")] public string? CreateTime { get; set; }
+    [JsonPropertyName("resource_type")] public string? ResourceType { get; set; }
+    [JsonPropertyName("resource_version")] public string? ResourceVersion { get; set; }
+    [JsonPropertyName("event_type")] public string? EventType { get; set; }
+    [JsonPropertyName("summary")] public string? Summary { get; set; }
+    [JsonPropertyName("resource")] public JsonElement? Resource { get; set; }
+    [JsonPropertyName("links")] public JsonElement? Links { get; set; }
 
     /// <summary>Deserializes <see cref="Resource"/> into <typeparamref name="T"/> (null if there is no resource).</summary>
-    public T? ResourceAs<T>() where T : class => Resource?.ToObject<T>();
+    public T? ResourceAs<T>() where T : class
+        => Resource is { } resource ? resource.Deserialize<T>(Options) : null;
 
-    // Keep PayPal's raw date strings verbatim so the parsed model round-trips faithfully.
-    private static readonly JsonSerializerSettings Settings = new()
+    private static readonly JsonSerializerOptions Options = BuildOptions();
+
+    private static JsonSerializerOptions BuildOptions()
     {
-        DateParseHandling = DateParseHandling.None,
-        NullValueHandling = NullValueHandling.Ignore,
-    };
+        // System.Text.Json keeps date-like strings verbatim (unlike Newtonsoft), so the raw model
+        // round-trips faithfully with no special date handling.
+        var options = new JsonSerializerOptions();
+        PayPalJsonSettings.Apply(options);
+        return options;
+    }
 
     /// <summary>Parses a raw webhook request body into a <see cref="PayPalWebhookEvent"/>.</summary>
     public static PayPalWebhookEvent Parse(string json)
-        => JsonConvert.DeserializeObject<PayPalWebhookEvent>(json, Settings) ?? new PayPalWebhookEvent();
+        => JsonSerializer.Deserialize<PayPalWebhookEvent>(json, Options) ?? new PayPalWebhookEvent();
 }

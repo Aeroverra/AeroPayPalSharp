@@ -217,7 +217,7 @@ internal static class Program
                 ArrayBaseType = "System.Collections.ObjectModel.Collection",
                 DictionaryBaseType = "System.Collections.Generic.Dictionary",
                 ClassStyle = CSharpClassStyle.Poco,
-                JsonLibrary = CSharpJsonLibrary.NewtonsoftJson,
+                JsonLibrary = CSharpJsonLibrary.SystemTextJson,
                 GenerateDefaultValues = true,
                 GenerateDataAnnotations = true,
                 HandleReferences = false,

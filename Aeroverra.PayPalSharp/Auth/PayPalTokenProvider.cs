@@ -1,7 +1,6 @@
 using System.Net.Http.Headers;
 using System.Text;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 
 namespace Aeroverra.PayPalSharp;
 
@@ -86,7 +85,7 @@ public sealed class PayPalTokenProvider : IPayPalTokenProvider
                     $"PayPal token request failed with {(int)response.StatusCode} {response.ReasonPhrase}: {Truncate(body, 500)}");
             }
 
-            var token = JsonConvert.DeserializeObject<TokenResponse>(body);
+            var token = System.Text.Json.JsonSerializer.Deserialize<TokenResponse>(body);
             if (token is null || string.IsNullOrEmpty(token.AccessToken))
             {
                 throw new PayPalAuthenticationException("PayPal token response did not contain an access_token.");
@@ -108,13 +107,13 @@ public sealed class PayPalTokenProvider : IPayPalTokenProvider
 
     private sealed class TokenResponse
     {
-        [JsonProperty("access_token")]
+        [System.Text.Json.Serialization.JsonPropertyName("access_token")]
         public string? AccessToken { get; set; }
 
-        [JsonProperty("token_type")]
+        [System.Text.Json.Serialization.JsonPropertyName("token_type")]
         public string? TokenType { get; set; }
 
-        [JsonProperty("expires_in")]
+        [System.Text.Json.Serialization.JsonPropertyName("expires_in")]
         public int ExpiresIn { get; set; }
     }
 }

@@ -1,7 +1,7 @@
+using System.Text.Json;
+using System.Text.Json.Nodes;
 using Aeroverra.PayPalSharp;
 using Aeroverra.PayPalSharp.OrdersV2;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Xunit;
 
 namespace Aeroverra.PayPalSharp.IntegrationTests;
@@ -13,13 +13,13 @@ namespace Aeroverra.PayPalSharp.IntegrationTests;
 /// </summary>
 public class PaymentSourceTests
 {
-    private static readonly JsonSerializerSettings Settings = Build();
+    private static readonly JsonSerializerOptions Options = Build();
 
-    private static JsonSerializerSettings Build()
+    private static JsonSerializerOptions Build()
     {
-        var s = new JsonSerializerSettings();
-        PayPalJsonSettings.Apply(s);
-        return s;
+        var options = new JsonSerializerOptions();
+        PayPalJsonSettings.Apply(options);
+        return options;
     }
 
     [Fact]
@@ -40,12 +40,11 @@ public class PaymentSourceTests
             },
         };
 
-        var json = JObject.Parse(JsonConvert.SerializeObject(order, Settings));
-        var pui = json["payment_source"]!["pay_upon_invoice"]!;
-        Assert.Equal("buyer@example.de", (string)pui["email"]!);
-        Assert.Equal("1990-01-01", (string)pui["birth_date"]!);
-        Assert.Equal("John", (string)pui["name"]!["given_name"]!);
-        Assert.Equal("DE", (string)pui["billing_address"]!["country_code"]!);
+        var pui = JsonNode.Parse(JsonSerializer.Serialize(order, Options))!["payment_source"]!["pay_upon_invoice"]!;
+        Assert.Equal("buyer@example.de", pui["email"]!.GetValue<string>());
+        Assert.Equal("1990-01-01", pui["birth_date"]!.GetValue<string>());
+        Assert.Equal("John", pui["name"]!["given_name"]!.GetValue<string>());
+        Assert.Equal("DE", pui["billing_address"]!["country_code"]!.GetValue<string>());
     }
 
     [Fact]
@@ -60,10 +59,9 @@ public class PaymentSourceTests
             PaymentSource = new PaymentSource { Multibanco = apm },
         };
 
-        var json = JObject.Parse(JsonConvert.SerializeObject(order, Settings));
-        var mb = json["payment_source"]!["multibanco"]!;
-        Assert.Equal("PT", (string)mb["country_code"]!);
-        Assert.Equal("Ana", (string)mb["name"]!["given_name"]!);
-        Assert.Equal("ABCDPTPL", (string)mb["bic"]!); // flowed through additionalProperties
+        var mb = JsonNode.Parse(JsonSerializer.Serialize(order, Options))!["payment_source"]!["multibanco"]!;
+        Assert.Equal("PT", mb["country_code"]!.GetValue<string>());
+        Assert.Equal("Ana", mb["name"]!["given_name"]!.GetValue<string>());
+        Assert.Equal("ABCDPTPL", mb["bic"]!.GetValue<string>()); // flowed through additionalProperties
     }
 }
