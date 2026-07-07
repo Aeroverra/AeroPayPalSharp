@@ -77,8 +77,16 @@ public static class ServiceCollectionExtensions
         AddApiClient<IWebhooksV1Client, WebhooksV1Client>(services);
         AddApiClient<IPayPalCustomClient, PayPalCustomClient>(services);
 
-        services.AddScoped<IPayPalApiClient, PayPalApiClient>();
         services.AddPayPalSharpFactory();
+
+        // SINGLETON so it can be injected into services of ANY lifetime (singletons included). It is built
+        // over the factory's shared, pooled transport handler - DNS-safe via PooledConnectionLifetime -
+        // NOT a captured HttpClientFactory typed client, so a long-lived instance is safe. The ambient
+        // ActingAsMerchant / WithMockResponse scopes are AsyncLocal, so one shared client serves concurrent
+        // requests correctly. (Individual sub-clients like IOrdersV2Client remain resolvable on their own.)
+        services.TryAddSingleton<IPayPalApiClient>(sp =>
+            ((PayPalClientFactory)sp.GetRequiredService<IPayPalClientFactory>())
+                .CreateFromOptions(sp.GetRequiredService<IOptions<PayPalOptions>>().Value));
         return services;
     }
 

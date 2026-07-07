@@ -14,6 +14,11 @@ The token provider is a **singleton**, so its cache is shared everywhere the cli
 one token fetch per token lifetime (several hours), not one per call. Concurrent first-use collapses to a
 single fetch. With `IPayPalClientFactory`, each credential set caches its own token.
 
+`IPayPalApiClient` is itself registered as a **singleton**, so you can inject it into a service of any
+lifetime (including your own singletons). It rides a shared, pooled transport handler (DNS-safe), and the
+`ActingAsMerchant` / `WithMockResponse` scopes are per-async-flow, so one shared client serves concurrent
+requests correctly.
+
 ## Getting a raw token
 
 If you need to call something not yet wrapped, inject the provider:

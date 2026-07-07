@@ -219,9 +219,32 @@ public sealed class PayPalClientFactory : IPayPalClientFactory, IDisposable
         return BuildClient(options, tokenProvider);
     }
 
-    private IPayPalApiClient Build(PayPalCredentials credentials)
+    /// <summary>
+    /// Builds (and caches) a client from a full <see cref="PayPalOptions"/>, preserving credentials,
+    /// retry/logging/callbacks, and transport config. Used by the DI singleton registration so an injected
+    /// <see cref="IPayPalApiClient"/> is singleton-safe (it rides the factory's shared pooled handler, DNS-
+    /// safe via PooledConnectionLifetime, rather than a captured HttpClientFactory handler) and can be
+    /// injected into services of ANY lifetime.
+    /// </summary>
+    public IPayPalApiClient CreateFromOptions(PayPalOptions options)
     {
-        var options = Microsoft.Extensions.Options.Options.Create(credentials.ToOptions());
+        ArgumentNullException.ThrowIfNull(options);
+        if (string.IsNullOrWhiteSpace(options.ClientId) || string.IsNullOrWhiteSpace(options.ClientSecret))
+        {
+            throw new ArgumentException("ClientId and ClientSecret are required.", nameof(options));
+        }
+        ObjectDisposedException.ThrowIf(_disposed, this);
+
+        var key = $"options:{options.Environment}:{options.ClientId}:{options.MerchantId}:{options.PartnerAttributionId}:{options.SendAuthAssertion}";
+        return _clients.GetOrAdd(key, _ => new Lazy<IPayPalApiClient>(
+            () => Build(Microsoft.Extensions.Options.Options.Create(options)))).Value;
+    }
+
+    private IPayPalApiClient Build(PayPalCredentials credentials)
+        => Build(Microsoft.Extensions.Options.Options.Create(credentials.ToOptions()));
+
+    private IPayPalApiClient Build(IOptions<PayPalOptions> options)
+    {
         var baseUri = ResolveBaseUri(options.Value);
 
         // Token provider gets its own HttpClient over the shared transport (no auth handler), with retry
