@@ -13,6 +13,20 @@ new Money { CurrencyCode = PayPalCurrency.Jpy, Value = 5000m };    // -> "5000" 
 new Money { CurrencyCode = PayPalCurrency.Usd, Value = 9.99m };    // -> "9.99"
 ```
 
+## Raw JSON
+
+Need the raw JSON of a model (to store a response, forward it to a browser, or log it)? Use `PayPalJson` -
+do NOT run the models through your own serializer, since they are System.Text.Json-attributed and another
+serializer would emit the C# PascalCase names instead of PayPal's wire names.
+
+```csharp
+string raw = PayPalJson.Serialize(order);          // {"id":"...","purchase_units":[...]}  (money as strings)
+var back   = PayPalJson.Deserialize<Order>(raw);
+```
+
+Re-serializing a model you got back from the SDK is faithful to what PayPal sent - fields the model does
+not name are preserved through extension data, so nothing is lost.
+
 ## Enums are strings
 
 PayPal adds enum values constantly; a C# enum would throw on an unseen one. Enums are `string` (allowed
