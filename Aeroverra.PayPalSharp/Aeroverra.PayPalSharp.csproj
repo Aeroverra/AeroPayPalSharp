@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	  <VersionPrefix>0.0.0.0</VersionPrefix>
+	  <VersionPrefix>1.0.0.0</VersionPrefix>
     <!-- Target net8.0 (LTS): the assembly is natively consumable by .NET 8, 9, and 10 apps. -->
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
