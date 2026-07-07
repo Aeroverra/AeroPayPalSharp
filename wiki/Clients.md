@@ -41,6 +41,18 @@ Order fetched = await paypal.Orders.GetAsync(created.Id);
 
 To create an order for a seller, see [Partner and platform](Partner-and-Platform.md).
 
+Alternative payment methods are set on `PaymentSource`. Beyond card/PayPal/wallets, PayPal's own spec
+omits several it accepts, so the SDK adds them: `pay_upon_invoice` (typed `PayUponInvoiceRequest`) and the
+simpler APMs (alipay, multibanco, oxxo, ...) via a shared `ApmRequest` with an extension-data bag for any
+method-specific fields:
+
+```csharp
+order.PaymentSource = new PaymentSource
+{
+    PayUponInvoice = new PayUponInvoiceRequest { Email = "buyer@example.de", /* name, birth_date, ... */ },
+};
+```
+
 ## Webhooks
 
 ```csharp

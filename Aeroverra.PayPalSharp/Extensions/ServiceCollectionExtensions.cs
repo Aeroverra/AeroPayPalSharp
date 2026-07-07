@@ -48,7 +48,8 @@ public static class ServiceCollectionExtensions
         // SINGLETON so one OAuth token is cached and shared across every client and request, rather than
         // one cache per injected client (the typed-client pattern would make it transient). The token POST
         // is safe to retry (a duplicate just returns another valid token), so it gets the retry handler too.
-        services.AddHttpClient(TokenHttpClientName, ConfigureHttpClient)
+        services.AddHttpClient(TokenHttpClientName, ConfigureBaseHttpClient)
+            .ConfigurePrimaryHttpMessageHandler(BuildPrimaryHandler)
             .AddHttpMessageHandler<PayPalRetryHandler>()
             .AddHttpMessageHandler<PayPalObservabilityHandler>();
         services.TryAddSingleton<IPayPalTokenProvider>(sp => new PayPalTokenProvider(
@@ -93,7 +94,10 @@ public static class ServiceCollectionExtensions
     /// </summary>
     public static IServiceCollection AddPayPalSharpFactory(this IServiceCollection services)
     {
-        services.TryAddSingleton<IPayPalClientFactory, PayPalClientFactory>();
+        // Build the factory from the configured options so PrimaryHandlerFactory (proxy/TLS) and
+        // ConfigureHttpClient apply on the factory path too, matching the DI path.
+        services.TryAddSingleton<IPayPalClientFactory>(sp =>
+            PayPalClientFactory.FromOptions(sp.GetService<IOptions<PayPalOptions>>()?.Value));
         return services;
     }
 
@@ -103,8 +107,10 @@ public static class ServiceCollectionExtensions
     {
         // Handler order (outermost -> innermost): retry wraps everything so each attempt re-runs auth +
         // partner and sends fresh headers; observability is innermost so it logs the final request and
-        // each attempt.
-        services.AddHttpClient<TInterface, TImplementation>(ConfigureHttpClient)
+        // each attempt. The primary handler (proxy/TLS) comes from PayPalOptions.PrimaryHandlerFactory,
+        // and PayPalOptions.ConfigureHttpClient runs last so a caller's timeout/headers win.
+        services.AddHttpClient<TInterface, TImplementation>(ConfigureApiHttpClient)
+            .ConfigurePrimaryHttpMessageHandler(BuildPrimaryHandler)
             .AddHttpMessageHandler<PayPalRetryHandler>()
             .AddHttpMessageHandler<PayPalAuthenticationHandler>()
             .AddHttpMessageHandler<PayPalPartnerHeaderHandler>()
@@ -112,7 +118,16 @@ public static class ServiceCollectionExtensions
             .AddHttpMessageHandler<PayPalObservabilityHandler>();
     }
 
-    private static void ConfigureHttpClient(IServiceProvider serviceProvider, HttpClient client)
+    // Transport handler for all PayPal clients (proxy, TLS, connection limits). HttpClientFactory manages
+    // its lifetime/rotation. Also used by the token client so token fetches go through the same proxy.
+    private static HttpMessageHandler BuildPrimaryHandler(IServiceProvider serviceProvider)
+    {
+        var options = serviceProvider.GetRequiredService<IOptions<PayPalOptions>>().Value;
+        return options.PrimaryHandlerFactory?.Invoke() ?? new SocketsHttpHandler();
+    }
+
+    // Base HttpClient config (base URL, timeout, accept headers). Shared by API and token clients.
+    private static void ConfigureBaseHttpClient(IServiceProvider serviceProvider, HttpClient client)
     {
         var options = serviceProvider.GetRequiredService<IOptions<PayPalOptions>>().Value;
         // Trailing slash is required so the generated clients' relative paths resolve.
@@ -121,5 +136,12 @@ public static class ServiceCollectionExtensions
         client.Timeout = TimeSpan.FromSeconds(options.TimeoutSeconds);
         client.DefaultRequestHeaders.Accept.ParseAdd("application/json");
         client.DefaultRequestHeaders.AcceptLanguage.ParseAdd("en_US");
+    }
+
+    // API clients also get the caller's ConfigureHttpClient hook, applied last so it overrides our setup.
+    private static void ConfigureApiHttpClient(IServiceProvider serviceProvider, HttpClient client)
+    {
+        ConfigureBaseHttpClient(serviceProvider, client);
+        serviceProvider.GetRequiredService<IOptions<PayPalOptions>>().Value.ConfigureHttpClient?.Invoke(client);
     }
 }

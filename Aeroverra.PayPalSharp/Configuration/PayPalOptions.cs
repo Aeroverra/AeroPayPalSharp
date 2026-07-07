@@ -67,6 +67,23 @@ public sealed class PayPalOptions
     public PayPalLoggingOptions Logging { get; set; } = new();
 
     /// <summary>
+    /// Builds the primary (transport) HTTP handler for every PayPal client, on BOTH the DI and factory
+    /// paths. This is the seam for a proxy, custom TLS, connection limits, client certs, or a test double.
+    /// You own construction, so return whatever handler you need, for example:
+    /// <code>o.PrimaryHandlerFactory = () => new SocketsHttpHandler { Proxy = new WebProxy("http://proxy:8080"), UseProxy = true };</code>
+    /// Leave null for the default. Note: the system/environment proxy (HTTP_PROXY etc.) is already honored
+    /// with no configuration.
+    /// </summary>
+    public Func<HttpMessageHandler>? PrimaryHandlerFactory { get; set; }
+
+    /// <summary>
+    /// Configures the <see cref="HttpClient"/> used for API calls (for example a custom timeout or default
+    /// headers). Runs AFTER the SDK's own setup, so your changes win. Applies on both the DI and factory
+    /// paths. (Transport concerns like a proxy belong on <see cref="PrimaryHandlerFactory"/> instead.)
+    /// </summary>
+    public Action<HttpClient>? ConfigureHttpClient { get; set; }
+
+    /// <summary>
     /// Called just before each HTTP attempt is sent (after auth/partner headers are attached). A hook for
     /// custom logging, metrics, or header inspection - the .NET-native equivalent of an "API callback".
     /// Keep it fast and non-throwing; exceptions from it are ignored.

@@ -54,6 +54,8 @@ modern .NET with first-class partner / platform support.
 - **How do I handle many merchants with their own keys?** [Multi-tenant factory](Multi-Tenant-Factory.md).
 - **Are calls retried? Can they double-charge?** No - retries are idempotency-safe. [Resilience](Resilience-and-Observability.md).
 - **How do I get the PayPal-Debug-Id for support?** [Resilience](Resilience-and-Observability.md) / [Error handling](Error-Handling.md).
+- **How do I set a proxy / custom transport?** `PrimaryHandlerFactory` in [Configuration](Configuration.md).
+- **How do I force a sandbox error (negative testing)?** `WithMockResponse(...)` in [Testing](Testing.md).
 - **How is money typed?** `decimal`, serialized as a currency-safe string (JPY-aware). [Models](Models-and-Nullability.md).
 - **Why is `status` a string and not an enum?** [Constants and enums](Constants-and-Enums.md).
 - **How do I regenerate after PayPal updates a spec?** [Regenerating the clients](Regenerating.md).

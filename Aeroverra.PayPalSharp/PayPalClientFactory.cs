@@ -119,6 +119,7 @@ public sealed class PayPalClientFactory : IPayPalClientFactory, IDisposable
 {
     private readonly HttpMessageHandler _rootHandler;
     private readonly bool _ownsRootHandler;
+    private readonly Action<HttpClient>? _configureHttpClient;
     private readonly ConcurrentDictionary<string, Lazy<IPayPalApiClient>> _clients = new();
     private readonly List<HttpClient> _built = new();
     private readonly object _sync = new();
@@ -126,20 +127,32 @@ public sealed class PayPalClientFactory : IPayPalClientFactory, IDisposable
 
     /// <summary>Creates a factory with its own pooled transport handler.</summary>
     public PayPalClientFactory()
-        : this(new SocketsHttpHandler { PooledConnectionLifetime = TimeSpan.FromMinutes(5) }, ownsRootHandler: true)
+        : this(new SocketsHttpHandler { PooledConnectionLifetime = TimeSpan.FromMinutes(5) }, ownsRootHandler: true, configureHttpClient: null)
     {
     }
 
     /// <summary>Creates a factory over a transport handler you own (it will not be disposed by the factory).</summary>
     public PayPalClientFactory(HttpMessageHandler rootHandler)
-        : this(rootHandler, ownsRootHandler: false)
+        : this(rootHandler, ownsRootHandler: false, configureHttpClient: null)
     {
     }
 
-    private PayPalClientFactory(HttpMessageHandler rootHandler, bool ownsRootHandler)
+    private PayPalClientFactory(HttpMessageHandler rootHandler, bool ownsRootHandler, Action<HttpClient>? configureHttpClient)
     {
         _rootHandler = rootHandler;
         _ownsRootHandler = ownsRootHandler;
+        _configureHttpClient = configureHttpClient;
+    }
+
+    /// <summary>
+    /// Builds a factory honoring <see cref="PayPalOptions.PrimaryHandlerFactory"/> (proxy/TLS transport)
+    /// and <see cref="PayPalOptions.ConfigureHttpClient"/>, so the factory path matches the DI path.
+    /// </summary>
+    internal static PayPalClientFactory FromOptions(PayPalOptions? options)
+    {
+        var root = options?.PrimaryHandlerFactory?.Invoke()
+                   ?? new SocketsHttpHandler { PooledConnectionLifetime = TimeSpan.FromMinutes(5) };
+        return new PayPalClientFactory(root, ownsRootHandler: true, configureHttpClient: options?.ConfigureHttpClient);
     }
 
     public IPayPalApiClient Create(PayPalCredentials credentials)
@@ -248,6 +261,8 @@ public sealed class PayPalClientFactory : IPayPalClientFactory, IDisposable
         };
         apiHttp.DefaultRequestHeaders.Accept.ParseAdd("application/json");
         apiHttp.DefaultRequestHeaders.AcceptLanguage.ParseAdd("en_US");
+        // Caller's HttpClient hook (timeout/headers), applied last so it wins - matches the DI path.
+        _configureHttpClient?.Invoke(apiHttp);
 
         lock (_sync)
         {

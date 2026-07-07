@@ -51,8 +51,11 @@ public class TokenCachingTests
     {
         var handler = new CountingHandler();
         var services = new ServiceCollection();
-        services.AddPayPalSharp(o => { o.Environment = PayPalEnvironment.Sandbox; o.ClientId = "id"; o.ClientSecret = "secret"; });
-        services.ConfigureHttpClientDefaults(b => b.ConfigurePrimaryHttpMessageHandler(() => handler));
+        services.AddPayPalSharp(o =>
+        {
+            o.Environment = PayPalEnvironment.Sandbox; o.ClientId = "id"; o.ClientSecret = "secret";
+            o.PrimaryHandlerFactory = () => handler; // inject the counting transport handler via the SDK hook
+        });
         using var sp = services.BuildServiceProvider();
 
         var provider = sp.GetRequiredService<IPayPalTokenProvider>();

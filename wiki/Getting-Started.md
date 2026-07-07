@@ -6,6 +6,8 @@
 dotnet add package Aeroverra.PayPalSharp
 ```
 
+Targets **.NET 8** and runs on .NET 8, 9, and 10.
+
 ## Register and inject
 
 Configure once in your DI container (keep the client id / secret in user-secrets or env vars):

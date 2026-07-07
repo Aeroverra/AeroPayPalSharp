@@ -45,6 +45,7 @@ Each class also exposes `All` (the known values) for building dropdowns or valid
 - `PayPalAuthorizationStatus`, `PayPalCaptureStatus`, `PayPalRefundStatus`
 - `PayPalProductType`, `PayPalSubscriptionStatus`
 - `PayPalCurrency`
+- `PayPalWebhookEventType` (every webhook event name), `PayPalMockCode` (sandbox negative-testing codes)
 
 These cover the common fields. The full set of allowed values for any field is also listed in that
 property's XML doc comment (copied from PayPal's spec), so IntelliSense shows them inline.

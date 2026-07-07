@@ -16,6 +16,28 @@ All settings live on `PayPalOptions`, configured in `AddPayPalSharp`.
 | `Retry` | `PayPalRetryOptions` | Safe auto-retry (`MaxRetries`, `BaseDelay`, `MaxDelay`). [Details](Resilience-and-Observability.md). |
 | `Logging` | `PayPalLoggingOptions` | Optional `ILogger` request logging (`Enabled`, `Level`). Off by default. |
 | `OnRequest` / `OnResponse` / `OnException` | `Action<...>?` | Per-attempt callbacks. [Details](Resilience-and-Observability.md). |
+| `PrimaryHandlerFactory` | `Func<HttpMessageHandler>?` | Transport handler for a proxy, custom TLS, connection limits, or a test double. Applies to DI + factory. |
+| `ConfigureHttpClient` | `Action<HttpClient>?` | Configure the API `HttpClient` (timeout, default headers). Runs last, so it wins. |
+
+## Proxy and transport
+
+The system/environment proxy (`HTTP_PROXY` / `HTTPS_PROXY` / `NO_PROXY`) is honored with no configuration.
+For an explicit proxy (or custom TLS, connection limits, client certs), build the transport handler:
+
+```csharp
+services.AddPayPalSharp(o =>
+{
+    o.ClientId = "..."; o.ClientSecret = "...";
+    o.PrimaryHandlerFactory = () => new SocketsHttpHandler
+    {
+        Proxy = new WebProxy("http://corp-proxy:8080") { Credentials = CredentialCache.DefaultNetworkCredentials },
+        UseProxy = true,
+    };
+});
+```
+
+This applies on both the DI and factory paths (including the OAuth token fetch). `ConfigureHttpClient` is
+the seam for client-level settings like timeout and default headers.
 
 ## Inline
 
