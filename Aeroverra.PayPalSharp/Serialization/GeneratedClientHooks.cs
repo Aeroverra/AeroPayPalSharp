@@ -8,6 +8,9 @@ namespace Aeroverra.PayPalSharp.OrdersV2
     {
         static partial void UpdateJsonSerializerSettings(System.Text.Json.JsonSerializerOptions settings)
             => global::Aeroverra.PayPalSharp.PayPalJsonSettings.Apply(settings);
+
+        // Capture the raw response body so PayPalApiException.Response carries the JSON error detail.
+        partial void Initialize() => ReadResponseAsString = true;
     }
 }
 
@@ -17,6 +20,9 @@ namespace Aeroverra.PayPalSharp.PaymentsV2
     {
         static partial void UpdateJsonSerializerSettings(System.Text.Json.JsonSerializerOptions settings)
             => global::Aeroverra.PayPalSharp.PayPalJsonSettings.Apply(settings);
+
+        // Capture the raw response body so PayPalApiException.Response carries the JSON error detail.
+        partial void Initialize() => ReadResponseAsString = true;
     }
 }
 
@@ -26,6 +32,9 @@ namespace Aeroverra.PayPalSharp.InvoicesV2
     {
         static partial void UpdateJsonSerializerSettings(System.Text.Json.JsonSerializerOptions settings)
             => global::Aeroverra.PayPalSharp.PayPalJsonSettings.Apply(settings);
+
+        // Capture the raw response body so PayPalApiException.Response carries the JSON error detail.
+        partial void Initialize() => ReadResponseAsString = true;
     }
 }
 
@@ -35,6 +44,9 @@ namespace Aeroverra.PayPalSharp.SubscriptionsV1
     {
         static partial void UpdateJsonSerializerSettings(System.Text.Json.JsonSerializerOptions settings)
             => global::Aeroverra.PayPalSharp.PayPalJsonSettings.Apply(settings);
+
+        // Capture the raw response body so PayPalApiException.Response carries the JSON error detail.
+        partial void Initialize() => ReadResponseAsString = true;
     }
 }
 
@@ -44,6 +56,9 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     {
         static partial void UpdateJsonSerializerSettings(System.Text.Json.JsonSerializerOptions settings)
             => global::Aeroverra.PayPalSharp.PayPalJsonSettings.Apply(settings);
+
+        // Capture the raw response body so PayPalApiException.Response carries the JSON error detail.
+        partial void Initialize() => ReadResponseAsString = true;
     }
 }
 
@@ -53,6 +68,9 @@ namespace Aeroverra.PayPalSharp.DisputesV1
     {
         static partial void UpdateJsonSerializerSettings(System.Text.Json.JsonSerializerOptions settings)
             => global::Aeroverra.PayPalSharp.PayPalJsonSettings.Apply(settings);
+
+        // Capture the raw response body so PayPalApiException.Response carries the JSON error detail.
+        partial void Initialize() => ReadResponseAsString = true;
     }
 }
 
@@ -62,6 +80,9 @@ namespace Aeroverra.PayPalSharp.PayoutsV1
     {
         static partial void UpdateJsonSerializerSettings(System.Text.Json.JsonSerializerOptions settings)
             => global::Aeroverra.PayPalSharp.PayPalJsonSettings.Apply(settings);
+
+        // Capture the raw response body so PayPalApiException.Response carries the JSON error detail.
+        partial void Initialize() => ReadResponseAsString = true;
     }
 }
 
@@ -71,6 +92,9 @@ namespace Aeroverra.PayPalSharp.TransactionSearchV1
     {
         static partial void UpdateJsonSerializerSettings(System.Text.Json.JsonSerializerOptions settings)
             => global::Aeroverra.PayPalSharp.PayPalJsonSettings.Apply(settings);
+
+        // Capture the raw response body so PayPalApiException.Response carries the JSON error detail.
+        partial void Initialize() => ReadResponseAsString = true;
     }
 }
 
@@ -80,6 +104,9 @@ namespace Aeroverra.PayPalSharp.ShipmentTrackingV1
     {
         static partial void UpdateJsonSerializerSettings(System.Text.Json.JsonSerializerOptions settings)
             => global::Aeroverra.PayPalSharp.PayPalJsonSettings.Apply(settings);
+
+        // Capture the raw response body so PayPalApiException.Response carries the JSON error detail.
+        partial void Initialize() => ReadResponseAsString = true;
     }
 }
 
@@ -89,6 +116,9 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     {
         static partial void UpdateJsonSerializerSettings(System.Text.Json.JsonSerializerOptions settings)
             => global::Aeroverra.PayPalSharp.PayPalJsonSettings.Apply(settings);
+
+        // Capture the raw response body so PayPalApiException.Response carries the JSON error detail.
+        partial void Initialize() => ReadResponseAsString = true;
     }
 }
 
@@ -98,6 +128,9 @@ namespace Aeroverra.PayPalSharp.WebProfilesV1
     {
         static partial void UpdateJsonSerializerSettings(System.Text.Json.JsonSerializerOptions settings)
             => global::Aeroverra.PayPalSharp.PayPalJsonSettings.Apply(settings);
+
+        // Capture the raw response body so PayPalApiException.Response carries the JSON error detail.
+        partial void Initialize() => ReadResponseAsString = true;
     }
 }
 
@@ -107,6 +140,9 @@ namespace Aeroverra.PayPalSharp.PartnerReferralsV2
     {
         static partial void UpdateJsonSerializerSettings(System.Text.Json.JsonSerializerOptions settings)
             => global::Aeroverra.PayPalSharp.PayPalJsonSettings.Apply(settings);
+
+        // Capture the raw response body so PayPalApiException.Response carries the JSON error detail.
+        partial void Initialize() => ReadResponseAsString = true;
     }
 }
 
@@ -116,6 +152,9 @@ namespace Aeroverra.PayPalSharp.PartnerReferralsV1
     {
         static partial void UpdateJsonSerializerSettings(System.Text.Json.JsonSerializerOptions settings)
             => global::Aeroverra.PayPalSharp.PayPalJsonSettings.Apply(settings);
+
+        // Capture the raw response body so PayPalApiException.Response carries the JSON error detail.
+        partial void Initialize() => ReadResponseAsString = true;
     }
 }
 
@@ -125,6 +164,9 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     {
         static partial void UpdateJsonSerializerSettings(System.Text.Json.JsonSerializerOptions settings)
             => global::Aeroverra.PayPalSharp.PayPalJsonSettings.Apply(settings);
+
+        // Capture the raw response body so PayPalApiException.Response carries the JSON error detail.
+        partial void Initialize() => ReadResponseAsString = true;
     }
 }
 
@@ -134,5 +176,8 @@ namespace Aeroverra.PayPalSharp.CustomV1
     {
         static partial void UpdateJsonSerializerSettings(System.Text.Json.JsonSerializerOptions settings)
             => global::Aeroverra.PayPalSharp.PayPalJsonSettings.Apply(settings);
+
+        // Capture the raw response body so PayPalApiException.Response carries the JSON error detail.
+        partial void Initialize() => ReadResponseAsString = true;
     }
 }
