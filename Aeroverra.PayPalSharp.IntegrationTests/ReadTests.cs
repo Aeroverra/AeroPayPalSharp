@@ -25,8 +25,8 @@ public class ReadTests
     {
         Skip.IfNot(_fx.IsConfigured, _fx.SkipReason);
         var next = await _fx.Client.Invoices.InvoicingGenerateNextInvoiceNumberAsync();
-        Assert.False(string.IsNullOrWhiteSpace(next.Invoice_number1));
-        _output.WriteLine($"next invoice number: {next.Invoice_number1}");
+        Assert.False(string.IsNullOrWhiteSpace(next.InvoiceNumber1));
+        _output.WriteLine($"next invoice number: {next.InvoiceNumber1}");
     }
 
     [SkippableFact]

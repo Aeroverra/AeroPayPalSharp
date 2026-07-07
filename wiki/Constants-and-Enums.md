@@ -17,14 +17,14 @@ For the values you actually set (and the statuses you compare against), there ar
 classes so you never hand-type a magic string, plus an `IsKnown` check to validate one:
 
 ```csharp
-var order = new Order_request
+var order = new OrderRequest
 {
     Intent = PayPalIntent.Capture,                         // "CAPTURE"
-    Purchase_units = new List<Purchase_units>
+    PurchaseUnits = new List<PurchaseUnitRequest>
     {
-        new Purchase_units
+        new PurchaseUnitRequest
         {
-            Amount = new Amount3 { Currency_code = PayPalCurrency.Usd, Value = "10.00" },
+            Amount = new AmountWithBreakdown { CurrencyCode = PayPalCurrency.Usd, Value = 10.00m },
         },
     },
 };

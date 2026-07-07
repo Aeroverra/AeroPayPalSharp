@@ -17,8 +17,18 @@ response's `links`, and so on) is marked required so you do not null-check thing
 there. Request-only and uncertain fields are left nullable so an edge case never blows up parsing. The
 set grows conservatively as tests confirm more fields.
 
-## Numbered type names
+## Naming
 
-NSwag deduplicates structurally similar schemas with numeric suffixes, so you will see types like
-`Amount3` or `Payee3`, and a property renamed to `Operation1` where it collided with a class name.
-These are the same shapes PayPal documents, just disambiguated.
+Types and properties are idiomatic C# PascalCase (`OrderRequest`, `CurrencyCode`, `AmountWithBreakdown`,
+`PaymentInstruction`). The JSON wire format is unchanged - every property keeps its
+`[JsonProperty("currency_code")]` attribute, so serialization still uses PayPal's snake_case names.
+
+PayPal wraps most shared components in single-ref `allOf` blocks, which NSwag would otherwise turn into
+hundreds of empty numbered aliases (`Amount2`, `Amount3`, `Payee2`, ...). The generator collapses those
+wrappers so the real component types are used directly - you write `AmountWithBreakdown` and `Payee`, not
+`Amount3` and `Payee3`.
+
+A numeric suffix still appears where PayPal genuinely defines two *different* inline schemas with the same
+name (for example several distinct `Name`/`Address` shapes across payment sources), or where a property
+name would collide with its class (`Operation1`). Those are real, structurally-different types, kept
+distinct on purpose.

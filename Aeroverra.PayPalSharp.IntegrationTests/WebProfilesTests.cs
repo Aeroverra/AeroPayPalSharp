@@ -22,7 +22,7 @@ public class WebProfilesTests
     {
         Skip.IfNot(_fx.IsConfigured, _fx.SkipReason);
 
-        var profile = new Web_profile
+        var profile = new WebProfile
         {
             Name = "aero-" + Guid.NewGuid().ToString("N")[..12],
         };

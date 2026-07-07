@@ -22,7 +22,7 @@ public class CatalogProductsTests
     {
         Skip.IfNot(_fx.IsConfigured, _fx.SkipReason);
 
-        var product = new Product_request_POST
+        var product = new ProductRequestPOST
         {
             Name = "Aero Test Product " + Guid.NewGuid().ToString("N")[..8],
             Type = PayPalProductType.Service,

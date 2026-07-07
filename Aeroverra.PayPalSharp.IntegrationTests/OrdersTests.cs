@@ -20,21 +20,21 @@ public class OrdersTests
         _output = output;
     }
 
-    private Order_request OrderForSeller(string? sellerMerchantId)
+    private OrderRequest OrderForSeller(string? sellerMerchantId)
     {
-        var unit = new Purchase_units
+        var unit = new PurchaseUnitRequest
         {
-            Amount = new Amount3 { Currency_code = PayPalCurrency.Usd, Value = 10.00m },
+            Amount = new AmountWithBreakdown { CurrencyCode = PayPalCurrency.Usd, Value = 10.00m },
         };
         if (!string.IsNullOrWhiteSpace(sellerMerchantId))
         {
-            unit.Payee = new Payee3 { Merchant_id = sellerMerchantId };
+            unit.Payee = new Payee { MerchantId = sellerMerchantId };
         }
 
-        return new Order_request
+        return new OrderRequest
         {
             Intent = PayPalIntent.Capture,
-            Purchase_units = new List<Purchase_units> { unit },
+            PurchaseUnits = new List<PurchaseUnitRequest> { unit },
         };
     }
 

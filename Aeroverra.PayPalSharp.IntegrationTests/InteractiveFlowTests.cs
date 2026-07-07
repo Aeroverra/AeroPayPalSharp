@@ -96,7 +96,7 @@ public class InteractiveFlowTests
 
         // 1. A catalog product.
         var product = await paypal.CatalogProducts.CreateAsync(
-            body: new Cat.Product_request_POST
+            body: new Cat.ProductRequestPOST
             {
                 Name = "Aero Test Product",
                 Type = PayPalProductType.Digital,
@@ -109,30 +109,30 @@ public class InteractiveFlowTests
 
         // 2. A monthly plan priced at 9.99.
         var plan = await paypal.Subscriptions.PlansCreateAsync(
-            body: new Subs.Plan_request_POST
+            body: new Subs.PlanRequestPOST
             {
-                Product_id = product.Id,
+                ProductId = product.Id,
                 Name = "Aero Test Plan",
                 Description = "Monthly test plan",
-                Billing_cycles = new Subs.Billing_cycle_list
+                BillingCycles = new Subs.BillingCycleList
                 {
-                    new Subs.Billing_cycle
+                    new Subs.BillingCycle
                     {
-                        Tenure_type = "REGULAR",
+                        TenureType = "REGULAR",
                         Sequence = 1,
-                        Total_cycles = 0,
-                        Frequency = new Subs.Frequency { Interval_unit = "MONTH", Interval_count = 1 },
-                        Pricing_scheme = new Subs.Pricing_scheme
+                        TotalCycles = 0,
+                        Frequency = new Subs.Frequency { IntervalUnit = "MONTH", IntervalCount = 1 },
+                        PricingScheme = new Subs.PricingScheme
                         {
-                            Fixed_price = new Subs.Money { Currency_code = PayPalCurrency.Usd, Value = 9.99m },
+                            FixedPrice = new Subs.Money { CurrencyCode = PayPalCurrency.Usd, Value = 9.99m },
                         },
                     },
                 },
-                Payment_preferences = new Subs.Payment_preferences
+                PaymentPreferences = new Subs.PaymentPreferences
                 {
-                    Auto_bill_outstanding = true,
-                    Setup_fee_failure_action = "CONTINUE",
-                    Payment_failure_threshold = 3,
+                    AutoBillOutstanding = true,
+                    SetupFeeFailureAction = "CONTINUE",
+                    PaymentFailureThreshold = 3,
                 },
             },
             payPal_Request_Id: Guid.NewGuid().ToString("N"));
@@ -141,15 +141,15 @@ public class InteractiveFlowTests
 
         // 3. A subscription against the plan.
         var subscription = await paypal.Subscriptions.CreateAsync(
-            body: new Subs.Subscription_request_post
+            body: new Subs.SubscriptionRequestPost
             {
-                Plan_id = plan.Id,
-                Application_context = new Subs.Application_context
+                PlanId = plan.Id,
+                ApplicationContext = new Subs.ApplicationContext
                 {
-                    Brand_name = "AeroPayPalSharp",
-                    User_action = "SUBSCRIBE_NOW",
-                    Return_url = new Uri(callback.ReturnUrl),
-                    Cancel_url = new Uri(callback.CancelUrl),
+                    BrandName = "AeroPayPalSharp",
+                    UserAction = "SUBSCRIBE_NOW",
+                    ReturnUrl = new Uri(callback.ReturnUrl),
+                    CancelUrl = new Uri(callback.CancelUrl),
                 },
             },
             payPal_Request_Id: Guid.NewGuid().ToString("N"));
@@ -197,37 +197,37 @@ public class InteractiveFlowTests
         var trackingId = "aero-" + Guid.NewGuid().ToString("N")[..12];
         try
         {
-            await paypal.PartnerReferralsV2.CreateAsync(new Refs.Referral_data
+            await paypal.PartnerReferralsV2.CreateAsync(new Refs.ReferralData
             {
-                Tracking_id = trackingId,
-                Partner_config_override = new Refs.Partner_config_override
+                TrackingId = trackingId,
+                PartnerConfigOverride = new Refs.PartnerConfigOverride
                 {
-                    Return_url = new Uri(callback.ReturnUrl),
-                    Return_url_description = "Return to the AeroPayPalSharp onboarding test",
+                    ReturnUrl = new Uri(callback.ReturnUrl),
+                    ReturnUrlDescription = "Return to the AeroPayPalSharp onboarding test",
                 },
-                Operations = new Refs.Operation_list
+                Operations = new Refs.OperationList
                 {
                     new Refs.Operation
                     {
                         Operation1 = "API_INTEGRATION",
-                        Api_integration_preference = new Refs.Integration_details
+                        ApiIntegrationPreference = new Refs.IntegrationDetails
                         {
-                            Rest_api_integration = new Refs.Rest_api_integration
+                            RestApiIntegration = new Refs.RestApiIntegration
                             {
-                                Integration_method = "PAYPAL",
-                                Integration_type = "THIRD_PARTY",
-                                Third_party_details = new Refs.Third_party_details
+                                IntegrationMethod = "PAYPAL",
+                                IntegrationType = "THIRD_PARTY",
+                                ThirdPartyDetails = new Refs.ThirdPartyDetails
                                 {
-                                    Features = new Refs.Rest_api_integration_rest_endpoint_features_enum_list { "PAYMENT", "REFUND" },
+                                    Features = new Refs.RestApiIntegrationRestEndpointFeaturesEnumList { "PAYMENT", "REFUND" },
                                 },
                             },
                         },
                     },
                 },
-                Products = new Refs.Product_list { "EXPRESS_CHECKOUT" },
-                Legal_consents = new Refs.Legal_consent_list
+                Products = new Refs.ProductList { "EXPRESS_CHECKOUT" },
+                LegalConsents = new Refs.LegalConsentList
                 {
-                    new Refs.Legal_consent { Type = "SHARE_DATA_CONSENT", Granted = true },
+                    new Refs.LegalConsent { Type = "SHARE_DATA_CONSENT", Granted = true },
                 },
             });
         }
@@ -297,78 +297,78 @@ public class InteractiveFlowTests
 
     // A fully-loaded order request: line items, an amount breakdown that sums, shipping, and buyer-facing
     // fields, so the create exercises as much of the model as possible (not just amount + description).
-    private static Order_request EnrichedOrder(LocalCallbackServer callback)
+    private static OrderRequest EnrichedOrder(LocalCallbackServer callback)
     {
         // 2x 5.00 + 1x 3.00 = 13.00 items; tax 1.30; shipping 2.00; handling 0.50; discount 1.00 => 15.80
-        return new Order_request
+        return new OrderRequest
         {
             Intent = PayPalIntent.Capture,
-            Purchase_units = new List<Purchase_units>
+            PurchaseUnits = new List<PurchaseUnitRequest>
             {
-                new Purchase_units
+                new PurchaseUnitRequest
                 {
-                    Reference_id = "unit-1",
+                    ReferenceId = "unit-1",
                     Description = "AeroPayPalSharp interactive test order",
-                    Custom_id = "aeropaypalsharp-custom-1",
-                    Invoice_id = "aeropaypalsharp-" + Guid.NewGuid().ToString("N")[..12],
-                    Soft_descriptor = "AEROTEST",
-                    Items = new List<Items>
+                    CustomId = "aeropaypalsharp-custom-1",
+                    InvoiceId = "aeropaypalsharp-" + Guid.NewGuid().ToString("N")[..12],
+                    SoftDescriptor = "AEROTEST",
+                    Items = new List<ItemRequest>
                     {
-                        new Items
+                        new ItemRequest
                         {
                             Name = "Aero Widget",
                             Description = "A well-tested widget",
                             Sku = "AERO-WIDGET",
                             Quantity = "2",
                             Category = "DIGITAL_GOODS",
-                            Unit_amount = new Unit_amount { Currency_code = PayPalCurrency.Usd, Value = 5.00m },
-                            Tax = new Tax { Currency_code = PayPalCurrency.Usd, Value = 0.50m },
+                            UnitAmount = new Money { CurrencyCode = PayPalCurrency.Usd, Value = 5.00m },
+                            Tax = new Money { CurrencyCode = PayPalCurrency.Usd, Value = 0.50m },
                         },
-                        new Items
+                        new ItemRequest
                         {
                             Name = "Aero Gadget",
                             Description = "A single gadget",
                             Sku = "AERO-GADGET",
                             Quantity = "1",
                             Category = "DIGITAL_GOODS",
-                            Unit_amount = new Unit_amount { Currency_code = PayPalCurrency.Usd, Value = 3.00m },
-                            Tax = new Tax { Currency_code = PayPalCurrency.Usd, Value = 0.30m },
+                            UnitAmount = new Money { CurrencyCode = PayPalCurrency.Usd, Value = 3.00m },
+                            Tax = new Money { CurrencyCode = PayPalCurrency.Usd, Value = 0.30m },
                         },
                     },
-                    Amount = new Amount3
+                    Amount = new AmountWithBreakdown
                     {
-                        Currency_code = PayPalCurrency.Usd,
+                        CurrencyCode = PayPalCurrency.Usd,
                         Value = 15.80m,
-                        Breakdown = new Amount_breakdown
+                        Breakdown = new AmountBreakdown
                         {
-                            Item_total = new Item_total { Currency_code = PayPalCurrency.Usd, Value = 13.00m },
-                            Tax_total = new Tax_total { Currency_code = PayPalCurrency.Usd, Value = 1.30m },
-                            Shipping = new Shipping { Currency_code = PayPalCurrency.Usd, Value = 2.00m },
-                            Handling = new Handling { Currency_code = PayPalCurrency.Usd, Value = 0.50m },
-                            Discount = new Discount { Currency_code = PayPalCurrency.Usd, Value = 1.00m },
+                            ItemTotal = new Money { CurrencyCode = PayPalCurrency.Usd, Value = 13.00m },
+                            TaxTotal = new Money { CurrencyCode = PayPalCurrency.Usd, Value = 1.30m },
+                            Shipping = new Money { CurrencyCode = PayPalCurrency.Usd, Value = 2.00m },
+                            Handling = new Money { CurrencyCode = PayPalCurrency.Usd, Value = 0.50m },
+                            Discount = new DiscountWithBreakdown { CurrencyCode = PayPalCurrency.Usd, Value = 1.00m },
                         },
                     },
-                    Shipping = new Shipping2
+                    Shipping = new ShippingDetail
                     {
-                        Name = new Name3 { Full_name = "John Doe" },
+                        Name = new Name3 { FullName = "John Doe" },
                         Address = new Address2
                         {
-                            Address_line_1 = "1 Main St",
-                            Admin_area_2 = "San Jose",
-                            Admin_area_1 = "CA",
-                            Postal_code = "95131",
-                            Country_code = "US",
+                            AddressLine1 = "1 Main St",
+                            AdminArea2 = "San Jose",
+                            AdminArea1 = "CA",
+                            PostalCode = "95131",
+                            CountryCode = "US",
                         },
                     },
                 },
             },
-            Application_context = new Application_context
+            ApplicationContext = new OrderApplicationContext
             {
-                Brand_name = "AeroPayPalSharp",
+                BrandName = "AeroPayPalSharp",
                 Locale = "en-US",
-                Return_url = new Uri(callback.ReturnUrl),
-                Cancel_url = new Uri(callback.CancelUrl),
-                User_action = PayPalUserAction.PayNow,
+                ReturnUrl = new Uri(callback.ReturnUrl),
+                CancelUrl = new Uri(callback.CancelUrl),
+                UserAction = PayPalUserAction.PayNow,
             },
         };
     }

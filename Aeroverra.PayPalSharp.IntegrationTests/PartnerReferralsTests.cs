@@ -20,32 +20,32 @@ public class PartnerReferralsTests
         _output = output;
     }
 
-    private static Referral_data MinimalReferral() => new()
+    private static ReferralData MinimalReferral() => new()
     {
-        Tracking_id = "AERO-" + Guid.NewGuid().ToString("N")[..12],
-        Operations = new Operation_list
+        TrackingId = "AERO-" + Guid.NewGuid().ToString("N")[..12],
+        Operations = new OperationList
         {
             new Operation
             {
                 Operation1 = "API_INTEGRATION",
-                Api_integration_preference = new Integration_details
+                ApiIntegrationPreference = new IntegrationDetails
                 {
-                    Rest_api_integration = new Rest_api_integration
+                    RestApiIntegration = new RestApiIntegration
                     {
-                        Integration_method = "PAYPAL",
-                        Integration_type = "THIRD_PARTY",
-                        Third_party_details = new Third_party_details
+                        IntegrationMethod = "PAYPAL",
+                        IntegrationType = "THIRD_PARTY",
+                        ThirdPartyDetails = new ThirdPartyDetails
                         {
-                            Features = new Rest_api_integration_rest_endpoint_features_enum_list { "PAYMENT", "REFUND" },
+                            Features = new RestApiIntegrationRestEndpointFeaturesEnumList { "PAYMENT", "REFUND" },
                         },
                     },
                 },
             },
         },
-        Products = new Product_list { "EXPRESS_CHECKOUT" },
-        Legal_consents = new Legal_consent_list
+        Products = new ProductList { "EXPRESS_CHECKOUT" },
+        LegalConsents = new LegalConsentList
         {
-            new Legal_consent { Type = "SHARE_DATA_CONSENT", Granted = true },
+            new LegalConsent { Type = "SHARE_DATA_CONSENT", Granted = true },
         },
     };
 
@@ -54,7 +54,7 @@ public class PartnerReferralsTests
     {
         Skip.IfNot(_fx.IsConfigured, _fx.SkipReason);
 
-        Create_referral_data_response created;
+        CreateReferralDataResponse created;
         try
         {
             created = await _fx.Client.PartnerReferralsV2.CreateAsync(MinimalReferral());

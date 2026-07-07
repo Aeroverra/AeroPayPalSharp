@@ -1,4 +1,5 @@
 using Aeroverra.PayPalSharp.WrapperGenerator;
+using Aeroverra.PayPalSharp.WrapperGenerator.Naming;
 using Aeroverra.PayPalSharp.WrapperGenerator.SpecFixer;
 using Aeroverra.PayPalSharp.WrapperGenerator.SpecFixer.Transformer;
 using Newtonsoft.Json.Linq;
@@ -93,6 +94,10 @@ internal static class Program
         new EnsureOperationResponses(),
         new FlattenEnumsToString(),
         new InlineStringAllOf(),
+        // Collapse PayPal's single-ref allOf wrappers so a handful of real models stop exploding into
+        // hundreds of empty numbered aliases (Amount3, Payee2, ...). Runs before MarkKnownRequired so
+        // that transformer still sees the canonical component schemas.
+        new CollapseSingleRefAllOf(),
         new MarkKnownRequired(),
         new MoneyValueToDecimal(),
         new FixMerchantIntegrationFindResponse(),
@@ -220,6 +225,10 @@ internal static class Program
                 EnforceFlagEnums = false,
                 GenerateOptionalPropertiesAsNullable = false,
                 GenerateNullableReferenceTypes = true,
+                // Idiomatic C# names (CurrencyCode, PaymentInstruction, AmountWithBreakdown). NSwag keeps
+                // [JsonProperty("currency_code")] on every property, so the JSON wire format is unchanged.
+                PropertyNameGenerator = new PascalCasePropertyNameGenerator(),
+                TypeNameGenerator = new PascalCaseTypeNameGenerator(),
             },
         };
     }

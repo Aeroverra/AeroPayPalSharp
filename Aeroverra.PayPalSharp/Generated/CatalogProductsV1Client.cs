@@ -41,7 +41,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
         /// <param name="payPal_Request_Id">The server stores keys for 72 hours.</param>
         /// <returns>A successful request returns the HTTP `200 OK` status code and a JSON response body that shows product details.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Product> CreateAsync(string? prefer = null, string? payPal_Request_Id = null, Product_request_POST? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Product> CreateAsync(string? prefer = null, string? payPal_Request_Id = null, ProductRequestPOST? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -55,7 +55,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
         /// <param name="total_required">Indicates whether to show the total items and total pages in the response.</param>
         /// <returns>A successful request returns the HTTP `200 OK` status code and a JSON response body that lists products with details.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Product_collection> ListAsync(int? page_size = null, int? page = null, bool? total_required = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ProductCollection> ListAsync(int? page_size = null, int? page = null, bool? total_required = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -126,7 +126,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
         /// <param name="payPal_Request_Id">The server stores keys for 72 hours.</param>
         /// <returns>A successful request returns the HTTP `200 OK` status code and a JSON response body that shows product details.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Product> CreateAsync(string? prefer = null, string? payPal_Request_Id = null, Product_request_POST? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Product> CreateAsync(string? prefer = null, string? payPal_Request_Id = null, ProductRequestPOST? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -237,21 +237,21 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
                         else
                         if (status_ == 500)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Error_500>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Error500>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new PayPalApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new PayPalApiException<Error_500>("An internal server error has occurred.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new PayPalApiException<Error500>("An internal server error has occurred.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
                         }
                         else
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Error_400>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Error400>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new PayPalApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new PayPalApiException<Error_400>("The default response.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new PayPalApiException<Error400>("The default response.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -280,7 +280,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
         /// <param name="total_required">Indicates whether to show the total items and total pages in the response.</param>
         /// <returns>A successful request returns the HTTP `200 OK` status code and a JSON response body that lists products with details.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Product_collection> ListAsync(int? page_size = null, int? page = null, bool? total_required = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<ProductCollection> ListAsync(int? page_size = null, int? page = null, bool? total_required = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -335,7 +335,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Product_collection>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<ProductCollection>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new PayPalApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -375,21 +375,21 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
                         else
                         if (status_ == 500)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Error_500>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Error500>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new PayPalApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new PayPalApiException<Error_500>("An internal server error has occurred.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new PayPalApiException<Error500>("An internal server error has occurred.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
                         }
                         else
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Error_400>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Error400>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new PayPalApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new PayPalApiException<Error_400>("The default response.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new PayPalApiException<Error400>("The default response.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -501,21 +501,21 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
                         else
                         if (status_ == 500)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Error_500>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Error500>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new PayPalApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new PayPalApiException<Error_500>("An internal server error has occurred.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new PayPalApiException<Error500>("An internal server error has occurred.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
                         }
                         else
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Error_400>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Error400>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new PayPalApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new PayPalApiException<Error_400>("The default response.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new PayPalApiException<Error400>("The default response.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -645,21 +645,21 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
                         else
                         if (status_ == 500)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Error_500>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Error500>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new PayPalApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new PayPalApiException<Error_500>("An internal server error has occurred.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new PayPalApiException<Error500>("An internal server error has occurred.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
                         }
                         else
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Error_400>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Error400>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new PayPalApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
-                            throw new PayPalApiException<Error_400>("The default response.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            throw new PayPalApiException<Error400>("The default response.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
                         }
                     }
                     finally
@@ -902,7 +902,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     /// Request is not well-formed, syntactically incorrect, or violates schema.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_400
+    public partial class Error400
     {
 
         /// <summary>
@@ -918,20 +918,20 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
         public string Message { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Error_details> Details { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorDetails> Details { get; set; } = default!;
 
         /// <summary>
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Debug_id { get; set; } = default!;
+        public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
-        public System.Collections.Generic.ICollection<Error_link_description> Links { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -948,7 +948,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     /// Authentication failed due to missing Authorization header, or invalid authentication credentials.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_401
+    public partial class Error401
     {
 
         /// <summary>
@@ -964,20 +964,20 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
         public string Message { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Error_details> Details { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorDetails> Details { get; set; } = default!;
 
         /// <summary>
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Debug_id { get; set; } = default!;
+        public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
-        public System.Collections.Generic.ICollection<Error_link_description> Links { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -994,7 +994,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     /// The client is not authorized to access this resource, although it may have valid credentials. 
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_403
+    public partial class Error403
     {
 
         /// <summary>
@@ -1010,20 +1010,20 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
         public string Message { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Error_details> Details { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorDetails> Details { get; set; } = default!;
 
         /// <summary>
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Debug_id { get; set; } = default!;
+        public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
-        public System.Collections.Generic.ICollection<Error_link_description> Links { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -1040,7 +1040,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     /// The server has not found anything matching the request URI. This either means that the URI is incorrect or the resource is not available.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_404
+    public partial class Error404
     {
 
         /// <summary>
@@ -1056,20 +1056,20 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
         public string Message { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Error_details> Details { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorDetails> Details { get; set; } = default!;
 
         /// <summary>
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Debug_id { get; set; } = default!;
+        public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
-        public System.Collections.Generic.ICollection<Error_link_description> Links { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -1086,7 +1086,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     /// The server has detected a conflict while processing this request.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_409
+    public partial class Error409
     {
 
         /// <summary>
@@ -1102,20 +1102,20 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
         public string Message { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Error_details> Details { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorDetails> Details { get; set; } = default!;
 
         /// <summary>
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Debug_id { get; set; } = default!;
+        public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
-        public System.Collections.Generic.ICollection<Error_link_description> Links { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -1132,7 +1132,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     /// The server does not support the request payload's media type.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_415
+    public partial class Error415
     {
 
         /// <summary>
@@ -1148,20 +1148,20 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
         public string Message { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Error_details> Details { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorDetails> Details { get; set; } = default!;
 
         /// <summary>
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Debug_id { get; set; } = default!;
+        public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
-        public System.Collections.Generic.ICollection<Error_link_description> Links { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -1178,7 +1178,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     /// The requested action cannot be performed and may require interaction with APIs or processes outside of the current request. This is distinct from a 500 response in that there are no systemic problems limiting the API from performing the request.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_422
+    public partial class Error422
     {
 
         /// <summary>
@@ -1194,20 +1194,20 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
         public string Message { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Error_details> Details { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorDetails> Details { get; set; } = default!;
 
         /// <summary>
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Debug_id { get; set; } = default!;
+        public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
-        public System.Collections.Generic.ICollection<Error_link_description> Links { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -1224,7 +1224,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     /// This is either a system or application error, and generally indicates that although the client appeared to provide a correct request, something unexpected has gone wrong on the server.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_500
+    public partial class Error500
     {
 
         /// <summary>
@@ -1243,14 +1243,14 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Debug_id { get; set; } = default!;
+        public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
-        public System.Collections.Generic.ICollection<Error_link_description> Links { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -1267,7 +1267,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     /// The server is temporarily unable to handle the request, for example, because of planned maintenance or downtime.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_503
+    public partial class Error503
     {
 
         /// <summary>
@@ -1286,14 +1286,14 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Debug_id { get; set; } = default!;
+        public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
-        public System.Collections.Generic.ICollection<Error_link_description> Links { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -1310,7 +1310,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     /// The error details. Required for client-side `4XX` errors.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_details
+    public partial class ErrorDetails
     {
 
         /// <summary>
@@ -1356,7 +1356,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     /// The request-related [HATEOAS link](/api/rest/responses/#hateoas-links) information.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_link_description
+    public partial class ErrorLinkDescription
     {
 
         /// <summary>
@@ -1402,7 +1402,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     /// The request-related [HATEOAS link](/docs/api/reference/api-responses/#hateoas-links) information.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Link_description
+    public partial class LinkDescription
     {
 
         /// <summary>
@@ -1442,7 +1442,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     /// An array of request-related [HATEOAS links](/docs/api/overview/#hateoas-links).
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Link_description_list : System.Collections.ObjectModel.Collection<Link_description>
+    public partial class LinkDescriptionList : System.Collections.ObjectModel.Collection<LinkDescription>
     {
 
     }
@@ -1496,7 +1496,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     /// An array of JSON patch objects to apply partial updates to resources.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Patch_request : System.Collections.ObjectModel.Collection<Patch>
+    public partial class PatchRequest : System.Collections.ObjectModel.Collection<Patch>
     {
 
     }
@@ -1549,14 +1549,14 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
         /// </summary>
         [Newtonsoft.Json.JsonProperty("image_url", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(2000, MinimumLength = 1)]
-        public System.Uri Image_url { get; set; } = default!;
+        public System.Uri ImageUrl { get; set; } = default!;
 
         /// <summary>
         /// The home page URL for the product.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("home_url", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(2000, MinimumLength = 1)]
-        public System.Uri Home_url { get; set; } = default!;
+        public System.Uri HomeUrl { get; set; } = default!;
 
         /// <summary>
         /// The date and time when the product was created, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6).
@@ -1564,7 +1564,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
         [Newtonsoft.Json.JsonProperty("create_time", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 20)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])[T,t]([0-1][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)([.][0-9]+)?([Zz]|[+-][0-9]{2}:[0-9]{2})$")]
-        public string Create_time { get; set; } = default!;
+        public string CreateTime { get; set; } = default!;
 
         /// <summary>
         /// The date and time when the product was last updated, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6).
@@ -1572,10 +1572,10 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
         [Newtonsoft.Json.JsonProperty("update_time", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 20)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])[T,t]([0-1][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)([.][0-9]+)?([Zz]|[+-][0-9]{2}:[0-9]{2})$")]
-        public string Update_time { get; set; } = default!;
+        public string UpdateTime { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Link_description_list Links { get; set; } = default!;
+        public LinkDescriptionList Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -1592,30 +1592,30 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     /// The list of products, with details.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Product_collection
+    public partial class ProductCollection
     {
 
         [Newtonsoft.Json.JsonProperty("products", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MinLength(1)]
         [System.ComponentModel.DataAnnotations.MaxLength(32767)]
-        public Product_collection_element_list Products { get; set; } = default!;
+        public ProductCollectionElementList Products { get; set; } = default!;
 
         /// <summary>
         /// The total number of items.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("total_items", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.Range(0, 500000000)]
-        public int Total_items { get; set; } = default!;
+        public int TotalItems { get; set; } = default!;
 
         /// <summary>
         /// The total number of pages.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("total_pages", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.Range(0, 100000000)]
-        public int Total_pages { get; set; } = default!;
+        public int TotalPages { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Link_description_list Links { get; set; } = default!;
+        public LinkDescriptionList Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -1632,7 +1632,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     /// The details for a product in the collection response.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Product_collection_element
+    public partial class ProductCollectionElement
     {
 
         /// <summary>
@@ -1662,10 +1662,10 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
         [Newtonsoft.Json.JsonProperty("create_time", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 20)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])[T,t]([0-1][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)([.][0-9]+)?([Zz]|[+-][0-9]{2}:[0-9]{2})$")]
-        public string Create_time { get; set; } = default!;
+        public string CreateTime { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Link_description_list Links { get; set; } = default!;
+        public LinkDescriptionList Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -1682,7 +1682,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     /// An array of products.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Product_collection_element_list : System.Collections.ObjectModel.Collection<Product_collection_element>
+    public partial class ProductCollectionElementList : System.Collections.ObjectModel.Collection<ProductCollectionElement>
     {
 
     }
@@ -1691,7 +1691,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     /// The create product request details.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Product_request_POST
+    public partial class ProductRequestPOST
     {
 
         /// <summary>
@@ -1737,14 +1737,14 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
         /// </summary>
         [Newtonsoft.Json.JsonProperty("image_url", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(2000, MinimumLength = 1)]
-        public System.Uri Image_url { get; set; } = default!;
+        public System.Uri ImageUrl { get; set; } = default!;
 
         /// <summary>
         /// The home page URL for the product.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("home_url", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(2000, MinimumLength = 1)]
-        public System.Uri Home_url { get; set; } = default!;
+        public System.Uri HomeUrl { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -1758,7 +1758,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Create400
+    public partial class ProductsCreate400
     {
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -1776,7 +1776,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Patch400
+    public partial class ProductsPatch400
     {
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -1794,7 +1794,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Patch422
+    public partial class ProductsPatch422
     {
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -1812,7 +1812,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Response : Error_400
+    public partial class Response : Error400
     {
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -1821,7 +1821,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Response2 : Error_401
+    public partial class Response2 : Error401
     {
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -1830,7 +1830,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Response3 : Error_403
+    public partial class Response3 : Error403
     {
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -1839,7 +1839,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Response4 : Error_422
+    public partial class Response4 : Error422
     {
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -1848,7 +1848,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Response5 : Error_400
+    public partial class Response5 : Error400
     {
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -1857,7 +1857,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Response6 : Error_401
+    public partial class Response6 : Error401
     {
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -1866,7 +1866,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Response7 : Error_403
+    public partial class Response7 : Error403
     {
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -1875,7 +1875,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Response8 : Error_401
+    public partial class Response8 : Error401
     {
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -1884,7 +1884,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Response9 : Error_403
+    public partial class Response9 : Error403
     {
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -1893,7 +1893,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Response10 : Error_404
+    public partial class Response10 : Error404
     {
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -1902,7 +1902,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Response11 : Error_400
+    public partial class Response11 : Error400
     {
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -1911,7 +1911,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Response12 : Error_401
+    public partial class Response12 : Error401
     {
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -1920,7 +1920,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Response13 : Error_403
+    public partial class Response13 : Error403
     {
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -1929,7 +1929,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Response14 : Error_404
+    public partial class Response14 : Error404
     {
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -1938,7 +1938,7 @@ namespace Aeroverra.PayPalSharp.CatalogProductsV1
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Response15 : Error_422
+    public partial class Response15 : Error422
     {
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]

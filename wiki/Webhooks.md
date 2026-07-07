@@ -14,10 +14,10 @@ var mine    = await paypal.Webhooks.ListAsync();                     // your sub
 Webhook created = await paypal.Webhooks.PostAsync(new Webhook
 {
     Url = new Uri("https://your.app/paypal/webhook"),
-    Event_types = new DefinitionsEvent_type_list
+    EventTypes = new DefinitionsEventTypeList
     {
-        new Event_type { Name = PayPalWebhookEventType.PaymentCaptureCompleted },
-        new Event_type { Name = PayPalWebhookEventType.CheckoutOrderApproved },
+        new EventType { Name = PayPalWebhookEventType.PaymentCaptureCompleted },
+        new EventType { Name = PayPalWebhookEventType.CheckoutOrderApproved },
     },
 });
 ```

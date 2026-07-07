@@ -20,15 +20,15 @@ injected client serves many sellers safely (including concurrently):
 ```csharp
 using (paypal.ActingAsMerchant(sellerMerchantId))
 {
-    var order = new Order_request
+    var order = new OrderRequest
     {
         Intent = PayPalIntent.Capture,
-        Purchase_units = new List<Purchase_units>
+        PurchaseUnits = new List<PurchaseUnitRequest>
         {
-            new Purchase_units
+            new PurchaseUnitRequest
             {
-                Amount = new Amount3 { Currency_code = PayPalCurrency.Usd, Value = "10.00" },
-                Payee  = new Payee3 { Merchant_id = sellerMerchantId },   // who gets the money
+                Amount = new AmountWithBreakdown { CurrencyCode = PayPalCurrency.Usd, Value = 10.00m },
+                Payee  = new Payee { MerchantId = sellerMerchantId },   // who gets the money
             },
         },
     };

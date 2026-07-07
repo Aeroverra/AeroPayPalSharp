@@ -35,7 +35,17 @@ Runs in this order (see `WrapperGenerator/SpecFixer/Transformer/`):
    [Models and nullability](Models-and-Nullability.md)).
 4. **InlineStringAllOf** collapses PayPal's `allOf: [ <string-ref>, <description> ]` wrapper to an inline
    string. Without this, after flattening, NSwag emits `class X : string`, which does not compile.
-5. **MarkKnownRequired** marks a curated set of always-present response fields required.
+5. **CollapseSingleRefAllOf** collapses `allOf: [ {$ref}, <cosmetic-only> ]` object wrappers to the bare
+   `$ref`, so PayPal's shared components (money, payee, name, ...) stop exploding into hundreds of empty
+   numbered alias classes. Only collapses when the siblings are purely cosmetic (description, readOnly).
+6. **MarkKnownRequired** marks a curated set of always-present response fields required.
+7. **MoneyValueToDecimal** retypes money `value` fields from string to `decimal` (serialized back to a
+   currency-safe string by `PayPalMoneyConverter`).
+8. **FixMerchantIntegrationFindResponse** gives the partner merchant-integration "find" endpoint its real
+   response type (PayPal's spec leaves it untyped).
+
+Type and property names are then PascalCased by generators in `WrapperGenerator/Naming/` (the
+`[JsonProperty(...)]` attributes preserve the JSON wire names).
 
 ## Adding a new PayPal API
 

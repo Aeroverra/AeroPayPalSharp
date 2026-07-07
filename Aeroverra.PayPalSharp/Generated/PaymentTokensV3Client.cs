@@ -41,7 +41,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// <param name="payPal_Request_Id">The server stores keys for 3 hours.</param>
         /// <returns>Idempotent response for a successful creation of payment token.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Payment_token_response> CreateAsync(Payment_token_request body, string? payPal_Request_Id = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<PaymentTokenResponse> CreateAsync(PaymentTokenRequest body, string? payPal_Request_Id = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -56,7 +56,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// <param name="total_required">A boolean indicating total number of items (total_items) and pages (total_pages) are expected to be returned in the response.</param>
         /// <returns>Successful execution.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Customer_vault_payment_tokens_response> CustomerPaymentTokensGetAsync(string customer_id, int? page_size = null, int? page = null, bool? total_required = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<CustomerVaultPaymentTokensResponse> CustomerPaymentTokensGetAsync(string customer_id, int? page_size = null, int? page = null, bool? total_required = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -68,7 +68,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// <param name="id">ID of the setup token.</param>
         /// <returns>Successful execution.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Payment_token_response> GetAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<PaymentTokenResponse> GetAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -93,7 +93,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// <param name="payPal_Request_Id">The server stores keys for 3 hours.</param>
         /// <returns>Idempotent response for a successful creation of setup token.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Setup_token_response> SetupTokensCreateAsync(Setup_token_request body, string? payPal_Request_Id = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetupTokenResponse> SetupTokensCreateAsync(SetupTokenRequest body, string? payPal_Request_Id = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -105,7 +105,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// <param name="id">ID of the setup token.</param>
         /// <returns>Found requested setup-token, returned a payment method associated with the token.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Setup_token_response> SetupTokensGetAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SetupTokenResponse> SetupTokensGetAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
     }
 
@@ -152,7 +152,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// <param name="payPal_Request_Id">The server stores keys for 3 hours.</param>
         /// <returns>Idempotent response for a successful creation of payment token.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Payment_token_response> CreateAsync(Payment_token_request body, string? payPal_Request_Id = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<PaymentTokenResponse> CreateAsync(PaymentTokenRequest body, string? payPal_Request_Id = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -203,7 +203,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Payment_token_response>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<PaymentTokenResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new PayPalApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -213,7 +213,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
                         else
                         if (status_ == 201)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Payment_token_response>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<PaymentTokenResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new PayPalApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -303,7 +303,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// <param name="total_required">A boolean indicating total number of items (total_items) and pages (total_pages) are expected to be returned in the response.</param>
         /// <returns>Successful execution.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Customer_vault_payment_tokens_response> CustomerPaymentTokensGetAsync(string customer_id, int? page_size = null, int? page = null, bool? total_required = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<CustomerVaultPaymentTokensResponse> CustomerPaymentTokensGetAsync(string customer_id, int? page_size = null, int? page = null, bool? total_required = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (customer_id == null)
                 throw new System.ArgumentNullException("customer_id");
@@ -362,7 +362,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Customer_vault_payment_tokens_response>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<CustomerVaultPaymentTokensResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new PayPalApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -429,7 +429,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// <param name="id">ID of the setup token.</param>
         /// <returns>Successful execution.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Payment_token_response> GetAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<PaymentTokenResponse> GetAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -474,7 +474,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Payment_token_response>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<PaymentTokenResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new PayPalApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -658,7 +658,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// <param name="payPal_Request_Id">The server stores keys for 3 hours.</param>
         /// <returns>Idempotent response for a successful creation of setup token.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Setup_token_response> SetupTokensCreateAsync(Setup_token_request body, string? payPal_Request_Id = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<SetupTokenResponse> SetupTokensCreateAsync(SetupTokenRequest body, string? payPal_Request_Id = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (body == null)
                 throw new System.ArgumentNullException("body");
@@ -709,7 +709,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Setup_token_response>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<SetupTokenResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new PayPalApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -719,7 +719,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
                         else
                         if (status_ == 201)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Setup_token_response>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<SetupTokenResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new PayPalApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -796,7 +796,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// <param name="id">ID of the setup token.</param>
         /// <returns>Found requested setup-token, returned a payment method associated with the token.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Setup_token_response> SetupTokensGetAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<SetupTokenResponse> SetupTokensGetAsync(string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -841,7 +841,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Setup_token_response>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<SetupTokenResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new PayPalApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -1044,7 +1044,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// A resource representing a response for Apple Pay.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Apple_pay_payment_token_response
+    public partial class ApplePayPaymentTokenResponse
     {
 
         /// <summary>
@@ -1068,7 +1068,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// The billing cycle providing details of the billing frequency, amount, duration and if the billing cycle is a free, discounted or regular billing cycle. The sequence of the billing cycle will be in the following order - free trial billing cycle(s), discounted trial billing cycle(s), regular billing cycle(s).
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Billing_cycle
+    public partial class BillingCycle
     {
 
         /// <summary>
@@ -1080,13 +1080,13 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.StringLength(24, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[A-Z_]+$")]
-        public string Tenure_type { get; set; } = default!;
+        public string TenureType { get; set; } = default!;
 
         /// <summary>
         /// The active pricing scheme for this billing cycle. A free trial billing cycle does not require a pricing scheme.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("pricing_scheme", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Pricing_scheme Pricing_scheme { get; set; } = default!;
+        public PricingScheme PricingScheme { get; set; } = default!;
 
         /// <summary>
         /// The frequency details for this billing cycle.
@@ -1099,7 +1099,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// </summary>
         [Newtonsoft.Json.JsonProperty("total_cycles", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.Range(0, 999)]
-        public int Total_cycles { get; set; } = 1;
+        public int TotalCycles { get; set; } = 1;
 
         /// <summary>
         /// The order in which this cycle is to run among other billing cycles. For example, a trial billing cycle has a `sequence` of `1` while a regular billing cycle has a `sequence` of `2`, so that trial cycle runs before the regular cycle.
@@ -1114,7 +1114,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("start_date", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(10, MinimumLength = 10)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$")]
-        public string Start_date { get; set; } = default!;
+        public string StartDate { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -1131,7 +1131,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// An array of billing cycles for trial billing and regular billing. A plan can have at most two trial cycles and only one regular cycle.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Billing_cycle_list : System.Collections.ObjectModel.Collection<Billing_cycle>
+    public partial class BillingCycleList : System.Collections.ObjectModel.Collection<BillingCycle>
     {
 
     }
@@ -1140,7 +1140,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// Bank Identification Number (BIN) details used to fund a payment.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Bin_details
+    public partial class BinDetails
     {
 
         /// <summary>
@@ -1156,7 +1156,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// </summary>
         [Newtonsoft.Json.JsonProperty("issuing_bank", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 1)]
-        public string Issuing_bank { get; set; } = default!;
+        public string IssuingBank { get; set; } = default!;
 
         /// <summary>
         /// The [two-character ISO-3166-1 country code](/docs/integration/direct/rest/country-codes/) of the bank.
@@ -1164,12 +1164,12 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("bin_country_code", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(2, MinimumLength = 2)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^([A-Z]{2}|C2)$")]
-        public string Bin_country_code { get; set; } = default!;
+        public string BinCountryCode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("products", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MinLength(1)]
         [System.ComponentModel.DataAnnotations.MaxLength(256)]
-        public Products_list Products { get; set; } = default!;
+        public ProductsList Products { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -1186,11 +1186,11 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// Full representation of a Card Payment Token including network token.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Card_response : Card_response_entity
+    public partial class CardResponse : CardResponseEntity
     {
 
         [Newtonsoft.Json.JsonProperty("network_token", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Network_token_entity Network_token { get; set; } = default!;
+        public NetworkTokenEntity NetworkToken { get; set; } = default!;
 
     }
 
@@ -1198,7 +1198,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// Full representation of a Card Payment Token.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Card_response_entity
+    public partial class CardResponseEntity
     {
 
         /// <summary>
@@ -1215,7 +1215,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("last_digits", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(4, MinimumLength = 2)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"[0-9]{2,}")]
-        public string Last_digits { get; set; } = default!;
+        public string LastDigits { get; set; } = default!;
 
         /// <summary>
         /// The card brand or network. Typically used in the response.
@@ -1237,7 +1237,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// Address request details.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("billing_address", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Billing_address Billing_address { get; set; } = default!;
+        public BillingAddress BillingAddress { get; set; } = default!;
 
         /// <summary>
         /// Card Verification status.
@@ -1245,25 +1245,25 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("verification_status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
-        public string Verification_status { get; set; } = default!;
+        public string VerificationStatus { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("verification", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Card_verification_details Verification { get; set; } = default!;
+        public CardVerificationDetails Verification { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("network_transaction_reference", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Network_transaction_reference_response Network_transaction_reference { get; set; } = default!;
+        public NetworkTransactionReferenceEntity NetworkTransactionReference { get; set; } = default!;
 
         /// <summary>
         /// Results of Authentication such as 3D Secure.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("authentication_result", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Authentication_result Authentication_result { get; set; } = default!;
+        public AuthenticationResult AuthenticationResult { get; set; } = default!;
 
         /// <summary>
         /// Bank Identification Number (BIN) details used to fund a payment.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("bin_details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Bin_details Bin_details { get; set; } = default!;
+        public BinDetails BinDetails { get; set; } = default!;
 
         /// <summary>
         /// The payment card type.
@@ -1288,7 +1288,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// Card Verification details including the authorization details and 3D SECURE details.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Card_verification_details
+    public partial class CardVerificationDetails
     {
 
         /// <summary>
@@ -1298,7 +1298,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [System.ComponentModel.DataAnnotations.StringLength(1024, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[a-zA-Z0-9-_@.:&+=*^'~#!$%()]+$")]
         [System.Obsolete]
-        public string Network_transaction_id { get; set; } = default!;
+        public string NetworkTransactionId { get; set; } = default!;
 
         /// <summary>
         /// DEPRECATED. This field is DEPRECATED. Please find the date data in the 'date' field under the 'network_transaction_reference' object instead of the 'verification' object.
@@ -1337,14 +1337,14 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// The processor response information for payment requests, such as direct credit card transactions.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("processor_response", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Processor_response Processor_response { get; set; } = default!;
+        public ProcessorResponse ProcessorResponse { get; set; } = default!;
 
         /// <summary>
         /// DEPRECATED. This field is DEPRECATED. Please find the 3D secure authentication data in the 'three_d_secure' object under the 'authentication_result' object instead of the 'verification' object.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("three_d_secure", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.Obsolete]
-        public object Three_d_secure { get; set; } = default!;
+        public object ThreeDSecure { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -1378,7 +1378,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("merchant_customer_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9a-zA-Z-_.^*$@#]+$")]
-        public string Merchant_customer_id { get; set; } = default!;
+        public string MerchantCustomerId { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -1395,7 +1395,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// Collection of payment tokens saved for a given customer.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Customer_vault_payment_tokens_response
+    public partial class CustomerVaultPaymentTokensResponse
     {
 
         /// <summary>
@@ -1403,14 +1403,14 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// </summary>
         [Newtonsoft.Json.JsonProperty("total_items", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.Range(1, 50)]
-        public int Total_items { get; set; } = default!;
+        public int TotalItems { get; set; } = default!;
 
         /// <summary>
         /// Total number of pages.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("total_pages", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.Range(1, 10)]
-        public int Total_pages { get; set; } = default!;
+        public int TotalPages { get; set; } = default!;
 
         /// <summary>
         /// This object defines a customer in your system. Use it to manage customer profiles, save payment methods and contact details.
@@ -1420,12 +1420,12 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
 
         [Newtonsoft.Json.JsonProperty("payment_tokens", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MaxLength(64)]
-        public Payment_token_response_list Payment_tokens { get; set; } = default!;
+        public PaymentTokenResponseList PaymentTokens { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MinLength(1)]
         [System.ComponentModel.DataAnnotations.MaxLength(32)]
-        public Link_description_list Links { get; set; } = default!;
+        public LinkDescriptionList Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -1442,7 +1442,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// An array of request-related [HATEOAS links](/api/rest/responses/#hateoas-links) that are either relevant to the issue by providing additional information or offering potential resolutions.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class DefinitionsLink_description_list : System.Collections.ObjectModel.Collection<Link_description>
+    public partial class DefinitionsLinkDescriptionList : System.Collections.ObjectModel.Collection<LinkDescription>
     {
 
     }
@@ -1451,7 +1451,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// The payment method to vault with the instrument details.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class DefinitionsPayment_source
+    public partial class DefinitionsPaymentSource
     {
 
         /// <summary>
@@ -1461,7 +1461,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         public Card2 Card { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("token", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Token_id_request Token { get; set; } = default!;
+        public TokenIdRequest Token { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -1500,13 +1500,13 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// </summary>
         [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Debug_id { get; set; } = default!;
+        public string DebugId { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Error_details_list Details { get; set; } = default!;
+        public ErrorDetailsList Details { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Error_definitionsLink_description_list Links { get; set; } = default!;
+        public ErrorDefinitionsLinkDescriptionList Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -1523,7 +1523,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// Request is not well-formed, syntactically incorrect, or violates schema.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_400
+    public partial class Error400
     {
 
         /// <summary>
@@ -1539,20 +1539,20 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         public string Message { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Error_details> Details { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorDetails> Details { get; set; } = default!;
 
         /// <summary>
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Debug_id { get; set; } = default!;
+        public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
-        public System.Collections.Generic.ICollection<Error_link_description> Links { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -1569,7 +1569,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// Authentication failed due to missing Authorization header, or invalid authentication credentials.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_401
+    public partial class Error401
     {
 
         /// <summary>
@@ -1585,20 +1585,20 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         public string Message { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Error_details> Details { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorDetails> Details { get; set; } = default!;
 
         /// <summary>
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Debug_id { get; set; } = default!;
+        public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
-        public System.Collections.Generic.ICollection<Error_link_description> Links { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -1615,7 +1615,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// The client is not authorized to access this resource, although it may have valid credentials. 
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_403
+    public partial class Error403
     {
 
         /// <summary>
@@ -1631,20 +1631,20 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         public string Message { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Error_details> Details { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorDetails> Details { get; set; } = default!;
 
         /// <summary>
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Debug_id { get; set; } = default!;
+        public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
-        public System.Collections.Generic.ICollection<Error_link_description> Links { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -1661,7 +1661,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// The server has not found anything matching the request URI. This either means that the URI is incorrect or the resource is not available.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_404
+    public partial class Error404
     {
 
         /// <summary>
@@ -1677,20 +1677,20 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         public string Message { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Error_details> Details { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorDetails> Details { get; set; } = default!;
 
         /// <summary>
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Debug_id { get; set; } = default!;
+        public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
-        public System.Collections.Generic.ICollection<Error_link_description> Links { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -1707,7 +1707,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// The server has detected a conflict while processing this request.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_409
+    public partial class Error409
     {
 
         /// <summary>
@@ -1723,20 +1723,20 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         public string Message { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Error_details> Details { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorDetails> Details { get; set; } = default!;
 
         /// <summary>
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Debug_id { get; set; } = default!;
+        public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
-        public System.Collections.Generic.ICollection<Error_link_description> Links { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -1753,7 +1753,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// The server does not support the request payload's media type.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_415
+    public partial class Error415
     {
 
         /// <summary>
@@ -1769,20 +1769,20 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         public string Message { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Error_details> Details { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorDetails> Details { get; set; } = default!;
 
         /// <summary>
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Debug_id { get; set; } = default!;
+        public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
-        public System.Collections.Generic.ICollection<Error_link_description> Links { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -1799,7 +1799,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// The requested action cannot be performed and may require interaction with APIs or processes outside of the current request. This is distinct from a 500 response in that there are no systemic problems limiting the API from performing the request.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_422
+    public partial class Error422
     {
 
         /// <summary>
@@ -1815,20 +1815,20 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         public string Message { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Error_details> Details { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorDetails> Details { get; set; } = default!;
 
         /// <summary>
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Debug_id { get; set; } = default!;
+        public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
-        public System.Collections.Generic.ICollection<Error_link_description> Links { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -1845,7 +1845,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// This is either a system or application error, and generally indicates that although the client appeared to provide a correct request, something unexpected has gone wrong on the server.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_500
+    public partial class Error500
     {
 
         /// <summary>
@@ -1864,14 +1864,14 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Debug_id { get; set; } = default!;
+        public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
-        public System.Collections.Generic.ICollection<Error_link_description> Links { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -1888,7 +1888,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// The server is temporarily unable to handle the request, for example, because of planned maintenance or downtime.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_503
+    public partial class Error503
     {
 
         /// <summary>
@@ -1907,14 +1907,14 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Debug_id { get; set; } = default!;
+        public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
-        public System.Collections.Generic.ICollection<Error_link_description> Links { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -1931,7 +1931,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// An array of request-related [HATEOAS links](/api/rest/responses/#hateoas-links).
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_definitionsLink_description_list : System.Collections.ObjectModel.Collection<Link_description>
+    public partial class ErrorDefinitionsLinkDescriptionList : System.Collections.ObjectModel.Collection<LinkDescription>
     {
 
     }
@@ -1940,7 +1940,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// The error details. Required for client-side `4XX` errors.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_details
+    public partial class ErrorDetails
     {
 
         /// <summary>
@@ -1986,7 +1986,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// The error details. Required for client-side `4XX` errors.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_details2
+    public partial class ErrorDetails2
     {
 
         /// <summary>
@@ -2017,7 +2017,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MinLength(1)]
         [System.ComponentModel.DataAnnotations.MaxLength(4)]
-        public DefinitionsLink_description_list Links { get; set; } = default!;
+        public DefinitionsLinkDescriptionList Links { get; set; } = default!;
 
         /// <summary>
         /// The human-readable description for an issue. The description can change over the lifetime of an API, so clients must not depend on this value.
@@ -2040,7 +2040,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// An array of additional details about the error.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_details_list : System.Collections.ObjectModel.Collection<Error_details2>
+    public partial class ErrorDetailsList : System.Collections.ObjectModel.Collection<ErrorDetails2>
     {
 
     }
@@ -2049,7 +2049,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// The request-related [HATEOAS link](/api/rest/responses/#hateoas-links) information.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_link_description
+    public partial class ErrorLinkDescription
     {
 
         /// <summary>
@@ -2095,7 +2095,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// Customizes the Vault creation flow experience for your customers.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Experience_context
+    public partial class ExperienceContext
     {
 
         /// <summary>
@@ -2104,7 +2104,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("brand_name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(300, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^.*$")]
-        public string Brand_name { get; set; } = default!;
+        public string BrandName { get; set; } = default!;
 
         /// <summary>
         /// The BCP 47-formatted locale of pages that the PayPal vaulting experience shows. PayPal supports a five-character code. For example, `DA-DK`, `HE-IL`, `ID-ID`, `JA-JP`, `NO-NO`, `PT-BR`, `RU-RU`, `SV-SE`, `TH-TH`, `ZH-CN`, `ZH-HK`, or `ZH-TW`.
@@ -2119,14 +2119,14 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// </summary>
         [Newtonsoft.Json.JsonProperty("return_url", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(4000, MinimumLength = 1)]
-        public System.Uri Return_url { get; set; } = default!;
+        public System.Uri ReturnUrl { get; set; } = default!;
 
         /// <summary>
         /// The URL where the customer is redirected after customer cancels or leaves the flow. It is a required field for contingency flows like PayPal wallet, 3DS.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("cancel_url", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(4000, MinimumLength = 1)]
-        public System.Uri Cancel_url { get; set; } = default!;
+        public System.Uri CancelUrl { get; set; } = default!;
 
         /// <summary>
         /// The shipping preference. This only applies to PayPal payment source.
@@ -2136,7 +2136,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("shipping_preference", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
-        public string Shipping_preference { get; set; } = "GET_FROM_FILE";
+        public string ShippingPreference { get; set; } = "GET_FROM_FILE";
 
         /// <summary>
         /// Vault Instruction on action to be performed after a successful payer approval.
@@ -2144,7 +2144,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("vault_instruction", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[A-Z_]+$")]
-        public string Vault_instruction { get; set; } = default!;
+        public string VaultInstruction { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -2176,7 +2176,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// The request-related [HATEOAS link](/api/rest/responses/#hateoas-links) information.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Link_description
+    public partial class LinkDescription
     {
 
         /// <summary>
@@ -2216,7 +2216,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// An array of related [HATEOAS links](/api/rest/responses/#hateoas).
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Link_description_list : System.Collections.ObjectModel.Collection<Link_description>
+    public partial class LinkDescriptionList : System.Collections.ObjectModel.Collection<LinkDescription>
     {
 
     }
@@ -2231,7 +2231,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("currency_code", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [System.ComponentModel.DataAnnotations.StringLength(3, MinimumLength = 3)]
-        public string Currency_code { get; set; } = default!;
+        public string CurrencyCode { get; set; } = default!;
 
         /// <summary>
         /// The value, which might be:&lt;ul&gt;&lt;li&gt;An integer for currencies like `JPY` that are not typically fractional.&lt;/li&gt;&lt;li&gt;A decimal fraction for currencies like `TND` that are subdivided into thousandths.&lt;/li&gt;&lt;/ul&gt;For the required number of decimal places for a currency code, see [Currency Codes](/api/rest/reference/currency-codes/).
@@ -2251,7 +2251,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Network_token_entity
+    public partial class NetworkTokenEntity
     {
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
@@ -2269,7 +2269,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// Previous network transaction reference including id and network.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Network_transaction_reference_entity
+    public partial class NetworkTransactionReferenceEntity
     {
 
         /// <summary>
@@ -2317,7 +2317,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Network_transaction_reference_request
+    public partial class NetworkTransactionReferenceRequest
     {
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
@@ -2332,32 +2332,23 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     }
 
     /// <summary>
-    /// Previous network transaction reference including id in response.
-    /// </summary>
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Network_transaction_reference_response : Network_transaction_reference_entity
-    {
-
-    }
-
-    /// <summary>
     /// The one-time charge info at the time of checkout.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class One_time_charges
+    public partial class OneTimeCharges
     {
 
         /// <summary>
         /// The setup fee for the recurring plan.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("setup_fee", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Money Setup_fee { get; set; } = default!;
+        public Money SetupFee { get; set; } = default!;
 
         /// <summary>
         /// The shipping amount due at the time of checkout.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("shipping_amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Money Shipping_amount { get; set; } = default!;
+        public Money ShippingAmount { get; set; } = default!;
 
         /// <summary>
         /// The taxes due at the time of checkout.
@@ -2369,7 +2360,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// The product price for any one-time product purchased at the time of checkout.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("product_price", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Money Product_price { get; set; } = default!;
+        public Money ProductPrice { get; set; } = default!;
 
         /// <summary>
         /// The subtotal at the time of checkout. This is calculated by using the formula x + y + z where x is first-recurring-charge, y is setup-fee and z is item-price.
@@ -2382,7 +2373,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// </summary>
         [Newtonsoft.Json.JsonProperty("total_amount", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
-        public Money Total_amount { get; set; } = new Money();
+        public Money TotalAmount { get; set; } = new Money();
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -2399,7 +2390,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// The customer who approves and pays for the order. The customer is also known as the payer.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Payer_base
+    public partial class PayerBase
     {
 
         /// <summary>
@@ -2408,7 +2399,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("email_address", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(254, MinimumLength = 3)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"(?:[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*|(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\[\x01-\x09\x0b\x0c\x0e-\x7f])*"")@(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-zA-Z0-9-]*[a-zA-Z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])")]
-        public string Email_address { get; set; } = default!;
+        public string EmailAddress { get; set; } = default!;
 
         /// <summary>
         /// The PayPal-assigned ID for the payer.
@@ -2416,7 +2407,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("payer_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(13, MinimumLength = 13)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[2-9A-HJ-NP-Z]{13}$")]
-        public string Payer_id { get; set; } = default!;
+        public string PayerId { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -2433,20 +2424,20 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// The vaulted payment method details.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Payment_source
+    public partial class PaymentSource
     {
 
         [Newtonsoft.Json.JsonProperty("card", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Card_response Card { get; set; } = default!;
+        public CardResponse Card { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("paypal", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Paypal_wallet_response Paypal { get; set; } = default!;
+        public PaypalWalletResponse Paypal { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("venmo", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Venmo_response Venmo { get; set; } = default!;
+        public VenmoResponse Venmo { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("apple_pay", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Apple_pay_payment_token_response Apple_pay { get; set; } = default!;
+        public ApplePayPaymentTokenResponse ApplePay { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -2463,7 +2454,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// Payment Token Request where the `source` defines the type of instrument to be stored.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Payment_token_request
+    public partial class PaymentTokenRequest
     {
 
         /// <summary>
@@ -2474,7 +2465,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
 
         [Newtonsoft.Json.JsonProperty("payment_source", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
-        public DefinitionsPayment_source Payment_source { get; set; } = new DefinitionsPayment_source();
+        public DefinitionsPaymentSource PaymentSource { get; set; } = new DefinitionsPaymentSource();
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -2491,7 +2482,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// Full representation of a saved payment token.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Payment_token_response
+    public partial class PaymentTokenResponse
     {
 
         /// <summary>
@@ -2509,12 +2500,12 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         public Customer Customer { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("payment_source", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Payment_source Payment_source { get; set; } = default!;
+        public PaymentSource PaymentSource { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MinLength(1)]
         [System.ComponentModel.DataAnnotations.MaxLength(32)]
-        public Link_description_list Links { get; set; } = default!;
+        public LinkDescriptionList Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -2528,7 +2519,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Payment_token_response_list : System.Collections.ObjectModel.Collection<Payment_token_response>
+    public partial class PaymentTokenResponseList : System.Collections.ObjectModel.Collection<PaymentTokenResponse>
     {
 
     }
@@ -2537,19 +2528,19 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// A resource representing a request to vault PayPal Wallet.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Paypal_wallet_request : Wallet_base
+    public partial class PaypalWalletRequest : WalletBase
     {
 
         [Newtonsoft.Json.JsonProperty("billing_plan", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Plan Billing_plan { get; set; } = default!;
+        public Plan BillingPlan { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("experience_context", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Experience_context Experience_context { get; set; } = default!;
+        public ExperienceContext ExperienceContext { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Paypal_wallet_response : Wallet_base
+    public partial class PaypalWalletResponse : WalletBase
     {
 
         /// <summary>
@@ -2558,7 +2549,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("email_address", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(254, MinimumLength = 3)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"(?:[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*|(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\[\x01-\x09\x0b\x0c\x0e-\x7f])*"")@(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-zA-Z0-9-]*[a-zA-Z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])")]
-        public string Email_address { get; set; } = default!;
+        public string EmailAddress { get; set; } = default!;
 
         /// <summary>
         /// The PayPal-assigned ID for the payer.
@@ -2566,7 +2557,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("payer_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(13, MinimumLength = 13)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[2-9A-HJ-NP-Z]{13}$")]
-        public string Payer_id { get; set; } = default!;
+        public string PayerId { get; set; } = default!;
 
         /// <summary>
         /// The name of the party.
@@ -2578,7 +2569,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// The phone number of the customer. Available only when you enable the **Contact Telephone Number** option in the &lt;a href="https://www.paypal.com/cgi-bin/customerprofileweb?cmd=_profile-website-payments"&gt;**Profile &amp; Settings**&lt;/a&gt; for the merchant's PayPal account. The `phone.phone_number` supports only `national_number`.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("phone", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Phone_with_type Phone { get; set; } = default!;
+        public PhoneWithType Phone { get; set; } = default!;
 
         /// <summary>
         /// The portable international postal address. Maps to [AddressValidationMetadata](https://github.com/googlei18n/libaddressinput/wiki/AddressValidationMetadata) and HTML 5.1 [Autofilling form controls: the autocomplete attribute](https://www.w3.org/TR/html51/sec-forms.html#autofilling-form-controls-the-autocomplete-attribute).
@@ -2592,13 +2583,13 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("account_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(13, MinimumLength = 13)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[2-9A-HJ-NP-Z]{13}$")]
-        public string Account_id { get; set; } = default!;
+        public string AccountId { get; set; } = default!;
 
         /// <summary>
         /// The phone number, in its canonical international [E.164 numbering plan format](https://www.itu.int/rec/T-REC-E.164/en).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("phone_number", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Phone Phone_number { get; set; } = default!;
+        public Phone PhoneNumber { get; set; } = default!;
 
     }
 
@@ -2616,7 +2607,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.StringLength(3, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{1,3}?$")]
-        public string Country_code { get; set; } = default!;
+        public string CountryCode { get; set; } = default!;
 
         /// <summary>
         /// The national number, in its canonical international [E.164 numbering plan format](https://www.itu.int/rec/T-REC-E.164/en). The combined length of the country calling code (CC) and the national number must not be greater than 15 digits. The national number consists of a national destination code (NDC) and subscriber number (SN).
@@ -2625,7 +2616,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.StringLength(14, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{1,14}?$")]
-        public string National_number { get; set; } = default!;
+        public string NationalNumber { get; set; } = default!;
 
         /// <summary>
         /// The extension number.
@@ -2633,7 +2624,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("extension_number", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(15, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{1,15}?$")]
-        public string Extension_number { get; set; } = default!;
+        public string ExtensionNumber { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -2650,18 +2641,18 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// The phone information.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Phone_with_type
+    public partial class PhoneWithType
     {
 
         [Newtonsoft.Json.JsonProperty("phone_type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Phone_type { get; set; } = default!;
+        public string PhoneType { get; set; } = default!;
 
         /// <summary>
         /// The phone number, in its canonical international [E.164 numbering plan format](https://www.itu.int/rec/T-REC-E.164/en).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("phone_number", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
-        public Phone_number Phone_number { get; set; } = new Phone_number();
+        public PhoneNumber PhoneNumber { get; set; } = new PhoneNumber();
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -2685,20 +2676,20 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.MinLength(1)]
         [System.ComponentModel.DataAnnotations.MaxLength(3)]
-        public Billing_cycle_list Billing_cycles { get; set; } = new Billing_cycle_list();
+        public BillingCycleList BillingCycles { get; set; } = new BillingCycleList();
 
         /// <summary>
         /// Product details associated with any one-time product purchase.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("product", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Product_override Product { get; set; } = default!;
+        public ProductOverride Product { get; set; } = default!;
 
         /// <summary>
         /// Price and currency for any one-time charges due at plan signup.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("one_time_charges", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
-        public One_time_charges One_time_charges { get; set; } = new One_time_charges();
+        public OneTimeCharges OneTimeCharges { get; set; } = new OneTimeCharges();
 
         /// <summary>
         /// Name of the recurring plan.
@@ -2723,7 +2714,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// The pricing scheme details.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Pricing_scheme
+    public partial class PricingScheme
     {
 
         /// <summary>
@@ -2741,13 +2732,13 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.StringLength(24, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[A-Z_]+$")]
-        public string Pricing_model { get; set; } = default!;
+        public string PricingModel { get; set; } = default!;
 
         /// <summary>
         /// The threshold amount on which the reload charge would be triggered. This will be associated with the account-balance where if the account-balance goes below this amount then customer would incur reload charge.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("reload_threshold_amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Money Reload_threshold_amount { get; set; } = default!;
+        public Money ReloadThresholdAmount { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -2761,7 +2752,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Product_override
+    public partial class ProductOverride
     {
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
@@ -2779,7 +2770,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// The type of card product assigned to the BIN by the issuer. These values are defined by the issuer and may change over time. Some examples include: PREPAID_GIFT, CONSUMER, CORPORATE.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Products_list : System.Collections.ObjectModel.Collection<string>
+    public partial class ProductsList : System.Collections.ObjectModel.Collection<string>
     {
 
     }
@@ -2788,7 +2779,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// Setup Token Request where the `source` defines the type of instrument to be stored.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Setup_token_request
+    public partial class SetupTokenRequest
     {
 
         /// <summary>
@@ -2801,7 +2792,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// The payment method to vault with the instrument details.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("payment_source", Required = Newtonsoft.Json.Required.Always)]
-        public Payment_source2 Payment_source { get; set; } = default!;
+        public PaymentSource2 PaymentSource { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -2818,7 +2809,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// Minimal representation of a cached setup token.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Setup_token_response
+    public partial class SetupTokenResponse
     {
 
         /// <summary>
@@ -2847,12 +2838,12 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// The setup payment method details.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("payment_source", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Payment_source3 Payment_source { get; set; } = default!;
+        public PaymentSource3 PaymentSource { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MinLength(1)]
         [System.ComponentModel.DataAnnotations.MaxLength(32)]
-        public Link_description_list Links { get; set; } = default!;
+        public LinkDescriptionList Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -2869,7 +2860,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// Results of 3D Secure Authentication.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Three_d_secure_authentication_response
+    public partial class ThreeDSecureAuthenticationResponse
     {
 
         /// <summary>
@@ -2878,7 +2869,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("authentication_status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
-        public string Authentication_status { get; set; } = default!;
+        public string AuthenticationStatus { get; set; } = default!;
 
         /// <summary>
         /// Status of authentication eligibility.
@@ -2886,7 +2877,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("enrollment_status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
-        public string Enrollment_status { get; set; } = default!;
+        public string EnrollmentStatus { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -2903,7 +2894,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// Results of 3D Secure Authentication.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Three_d_secure_authentication_response2 : Three_d_secure_authentication_response
+    public partial class ThreeDSecureAuthenticationResponse2 : ThreeDSecureAuthenticationResponse
     {
 
         /// <summary>
@@ -2912,7 +2903,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("authentication_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9a-zA-Z_-]+$")]
-        public string Authentication_id { get; set; } = default!;
+        public string AuthenticationId { get; set; } = default!;
 
     }
 
@@ -2920,7 +2911,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// The Tokenized Payment Source representing a Request to Vault a Token.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Token_id_request
+    public partial class TokenIdRequest
     {
 
         /// <summary>
@@ -2955,19 +2946,19 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Venmo_request : Wallet_base
+    public partial class VenmoRequest : WalletBase
     {
 
         /// <summary>
         /// Customizes the Vault creation flow experience for your customers.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("experience_context", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Experience_context2 Experience_context { get; set; } = default!;
+        public ExperienceContext2 ExperienceContext { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Venmo_response : Wallet_base
+    public partial class VenmoResponse : WalletBase
     {
 
         /// <summary>
@@ -2976,7 +2967,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("email_address", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(254, MinimumLength = 3)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"(?:[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*|(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\[\x01-\x09\x0b\x0c\x0e-\x7f])*"")@(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-zA-Z0-9-]*[a-zA-Z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])")]
-        public string Email_address { get; set; } = default!;
+        public string EmailAddress { get; set; } = default!;
 
         /// <summary>
         /// The PayPal-assigned ID for the payer.
@@ -2984,7 +2975,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("payer_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(13, MinimumLength = 13)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[2-9A-HJ-NP-Z]{13}$")]
-        public string Payer_id { get; set; } = default!;
+        public string PayerId { get; set; } = default!;
 
         /// <summary>
         /// The name of the party.
@@ -2996,7 +2987,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// The phone number of the customer. Available only when you enable the **Contact Telephone Number** option in the &lt;a href="https://www.paypal.com/cgi-bin/customerprofileweb?cmd=_profile-website-payments"&gt;**Profile &amp; Settings**&lt;/a&gt; for the merchant's PayPal account. The `phone.phone_number` supports only `national_number`.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("phone", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Phone_with_type Phone { get; set; } = default!;
+        public PhoneWithType Phone { get; set; } = default!;
 
         /// <summary>
         /// The portable international postal address. Maps to [AddressValidationMetadata](https://github.com/googlei18n/libaddressinput/wiki/AddressValidationMetadata) and HTML 5.1 [Autofilling form controls: the autocomplete attribute](https://www.w3.org/TR/html51/sec-forms.html#autofilling-form-controls-the-autocomplete-attribute).
@@ -3010,7 +3001,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("user_name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(50, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[-a-zA-Z0-9_]*$")]
-        public string User_name { get; set; } = default!;
+        public string UserName { get; set; } = default!;
 
     }
 
@@ -3018,7 +3009,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     /// Resource consolidating common request and response attributes for vaulting a Digital Wallet.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Wallet_base
+    public partial class WalletBase
     {
 
         /// <summary>
@@ -3037,7 +3028,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("usage_pattern", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(30, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
-        public string Usage_pattern { get; set; } = default!;
+        public string UsagePattern { get; set; } = default!;
 
         /// <summary>
         /// The shipping details.
@@ -3049,7 +3040,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// Create multiple payment tokens for the same payer, merchant/platform combination. Use this when the customer has not logged in at merchant/platform. The payment token thus generated, can then also be used to create the customer account at merchant/platform. Use this also when multiple payment tokens are required for the same payer, different customer at merchant/platform. This helps to identify customers distinctly even though they may share the same PayPal account. This only applies to PayPal payment source.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("permit_multiple_payment_tokens", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool Permit_multiple_payment_tokens { get; set; } = false;
+        public bool PermitMultiplePaymentTokens { get; set; } = false;
 
         /// <summary>
         /// The usage type associated with a digital wallet payment token.
@@ -3059,7 +3050,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("usage_type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
-        public string Usage_type { get; set; } = default!;
+        public string UsageType { get; set; } = default!;
 
         /// <summary>
         /// The customer type associated with a digital wallet payment token. This is to indicate whether the customer acting on the merchant / platform is either a business or a consumer.
@@ -3069,7 +3060,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("customer_type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
-        public string Customer_type { get; set; } = default!;
+        public string CustomerType { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -3100,7 +3091,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("last_digits", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(4, MinimumLength = 2)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{2,4}$")]
-        public string Last_digits { get; set; } = default!;
+        public string LastDigits { get; set; } = default!;
 
         /// <summary>
         /// The payment card type.
@@ -3122,7 +3113,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// The portable international postal address. Maps to [AddressValidationMetadata](https://github.com/googlei18n/libaddressinput/wiki/AddressValidationMetadata) and HTML 5.1 [Autofilling form controls: the autocomplete attribute](https://www.w3.org/TR/html51/sec-forms.html#autofilling-form-controls-the-autocomplete-attribute).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("billing_address", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Billing_address2 Billing_address { get; set; } = default!;
+        public BillingAddress2 BillingAddress { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -3136,7 +3127,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Billing_address
+    public partial class BillingAddress
     {
 
         /// <summary>
@@ -3144,41 +3135,41 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// </summary>
         [Newtonsoft.Json.JsonProperty("address_line_1", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(300)]
-        public string Address_line_1 { get; set; } = default!;
+        public string AddressLine1 { get; set; } = default!;
 
         /// <summary>
         /// The second line of the address, for example, a suite or apartment number.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("address_line_2", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(300)]
-        public string Address_line_2 { get; set; } = default!;
+        public string AddressLine2 { get; set; } = default!;
 
         /// <summary>
         /// A city, town, or village. Smaller than `admin_area_level_1`.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("admin_area_2", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(120)]
-        public string Admin_area_2 { get; set; } = default!;
+        public string AdminArea2 { get; set; } = default!;
 
         /// <summary>
         /// The highest-level sub-division in a country, which is usually a province, state, or ISO-3166-2 subdivision. This data is formatted for postal delivery, for example, `CA` and not `California`. Value, by country, is:&lt;ul&gt;&lt;li&gt;UK. A county.&lt;/li&gt;&lt;li&gt;US. A state.&lt;/li&gt;&lt;li&gt;Canada. A province.&lt;/li&gt;&lt;li&gt;Japan. A prefecture.&lt;/li&gt;&lt;li&gt;Switzerland. A *kanton*.&lt;/li&gt;&lt;/ul&gt;
         /// </summary>
         [Newtonsoft.Json.JsonProperty("admin_area_1", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(300)]
-        public string Admin_area_1 { get; set; } = default!;
+        public string AdminArea1 { get; set; } = default!;
 
         /// <summary>
         /// The postal code, which is the ZIP code or equivalent. Typically required for countries with a postal code or an equivalent. See [postal code](https://en.wikipedia.org/wiki/Postal_code).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("postal_code", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(60)]
-        public string Postal_code { get; set; } = default!;
+        public string PostalCode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("country_code", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [System.ComponentModel.DataAnnotations.StringLength(2, MinimumLength = 2)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^([A-Z]{2}|C2)$")]
-        public string Country_code { get; set; } = default!;
+        public string CountryCode { get; set; } = default!;
 
         /// <summary>
         /// The resource ID of the address.
@@ -3200,11 +3191,11 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Authentication_result
+    public partial class AuthenticationResult
     {
 
         [Newtonsoft.Json.JsonProperty("three_d_secure", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Three_d_secure_authentication_response2 Three_d_secure { get; set; } = default!;
+        public ThreeDSecureAuthenticationResponse2 ThreeDSecure { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -3218,7 +3209,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Processor_response
+    public partial class ProcessorResponse
     {
 
         /// <summary>
@@ -3227,7 +3218,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// <br/>Allowed values: A, B, C, D, E, F, G, I, M, N, P, R, S, U, W, X, Y, Z, Null, 0, 1, 2, 3, 4.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("avs_code", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Avs_code { get; set; } = default!;
+        public string AvsCode { get; set; } = default!;
 
         /// <summary>
         /// The card verification value code for for Visa, Discover, Mastercard, or American Express.
@@ -3235,7 +3226,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// <br/>Allowed values: E, I, M, N, P, S, U, X, All others, 0, 1, 2, 3, 4.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("cvv_code", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Cvv_code { get; set; } = default!;
+        public string CvvCode { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -3266,7 +3257,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("merchant_customer_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9a-zA-Z-_.^*$@#]+$")]
-        public string Merchant_customer_id { get; set; } = default!;
+        public string MerchantCustomerId { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -3313,7 +3304,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("security_code", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(4, MinimumLength = 3)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{3,4}$")]
-        public string Security_code { get; set; } = default!;
+        public string SecurityCode { get; set; } = default!;
 
         /// <summary>
         /// The card brand or network. Typically used in the response.
@@ -3327,10 +3318,10 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// The portable international postal address. Maps to [AddressValidationMetadata](https://github.com/googlei18n/libaddressinput/wiki/AddressValidationMetadata) and HTML 5.1 [Autofilling form controls: the autocomplete attribute](https://www.w3.org/TR/html51/sec-forms.html#autofilling-form-controls-the-autocomplete-attribute).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("billing_address", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Billing_address3 Billing_address { get; set; } = default!;
+        public BillingAddress3 BillingAddress { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("network_transaction_reference", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Network_transaction_reference_request Network_transaction_reference { get; set; } = default!;
+        public NetworkTransactionReferenceRequest NetworkTransactionReference { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -3361,7 +3352,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("merchant_customer_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9a-zA-Z-_.^*$@#]+$")]
-        public string Merchant_customer_id { get; set; } = default!;
+        public string MerchantCustomerId { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -3383,7 +3374,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// </summary>
         [Newtonsoft.Json.JsonProperty("given_name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(140)]
-        public string Given_name { get; set; } = default!;
+        public string GivenName { get; set; } = default!;
 
         /// <summary>
         /// When the party is a person, the party's surname or family name. Also known as the last name. Required when the party is a person. Use also to store multiple surnames including the matronymic, or mother's, surname.
@@ -3412,41 +3403,41 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// </summary>
         [Newtonsoft.Json.JsonProperty("address_line_1", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(300)]
-        public string Address_line_1 { get; set; } = default!;
+        public string AddressLine1 { get; set; } = default!;
 
         /// <summary>
         /// The second line of the address, for example, a suite or apartment number.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("address_line_2", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(300)]
-        public string Address_line_2 { get; set; } = default!;
+        public string AddressLine2 { get; set; } = default!;
 
         /// <summary>
         /// A city, town, or village. Smaller than `admin_area_level_1`.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("admin_area_2", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(120)]
-        public string Admin_area_2 { get; set; } = default!;
+        public string AdminArea2 { get; set; } = default!;
 
         /// <summary>
         /// The highest-level sub-division in a country, which is usually a province, state, or ISO-3166-2 subdivision. This data is formatted for postal delivery, for example, `CA` and not `California`. Value, by country, is:&lt;ul&gt;&lt;li&gt;UK. A county.&lt;/li&gt;&lt;li&gt;US. A state.&lt;/li&gt;&lt;li&gt;Canada. A province.&lt;/li&gt;&lt;li&gt;Japan. A prefecture.&lt;/li&gt;&lt;li&gt;Switzerland. A *kanton*.&lt;/li&gt;&lt;/ul&gt;
         /// </summary>
         [Newtonsoft.Json.JsonProperty("admin_area_1", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(300)]
-        public string Admin_area_1 { get; set; } = default!;
+        public string AdminArea1 { get; set; } = default!;
 
         /// <summary>
         /// The postal code, which is the ZIP code or equivalent. Typically required for countries with a postal code or an equivalent. See [postal code](https://en.wikipedia.org/wiki/Postal_code).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("postal_code", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(60)]
-        public string Postal_code { get; set; } = default!;
+        public string PostalCode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("country_code", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [System.ComponentModel.DataAnnotations.StringLength(2, MinimumLength = 2)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^([A-Z]{2}|C2)$")]
-        public string Country_code { get; set; } = default!;
+        public string CountryCode { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -3460,7 +3451,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Phone_number
+    public partial class PhoneNumber
     {
 
         /// <summary>
@@ -3470,7 +3461,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.StringLength(14, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{1,14}?$")]
-        public string National_number { get; set; } = default!;
+        public string NationalNumber { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -3501,7 +3492,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("merchant_customer_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9a-zA-Z-_.^*$@#]+$")]
-        public string Merchant_customer_id { get; set; } = default!;
+        public string MerchantCustomerId { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -3515,7 +3506,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Payment_source2
+    public partial class PaymentSource2
     {
 
         /// <summary>
@@ -3525,13 +3516,13 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         public Card3 Card { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("paypal", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Paypal_wallet_request Paypal { get; set; } = default!;
+        public PaypalWalletRequest Paypal { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("venmo", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Venmo_request Venmo { get; set; } = default!;
+        public VenmoRequest Venmo { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("token", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Token_id_request Token { get; set; } = default!;
+        public TokenIdRequest Token { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -3562,7 +3553,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("merchant_customer_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9a-zA-Z-_.^*$@#]+$")]
-        public string Merchant_customer_id { get; set; } = default!;
+        public string MerchantCustomerId { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -3576,17 +3567,17 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Payment_source3
+    public partial class PaymentSource3
     {
 
         [Newtonsoft.Json.JsonProperty("card", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Card4 Card { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("paypal", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Paypal_wallet_response Paypal { get; set; } = default!;
+        public PaypalWalletResponse Paypal { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("venmo", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Venmo_response Venmo { get; set; } = default!;
+        public VenmoResponse Venmo { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -3600,7 +3591,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Experience_context2
+    public partial class ExperienceContext2
     {
 
         /// <summary>
@@ -3609,7 +3600,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("brand_name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(300, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^.*$")]
-        public string Brand_name { get; set; } = default!;
+        public string BrandName { get; set; } = default!;
 
         /// <summary>
         /// The shipping preference. This only applies to PayPal payment source.
@@ -3619,7 +3610,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("shipping_preference", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
-        public string Shipping_preference { get; set; } = "GET_FROM_FILE";
+        public string ShippingPreference { get; set; } = "GET_FROM_FILE";
 
         /// <summary>
         /// Vault Instruction on action to be performed after a successful payer approval.
@@ -3627,7 +3618,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("vault_instruction", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[A-Z_]+$")]
-        public string Vault_instruction { get; set; } = default!;
+        public string VaultInstruction { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -3649,7 +3640,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// </summary>
         [Newtonsoft.Json.JsonProperty("given_name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(140)]
-        public string Given_name { get; set; } = default!;
+        public string GivenName { get; set; } = default!;
 
         /// <summary>
         /// When the party is a person, the party's surname or family name. Also known as the last name. Required when the party is a person. Use also to store multiple surnames including the matronymic, or mother's, surname.
@@ -3678,41 +3669,41 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// </summary>
         [Newtonsoft.Json.JsonProperty("address_line_1", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(300)]
-        public string Address_line_1 { get; set; } = default!;
+        public string AddressLine1 { get; set; } = default!;
 
         /// <summary>
         /// The second line of the address, for example, a suite or apartment number.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("address_line_2", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(300)]
-        public string Address_line_2 { get; set; } = default!;
+        public string AddressLine2 { get; set; } = default!;
 
         /// <summary>
         /// A city, town, or village. Smaller than `admin_area_level_1`.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("admin_area_2", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(120)]
-        public string Admin_area_2 { get; set; } = default!;
+        public string AdminArea2 { get; set; } = default!;
 
         /// <summary>
         /// The highest-level sub-division in a country, which is usually a province, state, or ISO-3166-2 subdivision. This data is formatted for postal delivery, for example, `CA` and not `California`. Value, by country, is:&lt;ul&gt;&lt;li&gt;UK. A county.&lt;/li&gt;&lt;li&gt;US. A state.&lt;/li&gt;&lt;li&gt;Canada. A province.&lt;/li&gt;&lt;li&gt;Japan. A prefecture.&lt;/li&gt;&lt;li&gt;Switzerland. A *kanton*.&lt;/li&gt;&lt;/ul&gt;
         /// </summary>
         [Newtonsoft.Json.JsonProperty("admin_area_1", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(300)]
-        public string Admin_area_1 { get; set; } = default!;
+        public string AdminArea1 { get; set; } = default!;
 
         /// <summary>
         /// The postal code, which is the ZIP code or equivalent. Typically required for countries with a postal code or an equivalent. See [postal code](https://en.wikipedia.org/wiki/Postal_code).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("postal_code", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(60)]
-        public string Postal_code { get; set; } = default!;
+        public string PostalCode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("country_code", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [System.ComponentModel.DataAnnotations.StringLength(2, MinimumLength = 2)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^([A-Z]{2}|C2)$")]
-        public string Country_code { get; set; } = default!;
+        public string CountryCode { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -3739,7 +3730,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// The phone number, in its canonical international [E.164 numbering plan format](https://www.itu.int/rec/T-REC-E.164/en).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("phone_number", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Phone_number2 Phone_number { get; set; } = default!;
+        public PhoneNumber2 PhoneNumber { get; set; } = default!;
 
         /// <summary>
         /// A classification for the method of purchase fulfillment (e.g shipping, in-store pickup, etc). Either `type` or `options` may be present, but not both.
@@ -3769,7 +3760,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Billing_address2
+    public partial class BillingAddress2
     {
 
         /// <summary>
@@ -3777,41 +3768,41 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// </summary>
         [Newtonsoft.Json.JsonProperty("address_line_1", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(300)]
-        public string Address_line_1 { get; set; } = default!;
+        public string AddressLine1 { get; set; } = default!;
 
         /// <summary>
         /// The second line of the address, for example, a suite or apartment number.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("address_line_2", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(300)]
-        public string Address_line_2 { get; set; } = default!;
+        public string AddressLine2 { get; set; } = default!;
 
         /// <summary>
         /// A city, town, or village. Smaller than `admin_area_level_1`.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("admin_area_2", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(120)]
-        public string Admin_area_2 { get; set; } = default!;
+        public string AdminArea2 { get; set; } = default!;
 
         /// <summary>
         /// The highest-level sub-division in a country, which is usually a province, state, or ISO-3166-2 subdivision. This data is formatted for postal delivery, for example, `CA` and not `California`. Value, by country, is:&lt;ul&gt;&lt;li&gt;UK. A county.&lt;/li&gt;&lt;li&gt;US. A state.&lt;/li&gt;&lt;li&gt;Canada. A province.&lt;/li&gt;&lt;li&gt;Japan. A prefecture.&lt;/li&gt;&lt;li&gt;Switzerland. A *kanton*.&lt;/li&gt;&lt;/ul&gt;
         /// </summary>
         [Newtonsoft.Json.JsonProperty("admin_area_1", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(300)]
-        public string Admin_area_1 { get; set; } = default!;
+        public string AdminArea1 { get; set; } = default!;
 
         /// <summary>
         /// The postal code, which is the ZIP code or equivalent. Typically required for countries with a postal code or an equivalent. See [postal code](https://en.wikipedia.org/wiki/Postal_code).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("postal_code", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(60)]
-        public string Postal_code { get; set; } = default!;
+        public string PostalCode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("country_code", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [System.ComponentModel.DataAnnotations.StringLength(2, MinimumLength = 2)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^([A-Z]{2}|C2)$")]
-        public string Country_code { get; set; } = default!;
+        public string CountryCode { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -3825,7 +3816,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Billing_address3
+    public partial class BillingAddress3
     {
 
         /// <summary>
@@ -3833,41 +3824,41 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// </summary>
         [Newtonsoft.Json.JsonProperty("address_line_1", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(300)]
-        public string Address_line_1 { get; set; } = default!;
+        public string AddressLine1 { get; set; } = default!;
 
         /// <summary>
         /// The second line of the address, for example, a suite or apartment number.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("address_line_2", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(300)]
-        public string Address_line_2 { get; set; } = default!;
+        public string AddressLine2 { get; set; } = default!;
 
         /// <summary>
         /// A city, town, or village. Smaller than `admin_area_level_1`.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("admin_area_2", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(120)]
-        public string Admin_area_2 { get; set; } = default!;
+        public string AdminArea2 { get; set; } = default!;
 
         /// <summary>
         /// The highest-level sub-division in a country, which is usually a province, state, or ISO-3166-2 subdivision. This data is formatted for postal delivery, for example, `CA` and not `California`. Value, by country, is:&lt;ul&gt;&lt;li&gt;UK. A county.&lt;/li&gt;&lt;li&gt;US. A state.&lt;/li&gt;&lt;li&gt;Canada. A province.&lt;/li&gt;&lt;li&gt;Japan. A prefecture.&lt;/li&gt;&lt;li&gt;Switzerland. A *kanton*.&lt;/li&gt;&lt;/ul&gt;
         /// </summary>
         [Newtonsoft.Json.JsonProperty("admin_area_1", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(300)]
-        public string Admin_area_1 { get; set; } = default!;
+        public string AdminArea1 { get; set; } = default!;
 
         /// <summary>
         /// The postal code, which is the ZIP code or equivalent. Typically required for countries with a postal code or an equivalent. See [postal code](https://en.wikipedia.org/wiki/Postal_code).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("postal_code", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(60)]
-        public string Postal_code { get; set; } = default!;
+        public string PostalCode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("country_code", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [System.ComponentModel.DataAnnotations.StringLength(2, MinimumLength = 2)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^([A-Z]{2}|C2)$")]
-        public string Country_code { get; set; } = default!;
+        public string CountryCode { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -3914,7 +3905,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("security_code", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(4, MinimumLength = 3)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{3,4}$")]
-        public string Security_code { get; set; } = default!;
+        public string SecurityCode { get; set; } = default!;
 
         /// <summary>
         /// The card brand or network. Typically used in the response.
@@ -3928,7 +3919,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// The portable international postal address. Maps to [AddressValidationMetadata](https://github.com/googlei18n/libaddressinput/wiki/AddressValidationMetadata) and HTML 5.1 [Autofilling form controls: the autocomplete attribute](https://www.w3.org/TR/html51/sec-forms.html#autofilling-form-controls-the-autocomplete-attribute).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("billing_address", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Billing_address4 Billing_address { get; set; } = default!;
+        public BillingAddress4 BillingAddress { get; set; } = default!;
 
         /// <summary>
         /// The API caller can opt in to verify the payment token through PayPal offered verification services (e.g. Smart Dollar Auth, 3DS).
@@ -3936,16 +3927,16 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("verification_method", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9A-Z_]+$")]
-        public string Verification_method { get; set; } = default!;
+        public string VerificationMethod { get; set; } = default!;
 
         /// <summary>
         /// Customizes the Vault creation flow experience for your customers.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("experience_context", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Experience_context3 Experience_context { get; set; } = default!;
+        public ExperienceContext3 ExperienceContext { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("network_transaction_reference", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Network_transaction_reference_request Network_transaction_reference { get; set; } = default!;
+        public NetworkTransactionReferenceRequest NetworkTransactionReference { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -3959,7 +3950,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Card4 : Card_response_entity
+    public partial class Card4 : CardResponseEntity
     {
 
     }
@@ -3973,7 +3964,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// </summary>
         [Newtonsoft.Json.JsonProperty("full_name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(300)]
-        public string Full_name { get; set; } = default!;
+        public string FullName { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -3987,7 +3978,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Phone_number2
+    public partial class PhoneNumber2
     {
 
         /// <summary>
@@ -3997,7 +3988,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.StringLength(3, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{1,3}?$")]
-        public string Country_code { get; set; } = default!;
+        public string CountryCode { get; set; } = default!;
 
         /// <summary>
         /// The national number, in its canonical international [E.164 numbering plan format](https://www.itu.int/rec/T-REC-E.164/en). The combined length of the country calling code (CC) and the national number must not be greater than 15 digits. The national number consists of a national destination code (NDC) and subscriber number (SN).
@@ -4006,7 +3997,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.StringLength(14, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[0-9]{1,14}?$")]
-        public string National_number { get; set; } = default!;
+        public string NationalNumber { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -4028,41 +4019,41 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// </summary>
         [Newtonsoft.Json.JsonProperty("address_line_1", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(300)]
-        public string Address_line_1 { get; set; } = default!;
+        public string AddressLine1 { get; set; } = default!;
 
         /// <summary>
         /// The second line of the address, for example, a suite or apartment number.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("address_line_2", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(300)]
-        public string Address_line_2 { get; set; } = default!;
+        public string AddressLine2 { get; set; } = default!;
 
         /// <summary>
         /// A city, town, or village. Smaller than `admin_area_level_1`.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("admin_area_2", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(120)]
-        public string Admin_area_2 { get; set; } = default!;
+        public string AdminArea2 { get; set; } = default!;
 
         /// <summary>
         /// The highest-level sub-division in a country, which is usually a province, state, or ISO-3166-2 subdivision. This data is formatted for postal delivery, for example, `CA` and not `California`. Value, by country, is:&lt;ul&gt;&lt;li&gt;UK. A county.&lt;/li&gt;&lt;li&gt;US. A state.&lt;/li&gt;&lt;li&gt;Canada. A province.&lt;/li&gt;&lt;li&gt;Japan. A prefecture.&lt;/li&gt;&lt;li&gt;Switzerland. A *kanton*.&lt;/li&gt;&lt;/ul&gt;
         /// </summary>
         [Newtonsoft.Json.JsonProperty("admin_area_1", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(300)]
-        public string Admin_area_1 { get; set; } = default!;
+        public string AdminArea1 { get; set; } = default!;
 
         /// <summary>
         /// The postal code, which is the ZIP code or equivalent. Typically required for countries with a postal code or an equivalent. See [postal code](https://en.wikipedia.org/wiki/Postal_code).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("postal_code", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(60)]
-        public string Postal_code { get; set; } = default!;
+        public string PostalCode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("country_code", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [System.ComponentModel.DataAnnotations.StringLength(2, MinimumLength = 2)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^([A-Z]{2}|C2)$")]
-        public string Country_code { get; set; } = default!;
+        public string CountryCode { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -4076,7 +4067,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Billing_address4
+    public partial class BillingAddress4
     {
 
         /// <summary>
@@ -4084,41 +4075,41 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// </summary>
         [Newtonsoft.Json.JsonProperty("address_line_1", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(300)]
-        public string Address_line_1 { get; set; } = default!;
+        public string AddressLine1 { get; set; } = default!;
 
         /// <summary>
         /// The second line of the address, for example, a suite or apartment number.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("address_line_2", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(300)]
-        public string Address_line_2 { get; set; } = default!;
+        public string AddressLine2 { get; set; } = default!;
 
         /// <summary>
         /// A city, town, or village. Smaller than `admin_area_level_1`.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("admin_area_2", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(120)]
-        public string Admin_area_2 { get; set; } = default!;
+        public string AdminArea2 { get; set; } = default!;
 
         /// <summary>
         /// The highest-level sub-division in a country, which is usually a province, state, or ISO-3166-2 subdivision. This data is formatted for postal delivery, for example, `CA` and not `California`. Value, by country, is:&lt;ul&gt;&lt;li&gt;UK. A county.&lt;/li&gt;&lt;li&gt;US. A state.&lt;/li&gt;&lt;li&gt;Canada. A province.&lt;/li&gt;&lt;li&gt;Japan. A prefecture.&lt;/li&gt;&lt;li&gt;Switzerland. A *kanton*.&lt;/li&gt;&lt;/ul&gt;
         /// </summary>
         [Newtonsoft.Json.JsonProperty("admin_area_1", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(300)]
-        public string Admin_area_1 { get; set; } = default!;
+        public string AdminArea1 { get; set; } = default!;
 
         /// <summary>
         /// The postal code, which is the ZIP code or equivalent. Typically required for countries with a postal code or an equivalent. See [postal code](https://en.wikipedia.org/wiki/Postal_code).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("postal_code", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(60)]
-        public string Postal_code { get; set; } = default!;
+        public string PostalCode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("country_code", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [System.ComponentModel.DataAnnotations.StringLength(2, MinimumLength = 2)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^([A-Z]{2}|C2)$")]
-        public string Country_code { get; set; } = default!;
+        public string CountryCode { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -4132,7 +4123,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Experience_context3
+    public partial class ExperienceContext3
     {
 
         /// <summary>
@@ -4141,7 +4132,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("brand_name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(300, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^.*$")]
-        public string Brand_name { get; set; } = default!;
+        public string BrandName { get; set; } = default!;
 
         /// <summary>
         /// The BCP 47-formatted locale of pages that the PayPal vaulting experience shows. PayPal supports a five-character code. For example, `DA-DK`, `HE-IL`, `ID-ID`, `JA-JP`, `NO-NO`, `PT-BR`, `RU-RU`, `SV-SE`, `TH-TH`, `ZH-CN`, `ZH-HK`, or `ZH-TW`.
@@ -4156,14 +4147,14 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         /// </summary>
         [Newtonsoft.Json.JsonProperty("return_url", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(4000, MinimumLength = 1)]
-        public System.Uri Return_url { get; set; } = default!;
+        public System.Uri ReturnUrl { get; set; } = default!;
 
         /// <summary>
         /// The URL where the customer is redirected after customer cancels or leaves the flow. It is a required field for contingency flows like PayPal wallet, 3DS.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("cancel_url", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(4000, MinimumLength = 1)]
-        public System.Uri Cancel_url { get; set; } = default!;
+        public System.Uri CancelUrl { get; set; } = default!;
 
         /// <summary>
         /// Vault Instruction on action to be performed after a successful payer approval.
@@ -4171,7 +4162,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         [Newtonsoft.Json.JsonProperty("vault_instruction", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[A-Z_]+$")]
-        public string Vault_instruction { get; set; } = default!;
+        public string VaultInstruction { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 

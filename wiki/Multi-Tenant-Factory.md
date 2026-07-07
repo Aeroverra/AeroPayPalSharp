@@ -15,7 +15,7 @@ Then, in a service, get a client for whichever account you are handling:
 ```csharp
 public sealed class PaymentService(IPayPalClientFactory paypalFactory)
 {
-    public Task<Order> CreateOrderFor(Merchant m, Order_request order) =>
+    public Task<Order> CreateOrderFor(Merchant m, OrderRequest order) =>
         paypalFactory
             .Create(m.PayPalClientId, m.PayPalClientSecret, PayPalEnvironment.Live, partnerAttributionId: m.BnCode)
             .Orders.CreateAsync(order, payPal_Request_Id: Guid.NewGuid().ToString("N"));

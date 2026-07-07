@@ -27,10 +27,10 @@ public class WebhooksTests
 
         var catalog = await _fx.Client.Webhooks.WebhooksEventTypesListAsync();
 
-        Assert.NotNull(catalog.Event_types);
-        Assert.NotEmpty(catalog.Event_types);
-        Assert.All(catalog.Event_types, e => Assert.False(string.IsNullOrWhiteSpace(e.Name)));
-        _output.WriteLine($"available event types: {catalog.Event_types.Count}; e.g. {catalog.Event_types.First().Name}");
+        Assert.NotNull(catalog.EventTypes);
+        Assert.NotEmpty(catalog.EventTypes);
+        Assert.All(catalog.EventTypes, e => Assert.False(string.IsNullOrWhiteSpace(e.Name)));
+        _output.WriteLine($"available event types: {catalog.EventTypes.Count}; e.g. {catalog.EventTypes.First().Name}");
     }
 
     [SkippableFact]
@@ -54,10 +54,10 @@ public class WebhooksTests
         var request = new Webhook
         {
             Url = url,
-            Event_types = new DefinitionsEvent_type_list
+            EventTypes = new DefinitionsEventTypeList
             {
-                new Event_type { Name = "PAYMENT.CAPTURE.COMPLETED" },
-                new Event_type { Name = "CHECKOUT.ORDER.APPROVED" },
+                new EventType { Name = "PAYMENT.CAPTURE.COMPLETED" },
+                new EventType { Name = "CHECKOUT.ORDER.APPROVED" },
             },
         };
 
@@ -72,8 +72,8 @@ public class WebhooksTests
             Assert.Equal(url, fetched.Url);
 
             var subscribed = await _fx.Client.Webhooks.EventTypesListAsync(created.Id);
-            Assert.NotEmpty(subscribed.Event_types);
-            Assert.Contains(subscribed.Event_types, e => e.Name == "PAYMENT.CAPTURE.COMPLETED");
+            Assert.NotEmpty(subscribed.EventTypes);
+            Assert.Contains(subscribed.EventTypes, e => e.Name == "PAYMENT.CAPTURE.COMPLETED");
         }
         finally
         {
@@ -91,21 +91,21 @@ public class WebhooksTests
     {
         Skip.IfNot(_fx.IsConfigured, _fx.SkipReason);
 
-        var request = new Verify_webhook_signature
+        var request = new VerifyWebhookSignature
         {
-            Auth_algo = "SHA256withRSA",
-            Cert_url = new Uri("https://api.sandbox.paypal.com/v1/notifications/certs/CERT-bogus"),
-            Transmission_id = Guid.NewGuid().ToString(),
-            Transmission_sig = "not-a-real-signature",
-            Transmission_time = DateTimeOffset.UtcNow,
-            Webhook_id = _fx.Data("WebhookId") ?? "WH-TEST",
-            Webhook_event = new Event(),
+            AuthAlgo = "SHA256withRSA",
+            CertUrl = new Uri("https://api.sandbox.paypal.com/v1/notifications/certs/CERT-bogus"),
+            TransmissionId = Guid.NewGuid().ToString(),
+            TransmissionSig = "not-a-real-signature",
+            TransmissionTime = DateTimeOffset.UtcNow,
+            WebhookId = _fx.Data("WebhookId") ?? "WH-TEST",
+            WebhookEvent = new Event(),
         };
 
         var response = await _fx.Client.Webhooks.VerifyWebhookSignaturePostAsync(request);
 
         // The endpoint responds 200 with a FAILURE verdict for a signature that can't verify.
-        Assert.Equal("FAILURE", response.Verification_status, ignoreCase: true);
-        _output.WriteLine($"verification_status={response.Verification_status}");
+        Assert.Equal("FAILURE", response.VerificationStatus, ignoreCase: true);
+        _output.WriteLine($"verification_status={response.VerificationStatus}");
     }
 }

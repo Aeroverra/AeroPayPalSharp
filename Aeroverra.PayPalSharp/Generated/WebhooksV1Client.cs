@@ -110,7 +110,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         /// </remarks>
         /// <returns>A successful request returns the HTTP `201 Created` status code and a JSON response body that shows webhook lookup details.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Webhooks_lookup> WebhooksLookupPostAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<WebhooksLookup> WebhooksLookupPostAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -133,7 +133,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         /// <param name="webhook_lookup_id">The ID of the webhook lookup to delete.</param>
         /// <returns>A successful request returns the HTTP `200 OK` status code and a JSON response body that shows webhook lookup details.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Webhooks_lookup> WebhooksLookupGetAsync(string webhook_lookup_id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<WebhooksLookup> WebhooksLookupGetAsync(string webhook_lookup_id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -156,7 +156,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         /// </remarks>
         /// <returns>A successful request returns the HTTP `200 OK` status code and a JSON response body that shows the verification status.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Verify_webhook_signature_response> VerifyWebhookSignaturePostAsync(Verify_webhook_signature? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<VerifyWebhookSignatureResponse> VerifyWebhookSignaturePostAsync(VerifyWebhookSignature? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -207,7 +207,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         /// <param name="event_id">The ID of the webhook event notification to resend.</param>
         /// <returns>A successful request returns the HTTP `202 Accepted` status code and a JSON response body that shows webhook event notification details.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Event> WebhooksEventsResendAsync(string event_id, Event_resend? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Event> WebhooksEventsResendAsync(string event_id, EventResend? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -218,7 +218,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         /// </remarks>
         /// <returns>A successful request returns the HTTP `202 Accepted` status code and a JSON response body that shows details for the mock event.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Event> SimulateEventPostAsync(Simulate_event? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Event> SimulateEventPostAsync(SimulateEvent? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
     }
 
@@ -779,7 +779,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         /// </remarks>
         /// <returns>A successful request returns the HTTP `201 Created` status code and a JSON response body that shows webhook lookup details.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Webhooks_lookup> WebhooksLookupPostAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<WebhooksLookup> WebhooksLookupPostAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -821,7 +821,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Webhooks_lookup>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<WebhooksLookup>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new PayPalApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -943,7 +943,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         /// <param name="webhook_lookup_id">The ID of the webhook lookup to delete.</param>
         /// <returns>A successful request returns the HTTP `200 OK` status code and a JSON response body that shows webhook lookup details.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Webhooks_lookup> WebhooksLookupGetAsync(string webhook_lookup_id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<WebhooksLookup> WebhooksLookupGetAsync(string webhook_lookup_id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (webhook_lookup_id == null)
                 throw new System.ArgumentNullException("webhook_lookup_id");
@@ -988,7 +988,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Webhooks_lookup>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<WebhooksLookup>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new PayPalApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -1108,7 +1108,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         /// </remarks>
         /// <returns>A successful request returns the HTTP `200 OK` status code and a JSON response body that shows the verification status.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Verify_webhook_signature_response> VerifyWebhookSignaturePostAsync(Verify_webhook_signature? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<VerifyWebhookSignatureResponse> VerifyWebhookSignaturePostAsync(VerifyWebhookSignature? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -1153,7 +1153,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Verify_webhook_signature_response>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<VerifyWebhookSignatureResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new PayPalApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -1469,7 +1469,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         /// <param name="event_id">The ID of the webhook event notification to resend.</param>
         /// <returns>A successful request returns the HTTP `202 Accepted` status code and a JSON response body that shows webhook event notification details.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Event> WebhooksEventsResendAsync(string event_id, Event_resend? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Event> WebhooksEventsResendAsync(string event_id, EventResend? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (event_id == null)
                 throw new System.ArgumentNullException("event_id");
@@ -1559,7 +1559,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         /// </remarks>
         /// <returns>A successful request returns the HTTP `202 Accepted` status code and a JSON response body that shows details for the mock event.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Event> SimulateEventPostAsync(Simulate_event? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<Event> SimulateEventPostAsync(SimulateEvent? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -1775,7 +1775,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     {
 
         [Newtonsoft.Json.JsonProperty("events", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Event_list Events { get; set; } = default!;
+        public EventList2 Events { get; set; } = default!;
 
         /// <summary>
         /// The number of items in each range of results. Note that the response might have fewer items than the requested `page_size` value.
@@ -1784,7 +1784,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         public int Count { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Link_description_list Links { get; set; } = default!;
+        public LinkDescriptionList Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -1805,7 +1805,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     {
 
         [Newtonsoft.Json.JsonProperty("event_types", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Event_type_list Event_types { get; set; } = default!;
+        public EventTypeList2 EventTypes { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -1826,7 +1826,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     {
 
         [Newtonsoft.Json.JsonProperty("webhooks", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Webhook_list Webhooks { get; set; } = default!;
+        public WebhookList2 Webhooks { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -1847,7 +1847,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     {
 
         [Newtonsoft.Json.JsonProperty("webhooks_lookups", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Webhooks_lookup_list Webhooks_lookups { get; set; } = default!;
+        public WebhooksLookupList WebhooksLookups { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -1864,7 +1864,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     /// An array of events to which to subscribe your webhook. To subscribe to all events, including events as they are added, specify the asterisk wild card. To replace the `event_types` array, specify the asterisk wild card. To list all supported events, &lt;a href="#event-type_list"&gt;list available events&lt;/a&gt;.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class DefinitionsEvent_type_list : System.Collections.ObjectModel.Collection<Event_type>
+    public partial class DefinitionsEventTypeList : System.Collections.ObjectModel.Collection<EventType>
     {
 
     }
@@ -1873,7 +1873,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     /// An array of request-related [HATEOAS links](/docs/api/reference/api-responses/#hateoas-links/).
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class DefinitionsLink_description_list : System.Collections.ObjectModel.Collection<Link_description>
+    public partial class DefinitionsLinkDescriptionList : System.Collections.ObjectModel.Collection<LinkDescription>
     {
 
     }
@@ -1919,19 +1919,19 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         /// </summary>
         [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Debug_id { get; set; } = default!;
+        public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// The information link, or URI, that shows detailed information about this error for the developer.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("information_link", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Information_link { get; set; } = default!;
+        public string InformationLink { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Error_details_list Details { get; set; } = default!;
+        public ErrorDetailsList Details { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Link_description_list Links { get; set; } = default!;
+        public LinkDescriptionList Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -1948,7 +1948,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     /// Request is not well-formed, syntactically incorrect, or violates schema.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_400
+    public partial class Error400
     {
 
         /// <summary>
@@ -1964,20 +1964,20 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         public string Message { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Error_details> Details { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorDetails> Details { get; set; } = default!;
 
         /// <summary>
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Debug_id { get; set; } = default!;
+        public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
-        public System.Collections.Generic.ICollection<Error_link_description> Links { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -1994,7 +1994,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     /// Authentication failed due to missing Authorization header, or invalid authentication credentials.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_401
+    public partial class Error401
     {
 
         /// <summary>
@@ -2010,20 +2010,20 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         public string Message { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Error_details> Details { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorDetails> Details { get; set; } = default!;
 
         /// <summary>
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Debug_id { get; set; } = default!;
+        public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
-        public System.Collections.Generic.ICollection<Error_link_description> Links { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -2040,7 +2040,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     /// The client is not authorized to access this resource, although it may have valid credentials. 
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_403
+    public partial class Error403
     {
 
         /// <summary>
@@ -2056,20 +2056,20 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         public string Message { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Error_details> Details { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorDetails> Details { get; set; } = default!;
 
         /// <summary>
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Debug_id { get; set; } = default!;
+        public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
-        public System.Collections.Generic.ICollection<Error_link_description> Links { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -2086,7 +2086,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     /// The server has not found anything matching the request URI. This either means that the URI is incorrect or the resource is not available.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_404
+    public partial class Error404
     {
 
         /// <summary>
@@ -2102,20 +2102,20 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         public string Message { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Error_details> Details { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorDetails> Details { get; set; } = default!;
 
         /// <summary>
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Debug_id { get; set; } = default!;
+        public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
-        public System.Collections.Generic.ICollection<Error_link_description> Links { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -2132,7 +2132,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     /// The server has detected a conflict while processing this request.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_409
+    public partial class Error409
     {
 
         /// <summary>
@@ -2148,20 +2148,20 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         public string Message { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Error_details> Details { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorDetails> Details { get; set; } = default!;
 
         /// <summary>
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Debug_id { get; set; } = default!;
+        public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
-        public System.Collections.Generic.ICollection<Error_link_description> Links { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -2178,7 +2178,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     /// The server does not support the request payload's media type.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_415
+    public partial class Error415
     {
 
         /// <summary>
@@ -2194,20 +2194,20 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         public string Message { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Error_details> Details { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorDetails> Details { get; set; } = default!;
 
         /// <summary>
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Debug_id { get; set; } = default!;
+        public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
-        public System.Collections.Generic.ICollection<Error_link_description> Links { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -2224,7 +2224,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     /// The requested action cannot be performed and may require interaction with APIs or processes outside of the current request. This is distinct from a 500 response in that there are no systemic problems limiting the API from performing the request.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_422
+    public partial class Error422
     {
 
         /// <summary>
@@ -2240,20 +2240,20 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         public string Message { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Error_details> Details { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorDetails> Details { get; set; } = default!;
 
         /// <summary>
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Debug_id { get; set; } = default!;
+        public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
-        public System.Collections.Generic.ICollection<Error_link_description> Links { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -2270,7 +2270,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     /// This is either a system or application error, and generally indicates that although the client appeared to provide a correct request, something unexpected has gone wrong on the server.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_500
+    public partial class Error500
     {
 
         /// <summary>
@@ -2289,14 +2289,14 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Debug_id { get; set; } = default!;
+        public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
-        public System.Collections.Generic.ICollection<Error_link_description> Links { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -2313,7 +2313,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     /// The server is temporarily unable to handle the request, for example, because of planned maintenance or downtime.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_503
+    public partial class Error503
     {
 
         /// <summary>
@@ -2332,14 +2332,14 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         /// The PayPal internal ID. Used for correlation purposes.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("debug_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Debug_id { get; set; } = default!;
+        public string DebugId { get; set; } = default!;
 
         /// <summary>
         /// An array of request-related [HATEOAS links](https://en.wikipedia.org/wiki/HATEOAS).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MaxLength(10000)]
-        public System.Collections.Generic.ICollection<Error_link_description> Links { get; set; } = default!;
+        public System.Collections.Generic.ICollection<ErrorLinkDescription> Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -2356,7 +2356,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     /// The error details. Required for client-side `4XX` errors.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_details
+    public partial class ErrorDetails
     {
 
         /// <summary>
@@ -2402,7 +2402,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     /// The error details. Required for client-side `4XX` errors.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_details2
+    public partial class ErrorDetails2
     {
 
         /// <summary>
@@ -2451,7 +2451,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     /// An array of additional details about the error.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_details_list : System.Collections.ObjectModel.Collection<Error_details2>
+    public partial class ErrorDetailsList : System.Collections.ObjectModel.Collection<ErrorDetails2>
     {
 
     }
@@ -2460,7 +2460,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     /// The request-related [HATEOAS link](/api/rest/responses/#hateoas-links) information.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_link_description
+    public partial class ErrorLinkDescription
     {
 
         /// <summary>
@@ -2506,7 +2506,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     /// The type of webhook error that occurred.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Error_type
+    public partial class ErrorType
     {
 
         /// <summary>
@@ -2556,23 +2556,23 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         /// The date and time when the webhook event notification was created, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("create_time", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset Create_time { get; set; } = default!;
+        public System.DateTimeOffset CreateTime { get; set; } = default!;
 
         /// <summary>
         /// The name of the resource related to the webhook notification event.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("resource_type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Resource_type { get; set; } = default!;
+        public string ResourceType { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("event_version", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^([0-9]+.[0-9]+)$")]
-        public string Event_version { get; set; } = default!;
+        public string EventVersion { get; set; } = default!;
 
         /// <summary>
         /// The event that triggered the webhook event notification.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("event_type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Event_type { get; set; } = default!;
+        public string EventType { get; set; } = default!;
 
         /// <summary>
         /// A summary description for the event notification.
@@ -2582,13 +2582,13 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
 
         [Newtonsoft.Json.JsonProperty("resource_version", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^([0-9]+.[0-9]+)$")]
-        public string Resource_version { get; set; } = default!;
+        public string ResourceVersion { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("resource", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Resource Resource { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Link_description_list Links { get; set; } = default!;
+        public LinkDescriptionList Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -2605,7 +2605,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     /// An array of webhooks events.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Event_list : System.Collections.ObjectModel.Collection<Event>
+    public partial class EventList2 : System.Collections.ObjectModel.Collection<Event>
     {
 
     }
@@ -2614,12 +2614,12 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     /// Resends a webhook event notification, by ID.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Event_resend
+    public partial class EventResend
     {
 
         [Newtonsoft.Json.JsonProperty("webhook_ids", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MaxLength(500)]
-        public Webhook_ids_list Webhook_ids { get; set; } = default!;
+        public WebhookIdsList WebhookIds { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -2636,7 +2636,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     /// An event type.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Event_type
+    public partial class EventType
     {
 
         /// <summary>
@@ -2659,7 +2659,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         public string Status { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("resource_versions", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Resource_versions_list Resource_versions { get; set; } = default!;
+        public ResourceVersionsList ResourceVersions { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -2676,7 +2676,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     /// An array of webhook events.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Event_type_list : System.Collections.ObjectModel.Collection<Event_type>
+    public partial class EventTypeList2 : System.Collections.ObjectModel.Collection<EventType>
     {
 
     }
@@ -2685,7 +2685,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     /// The request-related [HATEOAS link](/docs/api/reference/api-responses/#hateoas-links) information.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Link_description
+    public partial class LinkDescription
     {
 
         /// <summary>
@@ -2725,7 +2725,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     /// An array of request-related [HATEOAS links](/docs/api/reference/api-responses/#hateoas-links).
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Link_description_list : System.Collections.ObjectModel.Collection<Link_description>
+    public partial class LinkDescriptionList : System.Collections.ObjectModel.Collection<LinkDescription>
     {
 
     }
@@ -2779,7 +2779,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     /// An array of JSON patch objects to apply partial updates to resources.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Patch_request : System.Collections.ObjectModel.Collection<Patch>
+    public partial class PatchRequest : System.Collections.ObjectModel.Collection<Patch>
     {
 
     }
@@ -2806,7 +2806,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     /// Identifier for the event type example: 1.0/2.0 etc.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Resource_versions_list : System.Collections.ObjectModel.Collection<string>
+    public partial class ResourceVersionsList : System.Collections.ObjectModel.Collection<string>
     {
 
     }
@@ -2815,7 +2815,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     /// Simulates a mock webhook event.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Simulate_event
+    public partial class SimulateEvent
     {
 
         /// <summary>
@@ -2824,7 +2824,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         [Newtonsoft.Json.JsonProperty("webhook_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(50)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[a-zA-Z0-9]+$")]
-        public string Webhook_id { get; set; } = default!;
+        public string WebhookId { get; set; } = default!;
 
         /// <summary>
         /// The URL for the webhook endpoint. If omitted, the webhook ID is required.
@@ -2840,13 +2840,13 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [System.ComponentModel.DataAnnotations.StringLength(50)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[a-zA-Z0-9.]+$")]
-        public string Event_type { get; set; } = default!;
+        public string EventType { get; set; } = default!;
 
         /// <summary>
         /// The identifier for event type ex: 1.0/2.0 etc.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("resource_version", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Resource_version { get; set; } = default!;
+        public string ResourceVersion { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -2863,7 +2863,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     /// A verify webhook signature request.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Verify_webhook_signature
+    public partial class VerifyWebhookSignature
     {
 
         /// <summary>
@@ -2873,7 +2873,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [System.ComponentModel.DataAnnotations.StringLength(100)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[a-zA-Z0-9]+$")]
-        public string Auth_algo { get; set; } = default!;
+        public string AuthAlgo { get; set; } = default!;
 
         /// <summary>
         /// The X.509 public key certificate. Download the certificate from this URL and use it to verify the signature. Extract this value from the `PAYPAL-CERT-URL` response header, which is received with the webhook notification.
@@ -2881,7 +2881,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         [Newtonsoft.Json.JsonProperty("cert_url", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [System.ComponentModel.DataAnnotations.StringLength(500)]
-        public System.Uri Cert_url { get; set; } = default!;
+        public System.Uri CertUrl { get; set; } = default!;
 
         /// <summary>
         /// The ID of the HTTP transmission. Contained in the `PAYPAL-TRANSMISSION-ID` header of the notification message.
@@ -2890,7 +2890,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [System.ComponentModel.DataAnnotations.StringLength(50)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^(?!\d+$)\w+\S+")]
-        public string Transmission_id { get; set; } = default!;
+        public string TransmissionId { get; set; } = default!;
 
         /// <summary>
         /// The PayPal-generated asymmetric signature. Appears in the `PAYPAL-TRANSMISSION-SIG` header of the notification message.
@@ -2899,7 +2899,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [System.ComponentModel.DataAnnotations.StringLength(500)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^(?!\d+$)\w+\S+")]
-        public string Transmission_sig { get; set; } = default!;
+        public string TransmissionSig { get; set; } = default!;
 
         /// <summary>
         /// The date and time of the HTTP transmission, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6). Appears in the `PAYPAL-TRANSMISSION-TIME` header of the notification message.
@@ -2907,7 +2907,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         [Newtonsoft.Json.JsonProperty("transmission_time", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [System.ComponentModel.DataAnnotations.StringLength(100)]
-        public System.DateTimeOffset Transmission_time { get; set; } = default!;
+        public System.DateTimeOffset TransmissionTime { get; set; } = default!;
 
         /// <summary>
         /// The ID of the webhook as configured in your Developer Portal account.
@@ -2916,11 +2916,11 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [System.ComponentModel.DataAnnotations.StringLength(50)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^[a-zA-Z0-9]+$")]
-        public string Webhook_id { get; set; } = default!;
+        public string WebhookId { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("webhook_event", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
-        public Event Webhook_event { get; set; } = new Event();
+        public Event WebhookEvent { get; set; } = new Event();
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -2937,7 +2937,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     /// The verify webhook signature response.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Verify_webhook_signature_response
+    public partial class VerifyWebhookSignatureResponse
     {
 
         /// <summary>
@@ -2947,7 +2947,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         /// </summary>
         [Newtonsoft.Json.JsonProperty("verification_status", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Verification_status { get; set; } = default!;
+        public string VerificationStatus { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -2985,10 +2985,10 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         [Newtonsoft.Json.JsonProperty("event_types", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.MaxLength(500)]
-        public DefinitionsEvent_type_list Event_types { get; set; } = new DefinitionsEvent_type_list();
+        public DefinitionsEventTypeList EventTypes { get; set; } = new DefinitionsEventTypeList();
 
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public DefinitionsLink_description_list Links { get; set; } = default!;
+        public DefinitionsLinkDescriptionList Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -3005,7 +3005,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     /// An array of webhook account IDs.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Webhook_ids_list : System.Collections.ObjectModel.Collection<string>
+    public partial class WebhookIdsList : System.Collections.ObjectModel.Collection<string>
     {
 
     }
@@ -3014,7 +3014,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     /// An array of webhooks.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Webhook_list : System.Collections.ObjectModel.Collection<Webhook>
+    public partial class WebhookList2 : System.Collections.ObjectModel.Collection<Webhook>
     {
 
     }
@@ -3023,7 +3023,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     /// The webhook lookup details.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Webhooks_lookup
+    public partial class WebhooksLookup
     {
 
         /// <summary>
@@ -3038,10 +3038,10 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         [Newtonsoft.Json.JsonProperty("client_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(128)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^(?!\d+$)\w+\S+")]
-        public string Client_id { get; set; } = default!;
+        public string ClientId { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public DefinitionsLink_description_list Links { get; set; } = default!;
+        public DefinitionsLinkDescriptionList Links { get; set; } = default!;
 
         private System.Collections.Generic.IDictionary<string, object>? _additionalProperties;
 
@@ -3058,7 +3058,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     /// An array of webhook lookups.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Webhooks_lookup_list : System.Collections.ObjectModel.Collection<Webhooks_lookup>
+    public partial class WebhooksLookupList : System.Collections.ObjectModel.Collection<WebhooksLookup>
     {
 
     }

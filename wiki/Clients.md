@@ -26,12 +26,12 @@ Method names come from PayPal's dotted operationIds with the resource prefix dro
 ## Orders
 
 ```csharp
-var order = new Order_request
+var order = new OrderRequest
 {
     Intent = PayPalIntent.Capture,
-    Purchase_units = new List<Purchase_units>
+    PurchaseUnits = new List<PurchaseUnitRequest>
     {
-        new Purchase_units { Amount = new Amount3 { Currency_code = PayPalCurrency.Usd, Value = "10.00" } },
+        new PurchaseUnitRequest { Amount = new AmountWithBreakdown { CurrencyCode = PayPalCurrency.Usd, Value = 10.00m } },
     },
 };
 
@@ -50,9 +50,9 @@ var mine    = await paypal.Webhooks.ListAsync();                     // your sub
 Webhook created = await paypal.Webhooks.PostAsync(new Webhook
 {
     Url = new Uri("https://your.app/paypal/webhook"),
-    Event_types = new DefinitionsEvent_type_list
+    EventTypes = new DefinitionsEventTypeList
     {
-        new Event_type { Name = "PAYMENT.CAPTURE.COMPLETED" },
+        new EventType { Name = "PAYMENT.CAPTURE.COMPLETED" },
     },
 });
 await paypal.Webhooks.DeleteAsync(created.Id);

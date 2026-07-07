@@ -33,8 +33,8 @@ public class FactoryTests
 
         var catalog = await client.Webhooks.WebhooksEventTypesListAsync();
 
-        Assert.NotEmpty(catalog.Event_types);
-        _output.WriteLine($"factory-built client saw {catalog.Event_types.Count} event types");
+        Assert.NotEmpty(catalog.EventTypes);
+        _output.WriteLine($"factory-built client saw {catalog.EventTypes.Count} event types");
     }
 
     [SkippableFact]
