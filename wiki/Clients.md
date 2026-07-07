@@ -58,27 +58,13 @@ Webhook created = await paypal.Webhooks.PostAsync(new Webhook
 await paypal.Webhooks.DeleteAsync(created.Id);
 ```
 
-Verify a signature when a webhook arrives:
-
-```csharp
-var result = await paypal.Webhooks.VerifyWebhookSignaturePostAsync(new Verify_webhook_signature
-{
-    Auth_algo         = request.Headers["PAYPAL-AUTH-ALGO"],
-    Cert_url          = new Uri(request.Headers["PAYPAL-CERT-URL"]),
-    Transmission_id   = request.Headers["PAYPAL-TRANSMISSION-ID"],
-    Transmission_sig  = request.Headers["PAYPAL-TRANSMISSION-SIG"],
-    Transmission_time = DateTimeOffset.Parse(request.Headers["PAYPAL-TRANSMISSION-TIME"]),
-    Webhook_id        = options.WebhookId,
-    Webhook_event     = deserializedEvent,
-});
-
-if (!string.Equals(result.Verification_status, "SUCCESS", StringComparison.OrdinalIgnoreCase))
-    return Unauthorized();
-```
+To verify an incoming webhook, prefer the offline `IPayPalWebhookVerifier` (no API round-trip) - see
+[Webhooks](Webhooks.md). The online API call is also available as
+`paypal.Webhooks.VerifyWebhookSignaturePostAsync(new VerifyWebhookSignature { ... })`.
 
 ## Partner Referrals v2
 
 ```csharp
-Create_referral_data_response created = await paypal.PartnerReferralsV2.CreateAsync(referralData);
+CreateReferralDataResponse created = await paypal.PartnerReferralsV2.CreateAsync(referralData);
 string actionUrl = created.Links.First(l => l.Rel == "action_url").Href;   // seller onboarding URL
 ```

@@ -54,11 +54,78 @@ public sealed class PayPalOptions
     /// <summary>Overrides the environment-derived base URL. Leave null for the default.</summary>
     public string? BaseUrlOverride { get; set; }
 
-    /// <summary>Per-request timeout for the underlying HttpClients.</summary>
+    /// <summary>
+    /// Per-request timeout for the underlying HttpClients. This is the TOTAL budget for one call
+    /// including any automatic retries and their backoff waits, so it also bounds the worst-case wait.
+    /// </summary>
     public int TimeoutSeconds { get; set; } = 100;
+
+    /// <summary>Automatic, idempotency-safe retry of transient failures. See <see cref="PayPalRetryOptions"/>.</summary>
+    public PayPalRetryOptions Retry { get; set; } = new();
+
+    /// <summary>Optional request/response logging. Off by default.</summary>
+    public PayPalLoggingOptions Logging { get; set; } = new();
+
+    /// <summary>
+    /// Called just before each HTTP attempt is sent (after auth/partner headers are attached). A hook for
+    /// custom logging, metrics, or header inspection - the .NET-native equivalent of an "API callback".
+    /// Keep it fast and non-throwing; exceptions from it are ignored.
+    /// </summary>
+    public Action<HttpRequestMessage>? OnRequest { get; set; }
+
+    /// <summary>
+    /// Called after each HTTP response is received. This includes API errors: a PayPal 4xx/5xx arrives as
+    /// a response here (the typed <c>PayPalApiException</c> is synthesized later), so this DOES fire for
+    /// them. Use it to read response headers, for example the <c>PayPal-Debug-Id</c> for support tickets
+    /// (<see cref="PayPalHeaders.GetDebugId(HttpResponseMessage)"/>). Keep it fast and non-throwing.
+    /// </summary>
+    public Action<HttpResponseMessage>? OnResponse { get; set; }
+
+    /// <summary>
+    /// Called when a request fails with no response at all - a transport failure such as a network error,
+    /// timeout, or cancellation (where <see cref="OnResponse"/> cannot fire because nothing came back).
+    /// The exception is rethrown afterwards. Keep it fast and non-throwing.
+    /// </summary>
+    public Action<HttpRequestMessage, Exception>? OnException { get; set; }
 
     /// <summary>The effective base URL (override, else derived from <see cref="Environment"/>).</summary>
     public string BaseUrl => string.IsNullOrWhiteSpace(BaseUrlOverride)
         ? Environment == PayPalEnvironment.Live ? "https://api-m.paypal.com" : "https://api-m.sandbox.paypal.com"
         : BaseUrlOverride!;
+}
+
+/// <summary>
+/// Controls the built-in transient-fault retry. The defaults are safe for money: a mutating call
+/// (POST/PATCH) is retried ONLY when it carries a <c>PayPal-Request-Id</c> idempotency key, so PayPal
+/// deduplicates it and it can never be applied twice. Set <see cref="MaxRetries"/> to 0 to disable.
+/// </summary>
+public sealed class PayPalRetryOptions
+{
+    /// <summary>Maximum retry attempts after the first try (0 disables retries entirely). Default 3.</summary>
+    public int MaxRetries { get; set; } = 3;
+
+    /// <summary>Base backoff delay; the wait grows exponentially from here with jitter. Default 500ms.</summary>
+    public TimeSpan BaseDelay { get; set; } = TimeSpan.FromMilliseconds(500);
+
+    /// <summary>Upper bound on any single backoff wait (also caps a server <c>Retry-After</c>). Default 5s.</summary>
+    public TimeSpan MaxDelay { get; set; } = TimeSpan.FromSeconds(5);
+}
+
+/// <summary>Controls optional request/response logging via <c>ILogger</c>.</summary>
+public sealed class PayPalLoggingOptions
+{
+    /// <summary>When true, log a one-line summary (method, path, status, elapsed, debug id) per attempt. Default false.</summary>
+    public bool Enabled { get; set; }
+
+    /// <summary>Level for the per-request summary. Default <see cref="LogLevelOption.Debug"/>.</summary>
+    public LogLevelOption Level { get; set; } = LogLevelOption.Debug;
+}
+
+/// <summary>A minimal log-level selector so the options do not force a Microsoft.Extensions.Logging enum on callers.</summary>
+public enum LogLevelOption
+{
+    Trace,
+    Debug,
+    Information,
+    Warning,
 }

@@ -211,8 +211,10 @@ public sealed class PayPalClientFactory : IPayPalClientFactory, IDisposable
         var options = Microsoft.Extensions.Options.Options.Create(credentials.ToOptions());
         var baseUri = ResolveBaseUri(options.Value);
 
-        // Token provider gets its own HttpClient over the shared transport (no auth handler).
-        var tokenHttp = new HttpClient(new NonDisposingHandler(_rootHandler), disposeHandler: true)
+        // Token provider gets its own HttpClient over the shared transport (no auth handler), with retry
+        // so a transient token fetch is retried (a duplicate token is harmless).
+        var tokenRetry = new PayPalRetryHandler(options) { InnerHandler = new NonDisposingHandler(_rootHandler) };
+        var tokenHttp = new HttpClient(tokenRetry, disposeHandler: true)
         {
             BaseAddress = baseUri,
             Timeout = TimeSpan.FromSeconds(options.Value.TimeoutSeconds),
@@ -229,11 +231,15 @@ public sealed class PayPalClientFactory : IPayPalClientFactory, IDisposable
     {
         var baseUri = ResolveBaseUri(options.Value);
 
-        // API HttpClient: partner headers -> auth (bearer) -> shared transport.
+        // API HttpClient (outermost -> innermost): retry -> auth (bearer) -> partner headers ->
+        // observability -> shared transport. Mirrors the DI pipeline so factory-built clients behave
+        // identically (safe retries, callbacks, logging).
         var merchantContext = new PayPalMerchantContext();
-        var partner = new PayPalPartnerHeaderHandler(options, merchantContext) { InnerHandler = new NonDisposingHandler(_rootHandler) };
+        var observability = new PayPalObservabilityHandler(options) { InnerHandler = new NonDisposingHandler(_rootHandler) };
+        var partner = new PayPalPartnerHeaderHandler(options, merchantContext) { InnerHandler = observability };
         var auth = new PayPalAuthenticationHandler(tokenProvider) { InnerHandler = partner };
-        var apiHttp = new HttpClient(auth, disposeHandler: true)
+        var retry = new PayPalRetryHandler(options) { InnerHandler = auth };
+        var apiHttp = new HttpClient(retry, disposeHandler: true)
         {
             BaseAddress = baseUri,
             Timeout = TimeSpan.FromSeconds(options.Value.TimeoutSeconds),

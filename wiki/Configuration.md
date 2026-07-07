@@ -12,7 +12,10 @@ All settings live on `PayPalOptions`, configured in `AddPayPalSharp`.
 | `SendAuthAssertion` | `bool` | When true, attach `PayPal-Auth-Assertion` (act as `MerchantId`) on every call. Default false. |
 | `WebhookId` | `string?` | Your webhook id, for signature verification. |
 | `BaseUrlOverride` | `string?` | Override the environment-derived base URL. |
-| `TimeoutSeconds` | `int` | Per-request timeout (default 100). |
+| `TimeoutSeconds` | `int` | Total per-call budget incl. retries (default 100). |
+| `Retry` | `PayPalRetryOptions` | Safe auto-retry (`MaxRetries`, `BaseDelay`, `MaxDelay`). [Details](Resilience-and-Observability.md). |
+| `Logging` | `PayPalLoggingOptions` | Optional `ILogger` request logging (`Enabled`, `Level`). Off by default. |
+| `OnRequest` / `OnResponse` / `OnException` | `Action<...>?` | Per-attempt callbacks. [Details](Resilience-and-Observability.md). |
 
 ## Inline
 

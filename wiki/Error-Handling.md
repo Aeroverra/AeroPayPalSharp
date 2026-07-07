@@ -18,9 +18,12 @@ catch (PayPalApiException ex) when (ex.StatusCode == 404)
 }
 catch (PayPalApiException ex)
 {
-    logger.LogError("PayPal {Status}: {Body}", ex.StatusCode, ex.Response);
+    // ex.Headers has the PayPal-Debug-Id to quote to PayPal support.
+    logger.LogError("PayPal {Status} (debug {Debug}): {Body}",
+        ex.StatusCode, PayPalHeaders.GetDebugId(ex.Headers), ex.Response);
     throw;
 }
 ```
 
-Token acquisition failures throw `PayPalAuthenticationException`.
+Token acquisition failures throw `PayPalAuthenticationException`. For the debug id on **successful**
+calls, use the `OnResponse` callback ([Resilience and observability](Resilience-and-Observability.md)).

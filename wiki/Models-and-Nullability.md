@@ -1,34 +1,31 @@
 # Models and nullability
 
-PayPal's specs mark almost nothing as required, so a naive generator makes every property nullable.
-AeroPayPalSharp tightens this while staying crash-proof.
+PayPal marks almost nothing required, so the SDK tightens the generated models while staying crash-proof.
+
+## Money is `decimal`
+
+Money `value` fields are C# `decimal` (not string). On the wire they serialize as a currency-safe string:
+trailing zeros are trimmed, so a zero-decimal currency like JPY is never rejected.
+
+```csharp
+new Money { CurrencyCode = PayPalCurrency.Usd, Value = 10.00m };   // -> "10"
+new Money { CurrencyCode = PayPalCurrency.Jpy, Value = 5000m };    // -> "5000"  (not "5000.00")
+new Money { CurrencyCode = PayPalCurrency.Usd, Value = 9.99m };    // -> "9.99"
+```
 
 ## Enums are strings
 
-PayPal adds new enum values constantly (payment states, dispute reasons, processor codes, and so on).
-A generated C# enum would throw on any value it has not seen, breaking deserialization of an otherwise
-fine response. So enums become `string`, with the allowed values preserved in each property's XML doc
-comment.
+PayPal adds enum values constantly; a C# enum would throw on an unseen one. Enums are `string` (allowed
+values listed in each property's XML doc). Use the typed [constants](Constants-and-Enums.md) instead of
+literals.
 
 ## Known fields are non-null
 
-A curated, evidence-based set of always-present response fields (a webhook's `id`, a create-referral
-response's `links`, and so on) is marked required so you do not null-check things that are always
-there. Request-only and uncertain fields are left nullable so an edge case never blows up parsing. The
-set grows conservatively as tests confirm more fields.
+A curated set of always-present response fields (a webhook's `id`, a create-referral response's `links`)
+is marked required; everything uncertain stays nullable so an edge case never breaks parsing.
 
 ## Naming
 
-Types and properties are idiomatic C# PascalCase (`OrderRequest`, `CurrencyCode`, `AmountWithBreakdown`,
-`PaymentInstruction`). The JSON wire format is unchanged - every property keeps its
-`[JsonProperty("currency_code")]` attribute, so serialization still uses PayPal's snake_case names.
-
-PayPal wraps most shared components in single-ref `allOf` blocks, which NSwag would otherwise turn into
-hundreds of empty numbered aliases (`Amount2`, `Amount3`, `Payee2`, ...). The generator collapses those
-wrappers so the real component types are used directly - you write `AmountWithBreakdown` and `Payee`, not
-`Amount3` and `Payee3`.
-
-A numeric suffix still appears where PayPal genuinely defines two *different* inline schemas with the same
-name (for example several distinct `Name`/`Address` shapes across payment sources), or where a property
-name would collide with its class (`Operation1`). Those are real, structurally-different types, kept
-distinct on purpose.
+Idiomatic PascalCase (`OrderRequest`, `CurrencyCode`, `AmountWithBreakdown`). The wire format is unchanged
+(`[JsonProperty("currency_code")]` is kept). A numeric suffix appears only where PayPal genuinely defines
+different schemas with the same name, or a property collides with its class (`Operation1`).

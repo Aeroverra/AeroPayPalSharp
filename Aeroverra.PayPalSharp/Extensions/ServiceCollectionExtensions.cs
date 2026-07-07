@@ -40,10 +40,16 @@ public static class ServiceCollectionExtensions
         services.TryAddSingleton<IPayPalCertificateSource, HttpPayPalCertificateSource>();
         services.TryAddSingleton<IPayPalWebhookVerifier, PayPalWebhookVerifier>();
 
+        services.AddTransient<PayPalRetryHandler>();
+        services.AddTransient<PayPalObservabilityHandler>();
+
         // Token provider gets its own named HttpClient (no auth handler - it *is* the auth). It is a
         // SINGLETON so one OAuth token is cached and shared across every client and request, rather than
-        // one cache per injected client (the typed-client pattern would make it transient).
-        services.AddHttpClient(TokenHttpClientName, ConfigureHttpClient);
+        // one cache per injected client (the typed-client pattern would make it transient). The token POST
+        // is safe to retry (a duplicate just returns another valid token), so it gets the retry handler too.
+        services.AddHttpClient(TokenHttpClientName, ConfigureHttpClient)
+            .AddHttpMessageHandler<PayPalRetryHandler>()
+            .AddHttpMessageHandler<PayPalObservabilityHandler>();
         services.TryAddSingleton<IPayPalTokenProvider>(sp => new PayPalTokenProvider(
             sp.GetRequiredService<IHttpClientFactory>(),
             TokenHttpClientName,
@@ -93,9 +99,14 @@ public static class ServiceCollectionExtensions
         where TInterface : class
         where TImplementation : class, TInterface
     {
+        // Handler order (outermost -> innermost): retry wraps everything so each attempt re-runs auth +
+        // partner and sends fresh headers; observability is innermost so it logs the final request and
+        // each attempt.
         services.AddHttpClient<TInterface, TImplementation>(ConfigureHttpClient)
+            .AddHttpMessageHandler<PayPalRetryHandler>()
             .AddHttpMessageHandler<PayPalAuthenticationHandler>()
-            .AddHttpMessageHandler<PayPalPartnerHeaderHandler>();
+            .AddHttpMessageHandler<PayPalPartnerHeaderHandler>()
+            .AddHttpMessageHandler<PayPalObservabilityHandler>();
     }
 
     private static void ConfigureHttpClient(IServiceProvider serviceProvider, HttpClient client)

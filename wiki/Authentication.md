@@ -10,18 +10,9 @@ You never handle tokens yourself. `AddPayPalSharp` wires two pieces:
 
 ## Lifetime: one token, shared
 
-The token provider is registered as a **singleton**, so its cache is shared across every injected client,
-every controller/service, and every DI scope. Injecting `IPayPalApiClient` (or any sub-client) into a
-hundred places does not create a hundred token caches; they all resolve the same provider. PayPal tokens
-last several hours, so in steady state the whole app makes roughly one token request per token lifetime,
-not one per call or per client. Concurrent first-use is collapsed into a single fetch by the semaphore.
-
-(The aggregate `IPayPalApiClient` itself is scoped, which is the right lifetime for a client whose
-sub-clients wrap `HttpClientFactory`-managed `HttpClient`s. Its lifetime is independent of the token
-cache, which lives in the singleton provider.)
-
-When you build clients with `IPayPalClientFactory` instead, each distinct credential set gets its own
-provider and cache, reused across calls, so every merchant caches its own token.
+The token provider is a **singleton**, so its cache is shared everywhere the client is injected - roughly
+one token fetch per token lifetime (several hours), not one per call. Concurrent first-use collapses to a
+single fetch. With `IPayPalClientFactory`, each credential set caches its own token.
 
 ## Getting a raw token
 

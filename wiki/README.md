@@ -24,6 +24,8 @@ modern .NET with first-class partner / platform support.
   `PayPalCurrency.Usd`, statuses, ...) with an `IsKnown` validator, and why the model fields are strings.
 - **[Error handling](Error-Handling.md)** - the typed `PayPalApiException`, status codes, and the parsed
   error body.
+- **[Resilience and observability](Resilience-and-Observability.md)** - safe automatic retries, reading
+  `PayPal-Debug-Id`, request/response callbacks, and logging.
 
 ## Partner and platform
 
@@ -50,6 +52,9 @@ modern .NET with first-class partner / platform support.
 - **How do I verify an incoming webhook?** [Webhooks](Webhooks.md) (offline, no extra API call).
 - **How do I act on behalf of a seller when I am a partner?** [Partner and platform](Partner-and-Platform.md).
 - **How do I handle many merchants with their own keys?** [Multi-tenant factory](Multi-Tenant-Factory.md).
+- **Are calls retried? Can they double-charge?** No - retries are idempotency-safe. [Resilience](Resilience-and-Observability.md).
+- **How do I get the PayPal-Debug-Id for support?** [Resilience](Resilience-and-Observability.md) / [Error handling](Error-Handling.md).
+- **How is money typed?** `decimal`, serialized as a currency-safe string (JPY-aware). [Models](Models-and-Nullability.md).
 - **Why is `status` a string and not an enum?** [Constants and enums](Constants-and-Enums.md).
 - **How do I regenerate after PayPal updates a spec?** [Regenerating the clients](Regenerating.md).
 - **How do I publish a new version to NuGet?** [Releasing](Releasing.md).
