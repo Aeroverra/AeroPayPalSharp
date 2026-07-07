@@ -35,7 +35,7 @@ namespace Aeroverra.PayPalSharp.PayoutsV1
         /// Create batch payout
         /// </summary>
         /// <remarks>
-        /// Creates a batch payout. In the JSON request body, pass a `sender_batch_header` and an `items` array. The `sender_batch_header` defines how to handle the payout. The `items` array defines the payout items.&lt;br/&gt;You can make payouts to one or more recipients.&lt;blockquote&gt;&lt;strong&gt;Notes:&lt;/strong&gt; &lt;ul&gt;&lt;li&gt;&lt;p&gt;PayPal does not process duplicate payouts. If you specify a &lt;code&gt;sender_batch_id&lt;/code&gt; that was used in the last 30 days, the API rejects the request with an error message that shows the duplicate &lt;code&gt;sender_batch_id&lt;/code&gt; and includes a HATEOAS link to the original payout with the same &lt;code&gt;sender_batch_id&lt;/code&gt;.&lt;/p&gt;&lt;p&gt;If you receive an HTTP &lt;code&gt;5&lt;i&gt;nn&lt;/i&gt;&lt;/code&gt; status code, you can safely retry the request with the same &lt;code&gt;sender_batch_id&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;The Payouts API does not support build notation (BN) codes. In a future Payouts release, you can optionally provide BN codes in the &lt;code&gt;PayPal-Partner-Attribution-Id&lt;/code&gt; request header.&lt;/p&gt;&lt;p&gt;For information about the &lt;code&gt;PayPal-Partner-Attribution-Id&lt;/code&gt; header, see &lt;a href="/api/rest/requests/#http-request-headers"&gt;HTTP request headers&lt;/a&gt;. To learn about or request a BN code, contact your partner manager or see &lt;a href="https://www.paypal.com/us/webapps/mpp/partner-program"&gt;PayPal Partner Program&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/blockquote&gt;
+        /// Creates a batch payout. In the JSON request body, pass a `sender_batch_header` and an `items` array. The `sender_batch_header` defines how to handle the payout. The `items` array defines the payout items.&lt;br/&gt;You can make payouts to one or more recipients.&lt;blockquote&gt;&lt;strong&gt;Notes:&lt;/strong&gt; &lt;ul&gt;&lt;li&gt;&lt;p&gt;PayPal does not process duplicate payouts. If you specify a &lt;code&gt;sender_batch_id&lt;/code&gt; that was used in the last 30 days, the API rejects the request with an error message that shows the duplicate &lt;code&gt;sender_batch_id&lt;/code&gt; and includes a HATEOAS link to the original payout with the same &lt;code&gt;sender_batch_id&lt;/code&gt;.&lt;/p&gt;&lt;p&gt;If you receive an HTTP &lt;code&gt;5&lt;i&gt;nn&lt;/i&gt;&lt;/code&gt; status code, you can safely retry the request with the same &lt;code&gt;sender_batch_id&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;The Payouts API does not support build notation (BN) codes. In a future Payouts release, you can optionally provide BN codes in the &lt;code&gt;PayPal-Partner-Attribution-Id&lt;/code&gt; request header.&lt;/p&gt;&lt;p&gt;For information about the &lt;code&gt;PayPal-Partner-Attribution-Id&lt;/code&gt; header, see &lt;a href="https://developer.paypal.com/api/rest/requests/#http-request-headers"&gt;HTTP request headers&lt;/a&gt;. To learn about or request a BN code, contact your partner manager or see &lt;a href="https://www.paypal.com/us/webapps/mpp/partner-program"&gt;PayPal Partner Program&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/blockquote&gt;
         /// </remarks>
         /// <param name="payPal_Request_Id">The server stores keys for 30 days.</param>
         /// <returns>A successful request returns the HTTP &lt;code&gt;201 Created&lt;/code&gt; status code and a JSON response body that shows the ID for the payout and payout details. To show payout status, use the &lt;code&gt;payout_batch_id&lt;/code&gt; value that appears in the response. If the initial scan that checks for syntax errors, missing or duplicated keywords, and more succeeds, the &lt;code&gt;batch_status&lt;/code&gt; is &lt;code&gt;PENDING&lt;/code&gt;. The initial scan checks for syntax errors and missing or duplicated keywords. The API does not immediately validate some payout item values, such as the receiver phone numbers.</returns>
@@ -121,7 +121,7 @@ namespace Aeroverra.PayPalSharp.PayoutsV1
         /// Create batch payout
         /// </summary>
         /// <remarks>
-        /// Creates a batch payout. In the JSON request body, pass a `sender_batch_header` and an `items` array. The `sender_batch_header` defines how to handle the payout. The `items` array defines the payout items.&lt;br/&gt;You can make payouts to one or more recipients.&lt;blockquote&gt;&lt;strong&gt;Notes:&lt;/strong&gt; &lt;ul&gt;&lt;li&gt;&lt;p&gt;PayPal does not process duplicate payouts. If you specify a &lt;code&gt;sender_batch_id&lt;/code&gt; that was used in the last 30 days, the API rejects the request with an error message that shows the duplicate &lt;code&gt;sender_batch_id&lt;/code&gt; and includes a HATEOAS link to the original payout with the same &lt;code&gt;sender_batch_id&lt;/code&gt;.&lt;/p&gt;&lt;p&gt;If you receive an HTTP &lt;code&gt;5&lt;i&gt;nn&lt;/i&gt;&lt;/code&gt; status code, you can safely retry the request with the same &lt;code&gt;sender_batch_id&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;The Payouts API does not support build notation (BN) codes. In a future Payouts release, you can optionally provide BN codes in the &lt;code&gt;PayPal-Partner-Attribution-Id&lt;/code&gt; request header.&lt;/p&gt;&lt;p&gt;For information about the &lt;code&gt;PayPal-Partner-Attribution-Id&lt;/code&gt; header, see &lt;a href="/api/rest/requests/#http-request-headers"&gt;HTTP request headers&lt;/a&gt;. To learn about or request a BN code, contact your partner manager or see &lt;a href="https://www.paypal.com/us/webapps/mpp/partner-program"&gt;PayPal Partner Program&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/blockquote&gt;
+        /// Creates a batch payout. In the JSON request body, pass a `sender_batch_header` and an `items` array. The `sender_batch_header` defines how to handle the payout. The `items` array defines the payout items.&lt;br/&gt;You can make payouts to one or more recipients.&lt;blockquote&gt;&lt;strong&gt;Notes:&lt;/strong&gt; &lt;ul&gt;&lt;li&gt;&lt;p&gt;PayPal does not process duplicate payouts. If you specify a &lt;code&gt;sender_batch_id&lt;/code&gt; that was used in the last 30 days, the API rejects the request with an error message that shows the duplicate &lt;code&gt;sender_batch_id&lt;/code&gt; and includes a HATEOAS link to the original payout with the same &lt;code&gt;sender_batch_id&lt;/code&gt;.&lt;/p&gt;&lt;p&gt;If you receive an HTTP &lt;code&gt;5&lt;i&gt;nn&lt;/i&gt;&lt;/code&gt; status code, you can safely retry the request with the same &lt;code&gt;sender_batch_id&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;The Payouts API does not support build notation (BN) codes. In a future Payouts release, you can optionally provide BN codes in the &lt;code&gt;PayPal-Partner-Attribution-Id&lt;/code&gt; request header.&lt;/p&gt;&lt;p&gt;For information about the &lt;code&gt;PayPal-Partner-Attribution-Id&lt;/code&gt; header, see &lt;a href="https://developer.paypal.com/api/rest/requests/#http-request-headers"&gt;HTTP request headers&lt;/a&gt;. To learn about or request a BN code, contact your partner manager or see &lt;a href="https://www.paypal.com/us/webapps/mpp/partner-program"&gt;PayPal Partner Program&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/blockquote&gt;
         /// </remarks>
         /// <param name="payPal_Request_Id">The server stores keys for 30 days.</param>
         /// <returns>A successful request returns the HTTP &lt;code&gt;201 Created&lt;/code&gt; status code and a JSON response body that shows the ID for the payout and payout details. To show payout status, use the &lt;code&gt;payout_batch_id&lt;/code&gt; value that appears in the response. If the initial scan that checks for syntax errors, missing or duplicated keywords, and more succeeds, the &lt;code&gt;batch_status&lt;/code&gt; is &lt;code&gt;PENDING&lt;/code&gt;. The initial scan checks for syntax errors and missing or duplicated keywords. The API does not immediately validate some payout item values, such as the receiver phone numbers.</returns>
@@ -823,7 +823,7 @@ namespace Aeroverra.PayPalSharp.PayoutsV1
     {
 
         /// <summary>
-        /// The [three-character ISO-4217 currency code](/docs/integration/direct/rest/currency-codes/).
+        /// The [three-character ISO-4217 currency code](https://developer.paypal.com/docs/integration/direct/rest/currency-codes/).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("currency", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -848,7 +848,7 @@ namespace Aeroverra.PayPalSharp.PayoutsV1
     }
 
     /// <summary>
-    /// An array of request-related [HATEOAS links](/api/rest/responses/#hateoas-links).
+    /// An array of request-related [HATEOAS links](https://developer.paypal.com/api/rest/responses/#hateoas-links).
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class DefinitionsLinkDescriptionList : System.Collections.ObjectModel.Collection<LinkDescription>
@@ -1420,7 +1420,7 @@ namespace Aeroverra.PayPalSharp.PayoutsV1
     }
 
     /// <summary>
-    /// The request-related [HATEOAS link](/api/rest/responses/#hateoas-links) information.
+    /// The request-related [HATEOAS link](https://developer.paypal.com/api/rest/responses/#hateoas-links) information.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ErrorLinkDescription
@@ -1466,7 +1466,7 @@ namespace Aeroverra.PayPalSharp.PayoutsV1
     }
 
     /// <summary>
-    /// The request-related [HATEOAS link](/docs/api/reference/api-responses/#hateoas-links) information.
+    /// The request-related [HATEOAS link](https://developer.paypal.com/docs/api/reference/api-responses/#hateoas-links) information.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class LinkDescription
@@ -1506,7 +1506,7 @@ namespace Aeroverra.PayPalSharp.PayoutsV1
     }
 
     /// <summary>
-    /// An array of request-related [HATEOAS links](/docs/api/reference/api-responses/#hateoas-links).
+    /// An array of request-related [HATEOAS links](https://developer.paypal.com/docs/api/reference/api-responses/#hateoas-links).
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class LinkDescriptionList : System.Collections.ObjectModel.Collection<LinkDescription>
@@ -1657,7 +1657,7 @@ namespace Aeroverra.PayPalSharp.PayoutsV1
     }
 
     /// <summary>
-    /// An array of request-related [HATEOAS links](/api/rest/responses/#hateoas-links).
+    /// An array of request-related [HATEOAS links](https://developer.paypal.com/api/rest/responses/#hateoas-links).
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class PayoutBatchDefinitionsLinkDescriptionList : System.Collections.ObjectModel.Collection<LinkDescription>
@@ -1840,7 +1840,7 @@ namespace Aeroverra.PayPalSharp.PayoutsV1
     }
 
     /// <summary>
-    /// An array of request-related [HATEOAS links](/api/rest/responses/#hateoas-links).
+    /// An array of request-related [HATEOAS links](https://developer.paypal.com/api/rest/responses/#hateoas-links).
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class PayoutBatchItemsDefinitionsLinkDescriptionList : System.Collections.ObjectModel.Collection<LinkDescription>
@@ -2047,7 +2047,7 @@ namespace Aeroverra.PayPalSharp.PayoutsV1
     }
 
     /// <summary>
-    /// An array of request-related [HATEOAS links](/api/rest/responses/#hateoas-links).
+    /// An array of request-related [HATEOAS links](https://developer.paypal.com/api/rest/responses/#hateoas-links).
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class PayoutItemDefinitionsLinkDescriptionList : System.Collections.ObjectModel.Collection<LinkDescription>

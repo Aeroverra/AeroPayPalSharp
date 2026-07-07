@@ -81,12 +81,23 @@ public interface IPayPalApiClient
     /// <code>using (client.ActingAsMerchant(sellerMerchantId)) { await client.Orders.CreateAsync(order); }</code>
     /// </summary>
     IDisposable ActingAsMerchant(string merchantId);
+
+    /// <summary>
+    /// Forces the SANDBOX to return a specific negative/error response for calls inside the scope, for
+    /// negative testing. Pass a mock application code (see <see cref="PayPalMockCode"/>), which is wrapped
+    /// as <c>{"mock_application_codes":"..."}</c>, or a full JSON header value. Has NO effect in Live, so
+    /// it is safe if left in code. Pass <c>null</c> or an empty string to apply no mock, so a
+    /// <c>using</c> can stay in place unconditionally:
+    /// <code>using (client.WithMockResponse(simulateFailure ? PayPalMockCode.InstrumentDeclined : null)) { ... }</code>
+    /// </summary>
+    IDisposable WithMockResponse(string? mockApplicationCodeOrJson);
 }
 
 /// <inheritdoc />
 public sealed class PayPalApiClient : IPayPalApiClient
 {
     private readonly PayPalMerchantContext _merchantContext;
+    private readonly PayPalMockResponseContext _mockContext;
 
     public PayPalApiClient(
         IOrdersV2Client orders,
@@ -105,7 +116,8 @@ public sealed class PayPalApiClient : IPayPalApiClient
         IWebhooksV1Client webhooks,
         IPayPalCustomClient custom,
         IPayPalTokenProvider tokens,
-        PayPalMerchantContext merchantContext)
+        PayPalMerchantContext merchantContext,
+        PayPalMockResponseContext mockContext)
     {
         Orders = orders;
         Payments = payments;
@@ -124,6 +136,7 @@ public sealed class PayPalApiClient : IPayPalApiClient
         Custom = custom;
         Tokens = tokens;
         _merchantContext = merchantContext;
+        _mockContext = mockContext;
     }
 
     public IOrdersV2Client Orders { get; }
@@ -144,4 +157,26 @@ public sealed class PayPalApiClient : IPayPalApiClient
     public IPayPalTokenProvider Tokens { get; }
 
     public IDisposable ActingAsMerchant(string merchantId) => _merchantContext.ActingAs(merchantId);
+
+    public IDisposable WithMockResponse(string? mockApplicationCodeOrJson)
+    {
+        // null/empty means "no mock" - a no-op scope, so a using can stay in place unconditionally.
+        if (string.IsNullOrWhiteSpace(mockApplicationCodeOrJson))
+        {
+            return NoOpScope.Instance;
+        }
+
+        // Accept a raw JSON header value, or wrap a bare code as PayPal's mock_application_codes envelope.
+        var value = mockApplicationCodeOrJson.TrimStart().StartsWith('{')
+            ? mockApplicationCodeOrJson
+            : $"{{\"mock_application_codes\":\"{mockApplicationCodeOrJson}\"}}";
+
+        return _mockContext.Begin(value);
+    }
+
+    private sealed class NoOpScope : IDisposable
+    {
+        public static readonly NoOpScope Instance = new();
+        public void Dispose() { }
+    }
 }

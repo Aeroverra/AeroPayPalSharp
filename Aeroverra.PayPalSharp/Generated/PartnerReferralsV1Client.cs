@@ -37,7 +37,7 @@ namespace Aeroverra.PayPalSharp.PartnerReferralsV1
         /// <remarks>
         /// Creates a partner referral that is shared by the API caller. The referrals contains the client's personal, business, and financial data.
         /// </remarks>
-        /// <returns>A successful request returns the HTTP `201 Created` status code and a JSON response body that contains a [HATEOAS link](/docs/api/reference/api-responses/#hateoas-links) to show the referral data and an `action_url` to which you redirect the customer in a browser to complete the signup process. The `partner_referral_id` token is appended to the URL.</returns>
+        /// <returns>A successful request returns the HTTP `201 Created` status code and a JSON response body that contains a [HATEOAS link](https://developer.paypal.com/docs/api/reference/api-responses/#hateoas-links) to show the referral data and an `action_url` to which you redirect the customer in a browser to complete the signup process. The `partner_referral_id` token is appended to the URL.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<CreateReferralDataResponse> CreateAsync(ReferralData body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
@@ -62,7 +62,7 @@ namespace Aeroverra.PayPalSharp.PartnerReferralsV1
         /// </remarks>
         /// <param name="partner_id">The ID of the partner for which to show onboarded seller's credentials, which is the partner's PayPal account number. To find this ID, log in to the partner's PayPal business account. Navigate to **Profile**, click **Profile and settings**, and click **My business info**. The account number appears in the **Merchant account ID** section.</param>
         /// <param name="tracking_id">Filters the sellers in the response by this partner-provided seller ID (`merchant_id`).</param>
-        /// <returns>A successful request returns the HTTP `201 Created` status code and a JSON response body that lists sellers. For each seller, the response shows the seller ID (`merchant_id`), the tracking ID, and [HATEOAS links](/docs/api/reference/api-responses/#hateoas-links) to show the seller-partner information.</returns>
+        /// <returns>A successful request returns the HTTP `201 Created` status code and a JSON response body that lists sellers. For each seller, the response shows the seller ID (`merchant_id`), the tracking ID, and [HATEOAS links](https://developer.paypal.com/docs/api/reference/api-responses/#hateoas-links) to show the seller-partner information.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<MerchantIntegration> MerchantIntegrationFindAsync(string partner_id, string tracking_id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
@@ -118,7 +118,7 @@ namespace Aeroverra.PayPalSharp.PartnerReferralsV1
         /// <param name="id">The ID of the partner, which is the partner's PayPal account number. To find this ID, log in to the partner's PayPal business account. Navigate to **Profile**, click **Profile and settings**, and click **My business info**. The account number appears in the **Merchant account ID** section.</param>
         /// <param name="content_type">The Content-type header MUST be described in all externally-accessible APIs.</param>
         /// <param name="x_PAYPAL_SECURITY_CONTEXT">The X-PAYPAL-SECURITY-CONTEXT header MUST be described in all externally-accessible APIs.</param>
-        /// <returns>A successful request returns the HTTP `201 Created` status code and a JSON response body that contains an array of [HATEOAS links](/docs/api/reference/api-responses/#hateoas-links) that show the partner info.</returns>
+        /// <returns>A successful request returns the HTTP `201 Created` status code and a JSON response body that contains an array of [HATEOAS links](https://developer.paypal.com/docs/api/reference/api-responses/#hateoas-links) that show the partner info.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<Partner> PartnerCreateAsync(string id, Partner body, string? content_type = null, string? x_PAYPAL_SECURITY_CONTEXT = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
@@ -177,7 +177,7 @@ namespace Aeroverra.PayPalSharp.PartnerReferralsV1
         /// <remarks>
         /// Creates a partner referral that is shared by the API caller. The referrals contains the client's personal, business, and financial data.
         /// </remarks>
-        /// <returns>A successful request returns the HTTP `201 Created` status code and a JSON response body that contains a [HATEOAS link](/docs/api/reference/api-responses/#hateoas-links) to show the referral data and an `action_url` to which you redirect the customer in a browser to complete the signup process. The `partner_referral_id` token is appended to the URL.</returns>
+        /// <returns>A successful request returns the HTTP `201 Created` status code and a JSON response body that contains a [HATEOAS link](https://developer.paypal.com/docs/api/reference/api-responses/#hateoas-links) to show the referral data and an `action_url` to which you redirect the customer in a browser to complete the signup process. The `partner_referral_id` token is appended to the URL.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<CreateReferralDataResponse> CreateAsync(ReferralData body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
@@ -353,7 +353,7 @@ namespace Aeroverra.PayPalSharp.PartnerReferralsV1
         /// </remarks>
         /// <param name="partner_id">The ID of the partner for which to show onboarded seller's credentials, which is the partner's PayPal account number. To find this ID, log in to the partner's PayPal business account. Navigate to **Profile**, click **Profile and settings**, and click **My business info**. The account number appears in the **Merchant account ID** section.</param>
         /// <param name="tracking_id">Filters the sellers in the response by this partner-provided seller ID (`merchant_id`).</param>
-        /// <returns>A successful request returns the HTTP `201 Created` status code and a JSON response body that lists sellers. For each seller, the response shows the seller ID (`merchant_id`), the tracking ID, and [HATEOAS links](/docs/api/reference/api-responses/#hateoas-links) to show the seller-partner information.</returns>
+        /// <returns>A successful request returns the HTTP `201 Created` status code and a JSON response body that lists sellers. For each seller, the response shows the seller ID (`merchant_id`), the tracking ID, and [HATEOAS links](https://developer.paypal.com/docs/api/reference/api-responses/#hateoas-links) to show the seller-partner information.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<MerchantIntegration> MerchantIntegrationFindAsync(string partner_id, string tracking_id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
@@ -770,7 +770,7 @@ namespace Aeroverra.PayPalSharp.PartnerReferralsV1
         /// <param name="id">The ID of the partner, which is the partner's PayPal account number. To find this ID, log in to the partner's PayPal business account. Navigate to **Profile**, click **Profile and settings**, and click **My business info**. The account number appears in the **Merchant account ID** section.</param>
         /// <param name="content_type">The Content-type header MUST be described in all externally-accessible APIs.</param>
         /// <param name="x_PAYPAL_SECURITY_CONTEXT">The X-PAYPAL-SECURITY-CONTEXT header MUST be described in all externally-accessible APIs.</param>
-        /// <returns>A successful request returns the HTTP `201 Created` status code and a JSON response body that contains an array of [HATEOAS links](/docs/api/reference/api-responses/#hateoas-links) that show the partner info.</returns>
+        /// <returns>A successful request returns the HTTP `201 Created` status code and a JSON response body that contains an array of [HATEOAS links](https://developer.paypal.com/docs/api/reference/api-responses/#hateoas-links) that show the partner info.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Partner> PartnerCreateAsync(string id, Partner body, string? content_type = null, string? x_PAYPAL_SECURITY_CONTEXT = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
@@ -1205,7 +1205,7 @@ namespace Aeroverra.PayPalSharp.PartnerReferralsV1
     }
 
     /// <summary>
-    /// The request-related [HATEOAS link](/api/rest/responses/#hateoas-links) information.
+    /// The request-related [HATEOAS link](https://developer.paypal.com/api/rest/responses/#hateoas-links) information.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ErrorLinkDescription
@@ -1817,7 +1817,7 @@ namespace Aeroverra.PayPalSharp.PartnerReferralsV1
         public string City { get; set; } = default!;
 
         /// <summary>
-        /// The [code](/docs/integration/direct/rest/state-codes/) for a US state or the equivalent for other countries. Required for transactions if the address is in one of these countries: [Argentina](/docs/integration/direct/rest/state-codes/#argentina), [Brazil](/docs/integration/direct/rest/state-codes/#brazil), [Canada](/docs/integration/direct/rest/state-codes/#canada), [China](/docs/integration/direct/rest/state-codes/#china), [India](/docs/integration/direct/rest/state-codes/#india), [Italy](/docs/integration/direct/rest/state-codes/#italy), [Japan](/docs/integration/direct/rest/state-codes/#japan), [Mexico](/docs/integration/direct/rest/state-codes/#mexico), [Thailand](/docs/integration/direct/rest/state-codes/#thailand), or [United States](/docs/integration/direct/rest/state-codes/#usa). Maximum length is 40 single-byte characters.
+        /// The [code](https://developer.paypal.com/docs/integration/direct/rest/state-codes/) for a US state or the equivalent for other countries. Required for transactions if the address is in one of these countries: [Argentina](https://developer.paypal.com/docs/integration/direct/rest/state-codes/#argentina), [Brazil](https://developer.paypal.com/docs/integration/direct/rest/state-codes/#brazil), [Canada](https://developer.paypal.com/docs/integration/direct/rest/state-codes/#canada), [China](https://developer.paypal.com/docs/integration/direct/rest/state-codes/#china), [India](https://developer.paypal.com/docs/integration/direct/rest/state-codes/#india), [Italy](https://developer.paypal.com/docs/integration/direct/rest/state-codes/#italy), [Japan](https://developer.paypal.com/docs/integration/direct/rest/state-codes/#japan), [Mexico](https://developer.paypal.com/docs/integration/direct/rest/state-codes/#mexico), [Thailand](https://developer.paypal.com/docs/integration/direct/rest/state-codes/#thailand), or [United States](https://developer.paypal.com/docs/integration/direct/rest/state-codes/#usa). Maximum length is 40 single-byte characters.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("state", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string State { get; set; } = default!;
@@ -1871,7 +1871,7 @@ namespace Aeroverra.PayPalSharp.PartnerReferralsV1
         public bool PartialValue { get; set; } = false;
 
         /// <summary>
-        /// The [two-character ISO-3166-1 country code](/docs/api/reference/country-codes/) for the country that issued the document.
+        /// The [two-character ISO-3166-1 country code](https://developer.paypal.com/docs/api/reference/country-codes/) for the country that issued the document.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("issuer_country_code", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -1957,7 +1957,7 @@ namespace Aeroverra.PayPalSharp.PartnerReferralsV1
         public Address HomeAddress { get; set; } = default!;
 
         /// <summary>
-        /// The [two-character ISO-3166-1 country code](/docs/api/reference/country-codes/) for the nationality of the account holder. Can include one of the PayPal-supported countries.
+        /// The [two-character ISO-3166-1 country code](https://developer.paypal.com/docs/api/reference/country-codes/) for the nationality of the account holder. Can include one of the PayPal-supported countries.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("nationality_country_code", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(2, MinimumLength = 2)]
@@ -2040,14 +2040,14 @@ namespace Aeroverra.PayPalSharp.PartnerReferralsV1
     {
 
         /// <summary>
-        /// The [three-character ISO-4217 currency code](/docs/api/reference/currency-codes/).
+        /// The [three-character ISO-4217 currency code](https://developer.paypal.com/docs/api/reference/currency-codes/).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("currency", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string Currency1 { get; set; } = default!;
 
         /// <summary>
-        /// The amount, up to _`N`_ digits after the decimal separator. For currencies that do not support decimals, see [currency codes](/docs/api/reference/currency-codes/).
+        /// The amount, up to _`N`_ digits after the decimal separator. For currencies that do not support decimals, see [currency codes](https://developer.paypal.com/docs/api/reference/currency-codes/).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("value", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -2539,7 +2539,7 @@ namespace Aeroverra.PayPalSharp.PartnerReferralsV1
         public string AccountType { get; set; } = default!;
 
         /// <summary>
-        /// The primary [three-character ISO-4217 currency code](/docs/api/reference/currency-codes/) for the account.
+        /// The primary [three-character ISO-4217 currency code](https://developer.paypal.com/docs/api/reference/currency-codes/) for the account.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("currency_code", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.RegularExpression(@"^([A-Z]){3}$")]
@@ -2662,7 +2662,7 @@ namespace Aeroverra.PayPalSharp.PartnerReferralsV1
         public string PreferredLanguageCode { get; set; } = default!;
 
         /// <summary>
-        /// The primary [three-character ISO-4217 currency code](/docs/api/reference/currency-codes/) of the account.
+        /// The primary [three-character ISO-4217 currency code](https://developer.paypal.com/docs/api/reference/currency-codes/) of the account.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("primary_currency_code", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public object PrimaryCurrencyCode { get; set; } = default!;
@@ -2719,7 +2719,7 @@ namespace Aeroverra.PayPalSharp.PartnerReferralsV1
     {
 
         /// <summary>
-        /// The ID of the payment web experience profile, which is returned from a [create web experience profile](/docs/api/payment-experience/v1/#web-profiles_create) call.
+        /// The ID of the payment web experience profile, which is returned from a [create web experience profile](https://developer.paypal.com/docs/api/payment-experience/v1/#web-profiles_create) call.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("experience_id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ExperienceId { get; set; } = default!;
@@ -2955,7 +2955,7 @@ namespace Aeroverra.PayPalSharp.PartnerReferralsV1
     }
 
     /// <summary>
-    /// The request-related [HATEOAS link](/docs/api/reference/api-responses/#hateoas-links) information.
+    /// The request-related [HATEOAS link](https://developer.paypal.com/docs/api/reference/api-responses/#hateoas-links) information.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class LinkDescription
@@ -3035,7 +3035,7 @@ namespace Aeroverra.PayPalSharp.PartnerReferralsV1
         public System.Collections.Generic.ICollection<ErrorDetails2> Details { get; set; } = default!;
 
         /// <summary>
-        /// An array of request-related [HATEOAS links](/docs/api/reference/api-responses/#hateoas-links).
+        /// An array of request-related [HATEOAS links](https://developer.paypal.com/docs/api/reference/api-responses/#hateoas-links).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<LinkDescription> Links { get; set; } = default!;
@@ -3059,7 +3059,7 @@ namespace Aeroverra.PayPalSharp.PartnerReferralsV1
     {
 
         /// <summary>
-        /// An array of request-related [HATEOAS links](/docs/api/reference/api-responses/#hateoas-links).
+        /// An array of request-related [HATEOAS links](https://developer.paypal.com/docs/api/reference/api-responses/#hateoas-links).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
@@ -3099,7 +3099,7 @@ namespace Aeroverra.PayPalSharp.PartnerReferralsV1
         public ReferralData ReferralData { get; set; } = default!;
 
         /// <summary>
-        /// An array of request-related [HATEOAS links](/docs/api/reference/api-responses/#hateoas-links).
+        /// An array of request-related [HATEOAS links](https://developer.paypal.com/docs/api/reference/api-responses/#hateoas-links).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<LinkDescription> Links { get; set; } = default!;
@@ -3787,7 +3787,7 @@ namespace Aeroverra.PayPalSharp.PartnerReferralsV1
         public string Message1 { get; set; } = default!;
 
         /// <summary>
-        /// The [locale code](/docs/api/reference/locale-codes/) for the language of the message, such as `en_US`.
+        /// The [locale code](https://developer.paypal.com/docs/api/reference/locale-codes/) for the language of the message, such as `en_US`.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("language_code", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string LanguageCode { get; set; } = default!;
@@ -3811,7 +3811,7 @@ namespace Aeroverra.PayPalSharp.PartnerReferralsV1
     {
 
         /// <summary>
-        /// The [two-character ISO-3166-1 country code](/docs/api/reference/country-codes/) for the country that is associated with the preferences.
+        /// The [two-character ISO-3166-1 country code](https://developer.paypal.com/docs/api/reference/country-codes/) for the country that is associated with the preferences.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("country_code", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CountryCode { get; set; } = default!;

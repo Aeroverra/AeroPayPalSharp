@@ -37,7 +37,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         /// <remarks>
         /// Subscribes your webhook listener to events.
         /// </remarks>
-        /// <returns>A successful request returns the HTTP `201 Created` status code and a JSON response body with a [`webhook`](/docs/api/webhooks/v1/#definition-webhook) object that includes the webhook ID for later use.</returns>
+        /// <returns>A successful request returns the HTTP `201 Created` status code and a JSON response body with a [`webhook`](https://developer.paypal.com/docs/api/webhooks/v1/#definition-webhook) object that includes the webhook ID for later use.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<Webhook> PostAsync(Webhook? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
@@ -163,7 +163,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         /// List available events
         /// </summary>
         /// <remarks>
-        /// Lists available events to which any webhook can subscribe. For a list of supported events, see [Webhook event names](/docs/api/notifications/webhooks/event-names/).
+        /// Lists available events to which any webhook can subscribe. For a list of supported events, see [Webhook event names](https://developer.paypal.com/docs/api/notifications/webhooks/event-names/).
         /// </remarks>
         /// <returns>A successful request returns the HTTP `200 OK` status code and a JSON response body that lists available events to which any webhook can subscribe.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
@@ -261,7 +261,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         /// <remarks>
         /// Subscribes your webhook listener to events.
         /// </remarks>
-        /// <returns>A successful request returns the HTTP `201 Created` status code and a JSON response body with a [`webhook`](/docs/api/webhooks/v1/#definition-webhook) object that includes the webhook ID for later use.</returns>
+        /// <returns>A successful request returns the HTTP `201 Created` status code and a JSON response body with a [`webhook`](https://developer.paypal.com/docs/api/webhooks/v1/#definition-webhook) object that includes the webhook ID for later use.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Webhook> PostAsync(Webhook? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
@@ -1189,7 +1189,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
         /// List available events
         /// </summary>
         /// <remarks>
-        /// Lists available events to which any webhook can subscribe. For a list of supported events, see [Webhook event names](/docs/api/notifications/webhooks/event-names/).
+        /// Lists available events to which any webhook can subscribe. For a list of supported events, see [Webhook event names](https://developer.paypal.com/docs/api/notifications/webhooks/event-names/).
         /// </remarks>
         /// <returns>A successful request returns the HTTP `200 OK` status code and a JSON response body that lists available events to which any webhook can subscribe.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
@@ -1870,7 +1870,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     }
 
     /// <summary>
-    /// An array of request-related [HATEOAS links](/docs/api/reference/api-responses/#hateoas-links/).
+    /// An array of request-related [HATEOAS links](https://developer.paypal.com/docs/api/reference/api-responses/#hateoas-links/).
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class DefinitionsLinkDescriptionList : System.Collections.ObjectModel.Collection<LinkDescription>
@@ -2457,7 +2457,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     }
 
     /// <summary>
-    /// The request-related [HATEOAS link](/api/rest/responses/#hateoas-links) information.
+    /// The request-related [HATEOAS link](https://developer.paypal.com/api/rest/responses/#hateoas-links) information.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ErrorLinkDescription
@@ -2682,7 +2682,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     }
 
     /// <summary>
-    /// The request-related [HATEOAS link](/docs/api/reference/api-responses/#hateoas-links) information.
+    /// The request-related [HATEOAS link](https://developer.paypal.com/docs/api/reference/api-responses/#hateoas-links) information.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class LinkDescription
@@ -2722,7 +2722,7 @@ namespace Aeroverra.PayPalSharp.WebhooksV1
     }
 
     /// <summary>
-    /// An array of request-related [HATEOAS links](/docs/api/reference/api-responses/#hateoas-links).
+    /// An array of request-related [HATEOAS links](https://developer.paypal.com/docs/api/reference/api-responses/#hateoas-links).
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class LinkDescriptionList : System.Collections.ObjectModel.Collection<LinkDescription>

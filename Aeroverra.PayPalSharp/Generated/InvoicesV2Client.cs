@@ -205,7 +205,7 @@ namespace Aeroverra.PayPalSharp.InvoicesV2
         /// Delete invoice
         /// </summary>
         /// <remarks>
-        /// Deletes a draft or scheduled invoice, by ID. Deletes invoices in the draft or scheduled state only. For invoices that have already been sent, you can &lt;a href="/docs/api/invoicing/v2/#invoices_cancel"&gt;cancel the invoice&lt;/a&gt;. After you delete a draft or scheduled invoice, you can no longer use it or show its details. However, you can reuse its invoice number.
+        /// Deletes a draft or scheduled invoice, by ID. Deletes invoices in the draft or scheduled state only. For invoices that have already been sent, you can &lt;a href="https://developer.paypal.com/docs/api/invoicing/v2/#invoices_cancel"&gt;cancel the invoice&lt;/a&gt;. After you delete a draft or scheduled invoice, you can no longer use it or show its details. However, you can reuse its invoice number.
         /// </remarks>
         /// <param name="invoice_id">The ID of the draft invoice to delete.</param>
         /// <returns>A successful request returns the HTTP `204 No Content` status code with no JSON response body.</returns>
@@ -2116,7 +2116,7 @@ namespace Aeroverra.PayPalSharp.InvoicesV2
         /// Delete invoice
         /// </summary>
         /// <remarks>
-        /// Deletes a draft or scheduled invoice, by ID. Deletes invoices in the draft or scheduled state only. For invoices that have already been sent, you can &lt;a href="/docs/api/invoicing/v2/#invoices_cancel"&gt;cancel the invoice&lt;/a&gt;. After you delete a draft or scheduled invoice, you can no longer use it or show its details. However, you can reuse its invoice number.
+        /// Deletes a draft or scheduled invoice, by ID. Deletes invoices in the draft or scheduled state only. For invoices that have already been sent, you can &lt;a href="https://developer.paypal.com/docs/api/invoicing/v2/#invoices_cancel"&gt;cancel the invoice&lt;/a&gt;. After you delete a draft or scheduled invoice, you can no longer use it or show its details. However, you can reuse its invoice number.
         /// </remarks>
         /// <param name="invoice_id">The ID of the draft invoice to delete.</param>
         /// <returns>A successful request returns the HTTP `204 No Content` status code with no JSON response body.</returns>
@@ -3640,7 +3640,7 @@ namespace Aeroverra.PayPalSharp.InvoicesV2
         public string CurrencyCode { get; set; } = default!;
 
         /// <summary>
-        /// The value, which might be:&lt;ul&gt;&lt;li&gt;An integer for currencies like `JPY` that are not typically fractional.&lt;/li&gt;&lt;li&gt;A decimal fraction for currencies like `TND` that are subdivided into thousandths.&lt;/li&gt;&lt;/ul&gt;For the required number of decimal places for a currency code, see [Currency Codes](/docs/integration/direct/rest/currency-codes/).
+        /// The value, which might be:&lt;ul&gt;&lt;li&gt;An integer for currencies like `JPY` that are not typically fractional.&lt;/li&gt;&lt;li&gt;A decimal fraction for currencies like `TND` that are subdivided into thousandths.&lt;/li&gt;&lt;/ul&gt;For the required number of decimal places for a currency code, see [Currency Codes](https://developer.paypal.com/docs/integration/direct/rest/currency-codes/).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public decimal Value { get; set; } = default!;
@@ -4040,7 +4040,7 @@ namespace Aeroverra.PayPalSharp.InvoicesV2
         public string Reference { get; set; } = default!;
 
         /// <summary>
-        /// The [three-character ISO-4217 currency code](/docs/integration/direct/rest/currency-codes/) that identifies the currency.
+        /// The [three-character ISO-4217 currency code](https://developer.paypal.com/docs/integration/direct/rest/currency-codes/) that identifies the currency.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("currency_code", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
@@ -4581,7 +4581,7 @@ namespace Aeroverra.PayPalSharp.InvoicesV2
     }
 
     /// <summary>
-    /// The request-related [HATEOAS link](/api/rest/responses/#hateoas-links) information.
+    /// The request-related [HATEOAS link](https://developer.paypal.com/api/rest/responses/#hateoas-links) information.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ErrorLinkDescription
@@ -5009,7 +5009,7 @@ namespace Aeroverra.PayPalSharp.InvoicesV2
     }
 
     /// <summary>
-    /// An array of merchant invoices. Includes the total invoices count and [HATEOAS links](/docs/api/reference/api-responses/#hateoas-links) for navigation.
+    /// An array of merchant invoices. Includes the total invoices count and [HATEOAS links](https://developer.paypal.com/docs/api/reference/api-responses/#hateoas-links) for navigation.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class Invoices
@@ -5397,7 +5397,7 @@ namespace Aeroverra.PayPalSharp.InvoicesV2
     }
 
     /// <summary>
-    /// The request-related [HATEOAS link](/api/rest/responses/#hateoas-links) information.
+    /// The request-related [HATEOAS link](https://developer.paypal.com/api/rest/responses/#hateoas-links) information.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class LinkDescription
@@ -5437,7 +5437,7 @@ namespace Aeroverra.PayPalSharp.InvoicesV2
     }
 
     /// <summary>
-    /// An array of request-related [HATEOAS links](/docs/api/reference/api-responses/#hateoas-links).
+    /// An array of request-related [HATEOAS links](https://developer.paypal.com/docs/api/reference/api-responses/#hateoas-links).
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class LinkDescriptionList : System.Collections.ObjectModel.Collection<LinkDescription>
@@ -5523,7 +5523,7 @@ namespace Aeroverra.PayPalSharp.InvoicesV2
         public string CurrencyCode { get; set; } = default!;
 
         /// <summary>
-        /// The value, which might be:&lt;ul&gt;&lt;li&gt;An integer for currencies like `JPY` that are not typically fractional.&lt;/li&gt;&lt;li&gt;A decimal fraction for currencies like `TND` that are subdivided into thousandths.&lt;/li&gt;&lt;/ul&gt;For the required number of decimal places for a currency code, see [Currency Codes](/api/rest/reference/currency-codes/).
+        /// The value, which might be:&lt;ul&gt;&lt;li&gt;An integer for currencies like `JPY` that are not typically fractional.&lt;/li&gt;&lt;li&gt;A decimal fraction for currencies like `TND` that are subdivided into thousandths.&lt;/li&gt;&lt;/ul&gt;For the required number of decimal places for a currency code, see [Currency Codes](https://developer.paypal.com/api/rest/reference/currency-codes/).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("value", Required = Newtonsoft.Json.Required.Always)]
         public decimal Value { get; set; } = default!;
@@ -6170,7 +6170,7 @@ namespace Aeroverra.PayPalSharp.InvoicesV2
         public string Reference { get; set; } = default!;
 
         /// <summary>
-        /// The [three-character ISO-4217 currency code](/docs/integration/direct/rest/currency-codes/) that identifies the currency.
+        /// The [three-character ISO-4217 currency code](https://developer.paypal.com/docs/integration/direct/rest/currency-codes/) that identifies the currency.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("currency_code", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(3, MinimumLength = 3)]

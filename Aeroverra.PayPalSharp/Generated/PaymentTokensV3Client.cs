@@ -1159,7 +1159,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         public string IssuingBank { get; set; } = default!;
 
         /// <summary>
-        /// The [two-character ISO-3166-1 country code](/docs/integration/direct/rest/country-codes/) of the bank.
+        /// The [two-character ISO-3166-1 country code](https://developer.paypal.com/docs/integration/direct/rest/country-codes/) of the bank.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("bin_country_code", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(2, MinimumLength = 2)]
@@ -1439,7 +1439,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     }
 
     /// <summary>
-    /// An array of request-related [HATEOAS links](/api/rest/responses/#hateoas-links) that are either relevant to the issue by providing additional information or offering potential resolutions.
+    /// An array of request-related [HATEOAS links](https://developer.paypal.com/api/rest/responses/#hateoas-links) that are either relevant to the issue by providing additional information or offering potential resolutions.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class DefinitionsLinkDescriptionList : System.Collections.ObjectModel.Collection<LinkDescription>
@@ -1928,7 +1928,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     }
 
     /// <summary>
-    /// An array of request-related [HATEOAS links](/api/rest/responses/#hateoas-links).
+    /// An array of request-related [HATEOAS links](https://developer.paypal.com/api/rest/responses/#hateoas-links).
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ErrorDefinitionsLinkDescriptionList : System.Collections.ObjectModel.Collection<LinkDescription>
@@ -2046,7 +2046,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     }
 
     /// <summary>
-    /// The request-related [HATEOAS link](/api/rest/responses/#hateoas-links) information.
+    /// The request-related [HATEOAS link](https://developer.paypal.com/api/rest/responses/#hateoas-links) information.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ErrorLinkDescription
@@ -2173,7 +2173,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     }
 
     /// <summary>
-    /// The request-related [HATEOAS link](/api/rest/responses/#hateoas-links) information.
+    /// The request-related [HATEOAS link](https://developer.paypal.com/api/rest/responses/#hateoas-links) information.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class LinkDescription
@@ -2213,7 +2213,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
     }
 
     /// <summary>
-    /// An array of related [HATEOAS links](/api/rest/responses/#hateoas).
+    /// An array of related [HATEOAS links](https://developer.paypal.com/api/rest/responses/#hateoas).
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class LinkDescriptionList : System.Collections.ObjectModel.Collection<LinkDescription>
@@ -2234,7 +2234,7 @@ namespace Aeroverra.PayPalSharp.PaymentTokensV3
         public string CurrencyCode { get; set; } = default!;
 
         /// <summary>
-        /// The value, which might be:&lt;ul&gt;&lt;li&gt;An integer for currencies like `JPY` that are not typically fractional.&lt;/li&gt;&lt;li&gt;A decimal fraction for currencies like `TND` that are subdivided into thousandths.&lt;/li&gt;&lt;/ul&gt;For the required number of decimal places for a currency code, see [Currency Codes](/api/rest/reference/currency-codes/).
+        /// The value, which might be:&lt;ul&gt;&lt;li&gt;An integer for currencies like `JPY` that are not typically fractional.&lt;/li&gt;&lt;li&gt;A decimal fraction for currencies like `TND` that are subdivided into thousandths.&lt;/li&gt;&lt;/ul&gt;For the required number of decimal places for a currency code, see [Currency Codes](https://developer.paypal.com/api/rest/reference/currency-codes/).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("value", Required = Newtonsoft.Json.Required.Always)]
         public decimal Value { get; set; } = default!;

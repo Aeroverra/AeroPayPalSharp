@@ -232,11 +232,13 @@ public sealed class PayPalClientFactory : IPayPalClientFactory, IDisposable
         var baseUri = ResolveBaseUri(options.Value);
 
         // API HttpClient (outermost -> innermost): retry -> auth (bearer) -> partner headers ->
-        // observability -> shared transport. Mirrors the DI pipeline so factory-built clients behave
-        // identically (safe retries, callbacks, logging).
+        // mock-response -> observability -> shared transport. Mirrors the DI pipeline so factory-built
+        // clients behave identically (safe retries, mock responses, callbacks, logging).
         var merchantContext = new PayPalMerchantContext();
+        var mockContext = new PayPalMockResponseContext();
         var observability = new PayPalObservabilityHandler(options) { InnerHandler = new NonDisposingHandler(_rootHandler) };
-        var partner = new PayPalPartnerHeaderHandler(options, merchantContext) { InnerHandler = observability };
+        var mock = new PayPalMockResponseHandler(options, mockContext) { InnerHandler = observability };
+        var partner = new PayPalPartnerHeaderHandler(options, merchantContext) { InnerHandler = mock };
         var auth = new PayPalAuthenticationHandler(tokenProvider) { InnerHandler = partner };
         var retry = new PayPalRetryHandler(options) { InnerHandler = auth };
         var apiHttp = new HttpClient(retry, disposeHandler: true)
@@ -270,7 +272,8 @@ public sealed class PayPalClientFactory : IPayPalClientFactory, IDisposable
             new WebhooksV1Client(apiHttp),
             new PayPalCustomClient(apiHttp),
             tokenProvider,
-            merchantContext);
+            merchantContext,
+            mockContext);
     }
 
     private static Uri ResolveBaseUri(PayPalOptions options)

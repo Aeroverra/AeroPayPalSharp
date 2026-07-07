@@ -23,6 +23,30 @@ dotnet user-secrets --project Aeroverra.PayPalSharp.IntegrationTests set "PayPal
 dotnet user-secrets --project Aeroverra.PayPalSharp.IntegrationTests set "PayPal:WebhookId" "your-webhook-id"
 ```
 
+## Negative testing (forced sandbox errors)
+
+Force the sandbox to return a specific error with a `WithMockResponse` scope. It sends the
+`PayPal-Mock-Response` header only inside the block, and **only in Sandbox** (never Live):
+
+```csharp
+using (paypal.WithMockResponse(PayPalMockCode.InstrumentDeclined))
+{
+    await Assert.ThrowsAsync<PayPalApiException>(
+        () => paypal.Orders.CaptureAsync(orderId, payPal_Request_Id: $"{orderId}-capture"));
+}
+```
+
+`PayPalMockCode` has typed constants for the common codes (plus `All` / `IsKnown`); or pass any raw
+string, or a full JSON header value. Pass `null` (or empty) to apply no mock, so the `using` can stay in
+place unconditionally:
+
+```csharp
+using (paypal.WithMockResponse(simulateFailure ? PayPalMockCode.InstrumentDeclined : null))
+{
+    await paypal.Orders.CaptureAsync(orderId, payPal_Request_Id: $"{orderId}-capture");
+}
+```
+
 ## Interactive (human-in-the-loop) tests
 
 Some endpoints need a real buyer approval that cannot be automated (capturing and refunding a paid

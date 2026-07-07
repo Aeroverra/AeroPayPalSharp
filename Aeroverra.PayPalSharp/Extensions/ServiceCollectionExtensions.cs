@@ -35,6 +35,7 @@ public static class ServiceCollectionExtensions
         ArgumentNullException.ThrowIfNull(configure);
         services.Configure(configure);
         services.TryAddSingleton<PayPalMerchantContext>();
+        services.TryAddSingleton<PayPalMockResponseContext>();
 
         // Offline webhook signature verification (cert fetch + RSA verify, no API round-trip).
         services.TryAddSingleton<IPayPalCertificateSource, HttpPayPalCertificateSource>();
@@ -57,6 +58,7 @@ public static class ServiceCollectionExtensions
 
         services.AddTransient<PayPalAuthenticationHandler>();
         services.AddTransient<PayPalPartnerHeaderHandler>();
+        services.AddTransient<PayPalMockResponseHandler>();
 
         AddApiClient<IOrdersV2Client, OrdersV2Client>(services);
         AddApiClient<IPaymentsV2Client, PaymentsV2Client>(services);
@@ -106,6 +108,7 @@ public static class ServiceCollectionExtensions
             .AddHttpMessageHandler<PayPalRetryHandler>()
             .AddHttpMessageHandler<PayPalAuthenticationHandler>()
             .AddHttpMessageHandler<PayPalPartnerHeaderHandler>()
+            .AddHttpMessageHandler<PayPalMockResponseHandler>()
             .AddHttpMessageHandler<PayPalObservabilityHandler>();
     }
 

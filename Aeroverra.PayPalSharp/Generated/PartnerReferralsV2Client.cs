@@ -37,7 +37,7 @@ namespace Aeroverra.PayPalSharp.PartnerReferralsV2
         /// <remarks>
         /// Creates a partner referral that is shared by the partner or API caller. The partner referral is used to onboard the seller, and contains the seller's personal, business, financial and operations.
         /// </remarks>
-        /// <returns>A successful request returns the HTTP `201 Created` status code and a JSON response body that contains a [HATEOAS link](/docs/api/overview/#hateoas-links) to show the referral data and an `action_url` to which you redirect the customer in a browser to complete the signup process. The `partner_referral_id` token is appended to the URL.</returns>
+        /// <returns>A successful request returns the HTTP `201 Created` status code and a JSON response body that contains a [HATEOAS link](https://developer.paypal.com/docs/api/overview/#hateoas-links) to show the referral data and an `action_url` to which you redirect the customer in a browser to complete the signup process. The `partner_referral_id` token is appended to the URL.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<CreateReferralDataResponse> CreateAsync(ReferralData body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
@@ -94,7 +94,7 @@ namespace Aeroverra.PayPalSharp.PartnerReferralsV2
         /// <remarks>
         /// Creates a partner referral that is shared by the partner or API caller. The partner referral is used to onboard the seller, and contains the seller's personal, business, financial and operations.
         /// </remarks>
-        /// <returns>A successful request returns the HTTP `201 Created` status code and a JSON response body that contains a [HATEOAS link](/docs/api/overview/#hateoas-links) to show the referral data and an `action_url` to which you redirect the customer in a browser to complete the signup process. The `partner_referral_id` token is appended to the URL.</returns>
+        /// <returns>A successful request returns the HTTP `201 Created` status code and a JSON response body that contains a [HATEOAS link](https://developer.paypal.com/docs/api/overview/#hateoas-links) to show the referral data and an `action_url` to which you redirect the customer in a browser to complete the signup process. The `partner_referral_id` token is appended to the URL.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<CreateReferralDataResponse> CreateAsync(ReferralData body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
@@ -1323,7 +1323,7 @@ namespace Aeroverra.PayPalSharp.PartnerReferralsV2
     }
 
     /// <summary>
-    /// An array of request-related [HATEOAS links](/docs/api/overview/#hateoas-links).
+    /// An array of request-related [HATEOAS links](https://developer.paypal.com/docs/api/overview/#hateoas-links).
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class DefinitionsLinkDescriptionList : System.Collections.ObjectModel.Collection<LinkDescription>
@@ -1935,7 +1935,7 @@ namespace Aeroverra.PayPalSharp.PartnerReferralsV2
     }
 
     /// <summary>
-    /// The request-related [HATEOAS link](/api/rest/responses/#hateoas-links) information.
+    /// The request-related [HATEOAS link](https://developer.paypal.com/api/rest/responses/#hateoas-links) information.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ErrorLinkDescription
@@ -2245,7 +2245,7 @@ namespace Aeroverra.PayPalSharp.PartnerReferralsV2
     }
 
     /// <summary>
-    /// The request-related [HATEOAS link](/docs/api/reference/api-responses/#hateoas-links) information.
+    /// The request-related [HATEOAS link](https://developer.paypal.com/docs/api/reference/api-responses/#hateoas-links) information.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class LinkDescription
@@ -2321,7 +2321,7 @@ namespace Aeroverra.PayPalSharp.PartnerReferralsV2
         public string CurrencyCode { get; set; } = default!;
 
         /// <summary>
-        /// The value, which might be:&lt;ul&gt;&lt;li&gt;An integer for currencies like `JPY` that are not typically fractional.&lt;/li&gt;&lt;li&gt;A decimal fraction for currencies like `TND` that are subdivided into thousandths.&lt;/li&gt;&lt;/ul&gt;For the required number of decimal places for a currency code, see [Currency Codes](/docs/integration/direct/rest/currency-codes/).
+        /// The value, which might be:&lt;ul&gt;&lt;li&gt;An integer for currencies like `JPY` that are not typically fractional.&lt;/li&gt;&lt;li&gt;A decimal fraction for currencies like `TND` that are subdivided into thousandths.&lt;/li&gt;&lt;/ul&gt;For the required number of decimal places for a currency code, see [Currency Codes](https://developer.paypal.com/docs/integration/direct/rest/currency-codes/).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("value", Required = Newtonsoft.Json.Required.Always)]
         public decimal Value { get; set; } = default!;
@@ -2612,7 +2612,7 @@ namespace Aeroverra.PayPalSharp.PartnerReferralsV2
     }
 
     /// <summary>
-    /// A person's or party's related document data collected from the customer. For example SSN, ITIN, or business registration number collected from the user. &lt;blockquote&gt;&lt;strong&gt;Note:&lt;/strong&gt; This field is not applicable for POST [/v2/customer/partner-referrals](/docs/api/partner-referrals/v2/#partner-referrals_create) API calls.&lt;/blockquote&gt;
+    /// A person's or party's related document data collected from the customer. For example SSN, ITIN, or business registration number collected from the user. &lt;blockquote&gt;&lt;strong&gt;Note:&lt;/strong&gt; This field is not applicable for POST [/v2/customer/partner-referrals](https://developer.paypal.com/docs/api/partner-referrals/v2/#partner-referrals_create) API calls.&lt;/blockquote&gt;
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class PersonDocumentList : System.Collections.ObjectModel.Collection<PersonDocument>
@@ -2733,7 +2733,7 @@ namespace Aeroverra.PayPalSharp.PartnerReferralsV2
         public string Email { get; set; } = default!;
 
         /// <summary>
-        /// The preferred [locale code](/docs/api/reference/locale-codes/) to use in the onboarding flow for the customer.
+        /// The preferred [locale code](https://developer.paypal.com/docs/api/reference/locale-codes/) to use in the onboarding flow for the customer.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("preferred_language_code", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(10, MinimumLength = 2)]
@@ -2850,7 +2850,7 @@ namespace Aeroverra.PayPalSharp.PartnerReferralsV2
     }
 
     /// <summary>
-    /// An array of request-related [HATEOAS links](/docs/api/overview/#hateoas-links).
+    /// An array of request-related [HATEOAS links](https://developer.paypal.com/docs/api/overview/#hateoas-links).
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ReferralDataResponseDefinitionsLinkDescriptionList : System.Collections.ObjectModel.Collection<LinkDescription>

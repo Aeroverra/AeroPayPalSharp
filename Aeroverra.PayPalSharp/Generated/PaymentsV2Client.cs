@@ -1648,7 +1648,7 @@ namespace Aeroverra.PayPalSharp.PaymentsV2
         public string CurrencyCode { get; set; } = default!;
 
         /// <summary>
-        /// The value, which might be:&lt;ul&gt;&lt;li&gt;An integer for currencies like `JPY` that are not typically fractional.&lt;/li&gt;&lt;li&gt;A decimal fraction for currencies like `TND` that are subdivided into thousandths.&lt;/li&gt;&lt;/ul&gt;For the required number of decimal places for a currency code, see [Currency Codes](/api/rest/reference/currency-codes/).
+        /// The value, which might be:&lt;ul&gt;&lt;li&gt;An integer for currencies like `JPY` that are not typically fractional.&lt;/li&gt;&lt;li&gt;A decimal fraction for currencies like `TND` that are subdivided into thousandths.&lt;/li&gt;&lt;/ul&gt;For the required number of decimal places for a currency code, see [Currency Codes](https://developer.paypal.com/api/rest/reference/currency-codes/).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("value", Required = Newtonsoft.Json.Required.Always)]
         public decimal Value { get; set; } = default!;
@@ -1709,7 +1709,7 @@ namespace Aeroverra.PayPalSharp.PaymentsV2
     }
 
     /// <summary>
-    /// The discount amount and currency code. For list of supported currencies and decimal precision, see the PayPal REST APIs &lt;a href="/docs/integration/direct/rest/currency-codes/"&gt;Currency Codes&lt;/a&gt;.
+    /// The discount amount and currency code. For list of supported currencies and decimal precision, see the PayPal REST APIs &lt;a href="https://developer.paypal.com/docs/integration/direct/rest/currency-codes/"&gt;Currency Codes&lt;/a&gt;.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class DiscountWithBreakdown : Money
@@ -1757,7 +1757,7 @@ namespace Aeroverra.PayPalSharp.PaymentsV2
     }
 
     /// <summary>
-    /// The total order amount with an optional breakdown that provides details, such as the total item amount, total tax amount, shipping, handling, insurance, and discounts, if any.&lt;br/&gt;If you specify `amount.breakdown`, the amount equals `item_total` plus `tax_total` plus `shipping` plus `handling` plus `insurance` minus `shipping_discount` minus discount.&lt;br/&gt;The amount must be a positive number. For listed of supported currencies and decimal precision, see the PayPal REST APIs &lt;a href="/docs/integration/direct/rest/currency-codes/"&gt;Currency Codes&lt;/a&gt;.
+    /// The total order amount with an optional breakdown that provides details, such as the total item amount, total tax amount, shipping, handling, insurance, and discounts, if any.&lt;br/&gt;If you specify `amount.breakdown`, the amount equals `item_total` plus `tax_total` plus `shipping` plus `handling` plus `insurance` minus `shipping_discount` minus discount.&lt;br/&gt;The amount must be a positive number. For listed of supported currencies and decimal precision, see the PayPal REST APIs &lt;a href="https://developer.paypal.com/docs/integration/direct/rest/currency-codes/"&gt;Currency Codes&lt;/a&gt;.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class AmountWithBreakdown : Money
@@ -1917,7 +1917,7 @@ namespace Aeroverra.PayPalSharp.PaymentsV2
     }
 
     /// <summary>
-    /// The request-related [HATEOAS link](/api/rest/responses/#hateoas-links) information.
+    /// The request-related [HATEOAS link](https://developer.paypal.com/api/rest/responses/#hateoas-links) information.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class LinkDescription
@@ -2031,7 +2031,7 @@ namespace Aeroverra.PayPalSharp.PaymentsV2
         public string Issue { get; set; } = default!;
 
         /// <summary>
-        /// An array of request-related [HATEOAS links](/api/rest/responses/#hateoas-links) that are either relevant to the issue by providing additional information or offering potential resolutions.
+        /// An array of request-related [HATEOAS links](https://developer.paypal.com/api/rest/responses/#hateoas-links) that are either relevant to the issue by providing additional information or offering potential resolutions.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MinLength(1)]
@@ -2099,7 +2099,7 @@ namespace Aeroverra.PayPalSharp.PaymentsV2
         public System.Collections.Generic.ICollection<ErrorDetails> Details { get; set; } = default!;
 
         /// <summary>
-        /// An array of request-related [HATEOAS links](/api/rest/responses/#hateoas-links).
+        /// An array of request-related [HATEOAS links](https://developer.paypal.com/api/rest/responses/#hateoas-links).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MaxLength(32767)]
@@ -2314,7 +2314,7 @@ namespace Aeroverra.PayPalSharp.PaymentsV2
     }
 
     /// <summary>
-    /// The request-related [HATEOAS link](/api/rest/responses/#hateoas-links) information.
+    /// The request-related [HATEOAS link](https://developer.paypal.com/api/rest/responses/#hateoas-links) information.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class LinkDescription2
@@ -2464,7 +2464,7 @@ namespace Aeroverra.PayPalSharp.PaymentsV2
         public string ExpirationTime { get; set; } = default!;
 
         /// <summary>
-        /// An array of related [HATEOAS links](/docs/api/reference/api-responses/#hateoas-links).
+        /// An array of related [HATEOAS links](https://developer.paypal.com/docs/api/reference/api-responses/#hateoas-links).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MaxLength(32767)]
@@ -2958,7 +2958,7 @@ namespace Aeroverra.PayPalSharp.PaymentsV2
         public string DisbursementMode { get; set; } = default!;
 
         /// <summary>
-        /// An array of related [HATEOAS links](/docs/api/reference/api-responses/#hateoas-links).
+        /// An array of related [HATEOAS links](https://developer.paypal.com/docs/api/reference/api-responses/#hateoas-links).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MaxLength(32767)]
@@ -3232,7 +3232,7 @@ namespace Aeroverra.PayPalSharp.PaymentsV2
         public PayeeBase Payer { get; set; } = default!;
 
         /// <summary>
-        /// An array of related [HATEOAS links](/docs/api/reference/api-responses/#hateoas-links).
+        /// An array of related [HATEOAS links](https://developer.paypal.com/docs/api/reference/api-responses/#hateoas-links).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MaxLength(32767)]
@@ -3631,7 +3631,7 @@ namespace Aeroverra.PayPalSharp.PaymentsV2
         public PaymentSource PaymentSource { get; set; } = default!;
 
         /// <summary>
-        /// An array of related [HATEOAS links](/api/rest/responses/#hateoas).
+        /// An array of related [HATEOAS links](https://developer.paypal.com/api/rest/responses/#hateoas).
         /// </summary>
         [Newtonsoft.Json.JsonProperty("links", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.MinLength(1)]

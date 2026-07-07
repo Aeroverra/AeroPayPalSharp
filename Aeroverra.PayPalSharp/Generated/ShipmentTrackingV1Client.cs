@@ -35,7 +35,7 @@ namespace Aeroverra.PayPalSharp.ShipmentTrackingV1
         /// Add tracking information for multiple PayPal transactions
         /// </summary>
         /// <remarks>
-        /// &lt;blockquote&gt;&lt;strong&gt;Deprecation notice:&lt;/strong&gt; Adding tracking details for an order through &lt;code&gt;/v1/shipping/trackers-batch&lt;/code&gt; is deprecated as its a legacy way of integration. Use the new &lt;a href="/docs/tracking/orders-api/integrate/"&gt;Orders v2 API&lt;/a&gt; to share tracking details with PayPal.&lt;/blockquote&gt;Adds tracking information, with or without tracking numbers, for multiple PayPal transactions. Accepts up to 20 tracking IDs. For more information, see &lt;a href="/docs/tracking/tracking-api/integrate/#link-addtrackinginformationwithtrackingnumbers"&gt;Add tracking information with tracking numbers&lt;/a&gt; and &lt;a href="/docs/tracking/tracking-api/integrate/#link-addtrackinginformationwithouttrackingnumbers"&gt;Add tracking information without tracking numbers&lt;/a&gt;.
+        /// &lt;blockquote&gt;&lt;strong&gt;Deprecation notice:&lt;/strong&gt; Adding tracking details for an order through &lt;code&gt;/v1/shipping/trackers-batch&lt;/code&gt; is deprecated as its a legacy way of integration. Use the new &lt;a href="https://developer.paypal.com/docs/tracking/orders-api/integrate/"&gt;Orders v2 API&lt;/a&gt; to share tracking details with PayPal.&lt;/blockquote&gt;Adds tracking information, with or without tracking numbers, for multiple PayPal transactions. Accepts up to 20 tracking IDs. For more information, see &lt;a href="https://developer.paypal.com/docs/tracking/tracking-api/integrate/#link-addtrackinginformationwithtrackingnumbers"&gt;Add tracking information with tracking numbers&lt;/a&gt; and &lt;a href="https://developer.paypal.com/docs/tracking/tracking-api/integrate/#link-addtrackinginformationwithouttrackingnumbers"&gt;Add tracking information without tracking numbers&lt;/a&gt;.
         /// </remarks>
         /// <returns>A successful request returns the HTTP 200 OK status code and a JSON response body that shows tracking information.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
@@ -71,7 +71,7 @@ namespace Aeroverra.PayPalSharp.ShipmentTrackingV1
         /// Update or cancel tracking information for PayPal transaction
         /// </summary>
         /// <remarks>
-        /// Updates or cancels the tracking information for a PayPal transaction, by ID. To cancel tracking information, call this method and set the status to CANCELLED. For more information, see &lt;a href="/docs/tracking/tracking-api/integrate/#link-updateorcanceltrackinginformation"&gt;Update or cancel tracking information&lt;/a&gt;.
+        /// Updates or cancels the tracking information for a PayPal transaction, by ID. To cancel tracking information, call this method and set the status to CANCELLED. For more information, see &lt;a href="https://developer.paypal.com/docs/tracking/tracking-api/integrate/#link-updateorcanceltrackinginformation"&gt;Update or cancel tracking information&lt;/a&gt;.
         /// </remarks>
         /// <param name="id">The ID of the tracker in the &lt;code&gt;&lt;var&gt;transaction_id&lt;/var&gt;-&lt;var&gt;tracking_number&lt;/var&gt;&lt;/code&gt; format.</param>
         /// <returns>A successful request returns the HTTP 204 OK status code with no JSON response body.</returns>
@@ -130,7 +130,7 @@ namespace Aeroverra.PayPalSharp.ShipmentTrackingV1
         /// Add tracking information for multiple PayPal transactions
         /// </summary>
         /// <remarks>
-        /// &lt;blockquote&gt;&lt;strong&gt;Deprecation notice:&lt;/strong&gt; Adding tracking details for an order through &lt;code&gt;/v1/shipping/trackers-batch&lt;/code&gt; is deprecated as its a legacy way of integration. Use the new &lt;a href="/docs/tracking/orders-api/integrate/"&gt;Orders v2 API&lt;/a&gt; to share tracking details with PayPal.&lt;/blockquote&gt;Adds tracking information, with or without tracking numbers, for multiple PayPal transactions. Accepts up to 20 tracking IDs. For more information, see &lt;a href="/docs/tracking/tracking-api/integrate/#link-addtrackinginformationwithtrackingnumbers"&gt;Add tracking information with tracking numbers&lt;/a&gt; and &lt;a href="/docs/tracking/tracking-api/integrate/#link-addtrackinginformationwithouttrackingnumbers"&gt;Add tracking information without tracking numbers&lt;/a&gt;.
+        /// &lt;blockquote&gt;&lt;strong&gt;Deprecation notice:&lt;/strong&gt; Adding tracking details for an order through &lt;code&gt;/v1/shipping/trackers-batch&lt;/code&gt; is deprecated as its a legacy way of integration. Use the new &lt;a href="https://developer.paypal.com/docs/tracking/orders-api/integrate/"&gt;Orders v2 API&lt;/a&gt; to share tracking details with PayPal.&lt;/blockquote&gt;Adds tracking information, with or without tracking numbers, for multiple PayPal transactions. Accepts up to 20 tracking IDs. For more information, see &lt;a href="https://developer.paypal.com/docs/tracking/tracking-api/integrate/#link-addtrackinginformationwithtrackingnumbers"&gt;Add tracking information with tracking numbers&lt;/a&gt; and &lt;a href="https://developer.paypal.com/docs/tracking/tracking-api/integrate/#link-addtrackinginformationwithouttrackingnumbers"&gt;Add tracking information without tracking numbers&lt;/a&gt;.
         /// </remarks>
         /// <returns>A successful request returns the HTTP 200 OK status code and a JSON response body that shows tracking information.</returns>
         /// <exception cref="PayPalApiException">A server side error occurred.</exception>
@@ -422,7 +422,7 @@ namespace Aeroverra.PayPalSharp.ShipmentTrackingV1
         /// Update or cancel tracking information for PayPal transaction
         /// </summary>
         /// <remarks>
-        /// Updates or cancels the tracking information for a PayPal transaction, by ID. To cancel tracking information, call this method and set the status to CANCELLED. For more information, see &lt;a href="/docs/tracking/tracking-api/integrate/#link-updateorcanceltrackinginformation"&gt;Update or cancel tracking information&lt;/a&gt;.
+        /// Updates or cancels the tracking information for a PayPal transaction, by ID. To cancel tracking information, call this method and set the status to CANCELLED. For more information, see &lt;a href="https://developer.paypal.com/docs/tracking/tracking-api/integrate/#link-updateorcanceltrackinginformation"&gt;Update or cancel tracking information&lt;/a&gt;.
         /// </remarks>
         /// <param name="id">The ID of the tracker in the &lt;code&gt;&lt;var&gt;transaction_id&lt;/var&gt;-&lt;var&gt;tracking_number&lt;/var&gt;&lt;/code&gt; format.</param>
         /// <returns>A successful request returns the HTTP 204 OK status code with no JSON response body.</returns>
@@ -760,7 +760,7 @@ namespace Aeroverra.PayPalSharp.ShipmentTrackingV1
     }
 
     /// <summary>
-    /// An array of request-related [HATEOAS links](/docs/api/reference/api-responses/#hateoas-links).
+    /// An array of request-related [HATEOAS links](https://developer.paypal.com/docs/api/reference/api-responses/#hateoas-links).
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class BatchTrackerCollectionDefinitionsLinkDescriptionList : System.Collections.ObjectModel.Collection<LinkDescription>
@@ -769,7 +769,7 @@ namespace Aeroverra.PayPalSharp.ShipmentTrackingV1
     }
 
     /// <summary>
-    /// An array of request-related [HATEOAS links](/api/rest/responses/#hateoas-links) that are either relevant to the issue by providing additional information or offering potential resolutions.
+    /// An array of request-related [HATEOAS links](https://developer.paypal.com/api/rest/responses/#hateoas-links) that are either relevant to the issue by providing additional information or offering potential resolutions.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class DefinitionsLinkDescriptionList : System.Collections.ObjectModel.Collection<LinkDescription2>
@@ -1246,7 +1246,7 @@ namespace Aeroverra.PayPalSharp.ShipmentTrackingV1
     }
 
     /// <summary>
-    /// An array of request-related [HATEOAS links](/api/rest/responses/#hateoas-links).
+    /// An array of request-related [HATEOAS links](https://developer.paypal.com/api/rest/responses/#hateoas-links).
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ErrorDefinitionsLinkDescriptionList : System.Collections.ObjectModel.Collection<LinkDescription2>
@@ -1364,7 +1364,7 @@ namespace Aeroverra.PayPalSharp.ShipmentTrackingV1
     }
 
     /// <summary>
-    /// The request-related [HATEOAS link](/api/rest/responses/#hateoas-links) information.
+    /// The request-related [HATEOAS link](https://developer.paypal.com/api/rest/responses/#hateoas-links) information.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ErrorLinkDescription
@@ -1419,7 +1419,7 @@ namespace Aeroverra.PayPalSharp.ShipmentTrackingV1
     }
 
     /// <summary>
-    /// A request-related [HATEOAS link](/api/rest/responses/#hateoas-links).
+    /// A request-related [HATEOAS link](https://developer.paypal.com/api/rest/responses/#hateoas-links).
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class LinkDescription
@@ -1459,7 +1459,7 @@ namespace Aeroverra.PayPalSharp.ShipmentTrackingV1
     }
 
     /// <summary>
-    /// The request-related [HATEOAS link](/api/rest/responses/#hateoas-links) information.
+    /// The request-related [HATEOAS link](https://developer.paypal.com/api/rest/responses/#hateoas-links) information.
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class LinkDescription2
@@ -1499,7 +1499,7 @@ namespace Aeroverra.PayPalSharp.ShipmentTrackingV1
     }
 
     /// <summary>
-    /// An array of request-related [HATEOAS links](/docs/api/reference/api-responses/#hateoas-links).
+    /// An array of request-related [HATEOAS links](https://developer.paypal.com/docs/api/reference/api-responses/#hateoas-links).
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class LinkDescriptionList : System.Collections.ObjectModel.Collection<LinkDescription>
@@ -1750,7 +1750,7 @@ namespace Aeroverra.PayPalSharp.ShipmentTrackingV1
     }
 
     /// <summary>
-    /// An array of request-related [HATEOAS links](/docs/api/reference/api-responses/#hateoas-links).
+    /// An array of request-related [HATEOAS links](https://developer.paypal.com/docs/api/reference/api-responses/#hateoas-links).
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.7.1.0 (NJsonSchema v11.6.1.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class TrackerIdentifierCollectionDefinitionsLinkDescriptionList : System.Collections.ObjectModel.Collection<LinkDescription>

@@ -94,6 +94,9 @@ internal static class Program
         new EnsureOperationResponses(),
         new FlattenEnumsToString(),
         new InlineStringAllOf(),
+        // Add the payment-source methods PayPal recognizes but forgot to define on the request object
+        // (pay_upon_invoice, alipay, multibanco, ...). Before the collapse so its allOf wrappers simplify.
+        new AddMissingPaymentSources(),
         // Collapse PayPal's single-ref allOf wrappers so a handful of real models stop exploding into
         // hundreds of empty numbered aliases (Amount3, Payee2, ...). Runs before MarkKnownRequired so
         // that transformer still sees the canonical component schemas.
@@ -101,6 +104,7 @@ internal static class Program
         new MarkKnownRequired(),
         new MoneyValueToDecimal(),
         new FixMerchantIntegrationFindResponse(),
+        new AbsolutizeDocLinks(),
     };
 
     private static async Task<int> Main(string[] args)
